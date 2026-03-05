@@ -9,25 +9,22 @@ import 'provider_task.dart';
 import 'package:coran/core/storage/servizio_preferenze.dart';
 import 'scaffoldBase.dart';
 
-class PaginaTask2 extends ConsumerStatefulWidget {
+class Home extends ConsumerStatefulWidget {
 
 
-  const PaginaTask2({super.key});
+  const Home({super.key});
 
 
   @override
-  ConsumerState<PaginaTask2> createState() => _PaginaTask2State();
+  ConsumerState<Home> createState() => _HomeState();
 }
-class _PaginaTask2State extends ConsumerState<PaginaTask2> {
+class _HomeState extends ConsumerState<Home> {
 
  @override
   Widget build(BuildContext context) {
     bool test=true;
 
-    return BaseScaffold(
-      
-       currentIndex: 2,
-        body: Column(
+    return Column(
           children: [
             Expanded(child: SingleChildScrollView(child: Column( children: [
             Center(
@@ -41,7 +38,7 @@ class _PaginaTask2State extends ConsumerState<PaginaTask2> {
                   child:Column(
                     children: [Container(
                         alignment: Alignment.centerLeft,
-                        child: Text('SANNA RITA',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        child: Text('DISI FABIO',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       ),
                       Padding(
                       padding:EdgeInsetsGeometry.only(top: 20),
@@ -81,20 +78,20 @@ class _PaginaTask2State extends ConsumerState<PaginaTask2> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Richiesta',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('3562/SS',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                          child: Text('2186323/SS',
+                                                                      style: TextStyle(fontSize: 15,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         ),
                                                       SizedBox(
                                                           child: Text('Del',
-                                                                      style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                                      style: TextStyle(fontSize: 15,color: Colors.black54)
                                                                       )
                                                           
                                                         ),
@@ -102,7 +99,7 @@ class _PaginaTask2State extends ConsumerState<PaginaTask2> {
                                                           
                                                         
                                                           child: Text('25/02/2026',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                                      style: TextStyle(fontSize: 15,color: Colors.black87)
                                                                       )
                                                       )
                                                         )
@@ -545,12 +542,8 @@ class _PaginaTask2State extends ConsumerState<PaginaTask2> {
         ),
     ),
     ),],
-        )
-        ,
+        );
         
-
-      
-    );
   }
 
  

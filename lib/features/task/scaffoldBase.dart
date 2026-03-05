@@ -1,5 +1,8 @@
+import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BaseScaffold extends StatelessWidget {
   final Widget body;
@@ -13,6 +16,11 @@ class BaseScaffold extends StatelessWidget {
     super.key,
   });
 
+ 
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,13 +28,38 @@ class BaseScaffold extends StatelessWidget {
         title: Image.asset('assets/images/app_icon.png',
   width: 50,) ,
         centerTitle: true,
+        actions: [
+        if (currentIndex == 1) // solo nella prima pagina
+        IconButton(
+        icon: const Icon(Icons.filter_list),
+        onPressed: () {
+          context.push('/filtri');
+        },
+      ),
+  ],
       ),
       body: body,
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: const Color.fromARGB(255, 212, 237, 248),
+        currentIndex: currentIndex,
+          onTap: (index) {
+            switch (index) {
+              case 0:
+                context.go('/');
+                break;
+              case 1:
+                context.go('/ricerca');
+                break;
+              case 2:
+                context.go('/setting');
+                break;
+              
+            }
+          },
+          backgroundColor: const Color.fromARGB(255, 240, 250, 255),
           selectedItemColor: const Color(0xFF209BD6),
           items: [
             BottomNavigationBarItem(
+              
               icon:Icon(Icons.home),
               label: 'Home'
               ),

@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:typed_data';
 import 'dart:io';
+import 'test_pdf.dart';
 
 
 class Rdp extends ConsumerStatefulWidget {
@@ -32,9 +33,23 @@ class _RdpState extends ConsumerState<Rdp> {
  
 @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
-      currentIndex: 2,
-      body: SfPdfViewer.asset('assets/images/rdp.pdf')
+    return Scaffold(
+      appBar: AppBar(
+        title: Image.asset('assets/images/app_icon.png',
+                              width: 50,) ,
+        centerTitle: true,
+        
+      ),
+      body: Column( 
+        children: [
+          Padding(padding: EdgeInsetsGeometry.only(left: 300), child: ElevatedButton(onPressed: (){downloadPdf();}, child:  Icon(Icons.download))),
+        Expanded(
+        
+          child: 
+         SfPdfViewer.asset('assets/images/rdp.pdf'),
+        ),]
+    ),
+    
     );
   }
 
