@@ -8,7 +8,15 @@ workflows:
     scripts:
       - name: Get Flutter packages
         script: flutter pub get
-      - name: Build iOS
+      - name: Build iOS IPA
         script: flutter build ipa --release
+    publishing:
+      app_store_connect:
+        enabled: true
+        api_key: Fabio   # La tua API Key registrata su Codemagic
+        submit_to_testflight: true
+        beta_review: true
+        distribute_to_beta_groups: []  # opzionale, puoi inserire i nomi dei gruppi
+        publish_even_if_tests_fail: false
     artifacts:
       - build/ios/ipa/*.ipa
