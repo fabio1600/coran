@@ -35,8 +35,7 @@ class _RdpState extends ConsumerState<Rdp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset('assets/images/app_icon.png',
-                              width: 50,) ,
+        title: Text('Rapporto di prova'),
         centerTitle: true,
         
       ),

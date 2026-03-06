@@ -1,5 +1,6 @@
 import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/filtri.dart';
+import 'package:coran/features/task/login.dart';
 import 'package:coran/features/task/rdp.dart';
 import 'package:coran/features/task/home.dart';
 import 'package:coran/features/task/ricerca.dart';
@@ -14,7 +15,7 @@ final GoRouter router = GoRouter(
       builder: (context, state, child) {
         int index = 0;
 
-        if (state.uri.path == '/') {
+        if (state.uri.path == '/home') {
           index = 0;
         } else if (state.uri.path == '/ricerca') {
           index = 1;
@@ -27,7 +28,7 @@ final GoRouter router = GoRouter(
       },
       routes: [
         GoRoute(
-          path: '/',
+          path: '/home',
           builder: (context, state) => const Home(),
         ),
         GoRoute(
@@ -49,6 +50,10 @@ final GoRouter router = GoRouter(
     GoRoute(
           path: '/filtri',
           builder: (context, state) => const Filtri(),
+        ),
+    GoRoute(
+          path: '/',
+          builder: (context, state) => const Login(),
         ),
   ],
   

@@ -25,18 +25,26 @@ class BaseScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset('assets/images/app_icon.png',
-  width: 50,) ,
+        title: currentIndex == 0 
+                  ? Text('Home') 
+              : currentIndex == 1 
+                  ? Text('Ricerca') 
+              : currentIndex == 2
+                  ? Text('Impostazioni')
+                  : null,
         centerTitle: true,
         actions: [
-        if (currentIndex == 1) // solo nella prima pagina
+        if (currentIndex == 1)
+         // solo nella prima pagina
         IconButton(
         icon: const Icon(Icons.filter_list),
         onPressed: () {
           context.push('/filtri');
         },
       ),
+      
   ],
+  
       ),
       body: body,
       bottomNavigationBar: BottomNavigationBar(

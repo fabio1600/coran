@@ -27,39 +27,8 @@ class _RicercaState extends ConsumerState<Ricerca> {
     return Column(
           children: [
             Expanded(child: SingleChildScrollView(child: Column( children: [
+            Padding(padding:EdgeInsetsGeometry.only(top: 20)),
             Center(
-            child: FractionallySizedBox(
-              widthFactor: 0.95,
-              
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsetsGeometry.only(top: 20,bottom: 20),
-                  child:Column(
-                    children: [Container(
-                        alignment: Alignment.center,
-                        child: Text('RICERCA',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                      ),
-                      Padding(
-                      padding:EdgeInsetsGeometry.only(top: 20,bottom: 0),
-                      child: Container(
-                        
-                        alignment: Alignment.topLeft,
-                        child: ElevatedButton(onPressed: (){
-                          context.push('/filtri');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF209BD6)
-                        ),
-                        child: Icon(Icons.filter_list),)
-                      ),
-                      ),
-                    ],
-                  )
-                ),
-              ),
-            )),
-            Center( 
               child: 
               FractionallySizedBox(
                           alignment: Alignment.center,
@@ -218,13 +187,13 @@ class _RicercaState extends ConsumerState<Ricerca> {
                                           alignment: AlignmentGeometry.centerLeft,
                                           child: Padding(
                                             padding: EdgeInsetsGeometry.only(left: 310,top: 5,bottom: 5),
-                                            child: Expanded(child:  Row (
+                                            child:  Row (
                                                     children:[
                                                       Icon(Icons.picture_as_pdf,color: Colors.black,),
                                                       Icon(Icons.attach_file,color: Colors.black,)
                                                       ],
                                                     ),
-                                            )
+                                            
                                           )
                                         ),
                                           

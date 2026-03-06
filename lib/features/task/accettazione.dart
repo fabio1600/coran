@@ -36,8 +36,8 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
 
     return  Scaffold(
       appBar: AppBar(
-        title: Image.asset('assets/images/app_icon.png',
-                              width: 50,) ,
+        title: Text('Richiesta 3562'),
+                              
         centerTitle: true,
         
       ),
@@ -50,14 +50,7 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                   Container(
                     child: Column(
                       children: [
-                        Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsGeometry.only(left: 11,top:20,bottom: 20),
-                              child: Text('ACCETTAZIONE 3562',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            )
-                          ],
-                        ),
+                        Padding(padding:EdgeInsetsGeometry.only(top: 20)),
                         FractionallySizedBox(
                           widthFactor: 0.95,
                           child: Container(
@@ -70,7 +63,7 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 15),
+                                  padding: EdgeInsetsGeometry.only(left: 17,top: 15,right: 5),
                                   child: Text('DATA ACCETTAZIONE',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
@@ -97,7 +90,7 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                   child: Text('ATTIVITÀ',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7),
+                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
                                   child: Text('SOCIETA AGRICOLA TRES CORONAS S.S.',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
                                 Center(child: 
@@ -118,7 +111,7 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                   child: Text('INDIRIZZO',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7),
+                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
                                   child: Text('TRES CORONAS OZIERI (07014)',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
                                 Center(child: 
@@ -140,7 +133,7 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                   child: Text('RICHIEDENETE',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7),
+                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
                                   child: Text('SANNA RITA',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
                                 Center(child: 
@@ -183,7 +176,7 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                   child: Text('UTENTE',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7),
+                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
                                   child: Text('A.S.L. 1 SASSARI',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
                                 Center(child: 
@@ -205,7 +198,7 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                   child: Text('CODICE AZIENDA',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7),
+                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
                                   child: Text('IT052SS299',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
                                 Center(child: 
@@ -227,7 +220,7 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                   child: Text('ASL',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7),
+                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
                                   child: Text('AUSL 1 - SASSARI / OZIERI',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
                                 Center(child: 
@@ -247,8 +240,8 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                   child: Text('ALLEGATI PRESENTI',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,bottom: 20),
-                                  child: Row(children: [ Text(' DOC ACCOMPAGNAMENTO + PAGAMENTO',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),Icon(Icons.download)]),
+                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,bottom: 20,right: 5),
+                                  child: Row(children: [ Text('DOC ACCOMPAGNAMENTO + PAGAMENTO',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),Icon(Icons.download)]),
                                 ),
                               ],
                             ),
@@ -286,16 +279,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('RDP',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('6509',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -310,16 +303,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Conferimento',
-                                                            style: TextStyle(fontSize: 17,color:  Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color:  Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('1',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -336,16 +329,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Tipo',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('MUSCOLO/MUSCOLO SUINO ',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                          child: Text('MUSCOLO/MUSCOLO SUINO',
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -360,16 +353,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Specie',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('SUINO',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -384,16 +377,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child:Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Campioni',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('1',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -428,16 +421,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('RDP',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('6909',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -452,16 +445,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Conferimento',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('2',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -478,16 +471,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Tipo',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('MUSCOLO/MUSCOLO SUINO ',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -502,16 +495,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Specie',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('SUINO',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -526,16 +519,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child:Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Campioni',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('1',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -572,16 +565,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('RDP',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('7145',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -596,16 +589,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Conferimento',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('3',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -622,16 +615,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Tipo',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('MUSCOLO/MUSCOLO SUINO ',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -646,16 +639,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Specie',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('SUINO',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -670,16 +663,16 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                             child:Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Campioni',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text('1',
-                                                                      style: TextStyle(fontSize: 19,color:Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
