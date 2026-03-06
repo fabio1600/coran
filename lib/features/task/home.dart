@@ -83,23 +83,23 @@ class _HomeState extends ConsumerState<Home> {
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
                                                           child: Text('2186323/SS',
-                                                                      style: TextStyle(fontSize: 15,color: Colors.black87,fontWeight: FontWeight.bold)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         ),
                                                       SizedBox(
                                                           child: Text('Del',
-                                                                      style: TextStyle(fontSize: 15,color: Colors.black54)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black54)
                                                                       )
                                                           
                                                         ),
-                                                      Expanded( child: Padding(padding:EdgeInsetsGeometry.only(left: 7),
+                                                      Expanded( child: Padding(padding:EdgeInsetsGeometry.only(left: 10),
                                                           
                                                         
                                                           child: Text('25/02/2026',
-                                                                      style: TextStyle(fontSize: 15,color: Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                       )
                                                         )
@@ -118,14 +118,14 @@ class _HomeState extends ConsumerState<Home> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Quesito',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
                                                           child: Text('PATOLOGIE ANIMALI DA AFFEZIONE - CANE',
-                                                                      style: TextStyle(fontSize: 15,color: Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -142,14 +142,14 @@ class _HomeState extends ConsumerState<Home> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Attività',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
                                                           child: Text('SOCIETA AGRICOLA TRES CORONAS S.S.',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -166,14 +166,14 @@ class _HomeState extends ConsumerState<Home> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Codice Aziendale',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
                                                           child: Text('IT052SS299',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -191,14 +191,14 @@ class _HomeState extends ConsumerState<Home> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Comune',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
                                                           child: Text('OZIERI',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -208,16 +208,17 @@ class _HomeState extends ConsumerState<Home> {
                                             )
                                           ),
                                           Align(
-                                          alignment: AlignmentGeometry.centerLeft,
+                                          alignment: AlignmentGeometry.centerRight,
                                           child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 310,top: 5,bottom: 5),
-                                            child: Expanded(child:  Row (
+                                            padding: EdgeInsetsGeometry.only(top: 0,bottom: 5),
+                                            child:  Row (
+                                              mainAxisSize: MainAxisSize.min,
                                                     children:[
                                                       Icon(Icons.picture_as_pdf,color: Colors.black,),
                                                       Icon(Icons.attach_file,color: Colors.black,)
                                                       ],
                                                     ),
-                                            )
+                                          
                                           )
                                         ),
                                           
@@ -228,7 +229,7 @@ class _HomeState extends ConsumerState<Home> {
                           ),
                         ),
             ),
-            Center( 
+             Center( 
               child: 
               FractionallySizedBox(
                           alignment: Alignment.center,
@@ -244,17 +245,7 @@ class _HomeState extends ConsumerState<Home> {
                                 },
                                 child: Column(
                                   children: [ 
-                                        Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 250,top: 10),
-                                            child: Row (
-                                                    children:[
-                                                      Text('Analisi in corso...',style: TextStyle(color: Colors.black),)
-                                                      ]
-                                                    )
-                                          )
-                                        ),
+                                        
                                         Align(
                                           alignment: AlignmentGeometry.centerLeft,
                                           child: Padding(
@@ -263,17 +254,31 @@ class _HomeState extends ConsumerState<Home> {
                                                     children:[
                                                       SizedBox(
                                                         width: 105,
-                                                        child: Text('Accettazione',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                        child: Text('Richiesta',
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('4786',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
+                                                          child: Text('2186003/SS',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
+                                                        ),
+                                                      SizedBox(
+                                                          child: Text('Del',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black54)
+                                                                      )
+                                                          
+                                                        ),
+                                                      Expanded( child: Padding(padding:EdgeInsetsGeometry.only(left: 10),
+                                                          
+                                                        
+                                                          child: Text('02/02/2026',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
+                                                                      )
+                                                      )
                                                         )
                                                       ]
                                                     )
@@ -289,15 +294,15 @@ class _HomeState extends ConsumerState<Home> {
                                                     children:[
                                                       SizedBox(
                                                         width: 105,
-                                                        child: Text('Data Accettazione',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                        child: Text('Quesito',
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('12/02/2026',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
+                                                          child: Text('TRIC3: RICERCA TRICHINELLA - MACELLAZIONI USO FAMILIARE',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -314,14 +319,14 @@ class _HomeState extends ConsumerState<Home> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Attività',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
                                                           child: Text('SINI SALVATORE',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -338,14 +343,14 @@ class _HomeState extends ConsumerState<Home> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Codice Aziendale',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('IT052SS186',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
+                                                          child: Text('IT052SS862',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -363,14 +368,14 @@ class _HomeState extends ConsumerState<Home> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Comune',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
                                                           child: Text('OTTANA',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -379,6 +384,19 @@ class _HomeState extends ConsumerState<Home> {
                                               
                                             )
                                           ),
+                                          Align(
+                                          alignment: AlignmentGeometry.centerRight,
+                                          child: Padding(
+                                            padding: EdgeInsetsGeometry.only(top: 0,bottom: 5),
+                                            child:  Row (
+                                              mainAxisSize: MainAxisSize.min,
+                                                    children:[
+                                                      Text('Analisi in corso...',style: TextStyle(fontSize: 16,color: Colors.black87),)
+                                                      ],
+                                                    ),
+                                          
+                                          )
+                                        ),
                                           
                                   ],
                                 ),
@@ -397,14 +415,13 @@ class _HomeState extends ConsumerState<Home> {
                             child:SizedBox(
                               
                               child:ElevatedButton(
-                                
-                                style:ElevatedButton.styleFrom( backgroundColor:test  ?const Color.fromARGB(157, 80, 200, 255)
-                                                                                      : Colors.blue),
+                                style:ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)),
                                 onPressed: (){
                                   context.push('/accettazione');
                                 },
                                 child: Column(
                                   children: [ 
+                                        
                                         Align(
                                           alignment: AlignmentGeometry.centerLeft,
                                           child: Padding(
@@ -413,17 +430,31 @@ class _HomeState extends ConsumerState<Home> {
                                                     children:[
                                                       SizedBox(
                                                         width: 105,
-                                                        child: Text('Accettazione',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                        child: Text('Richiesta',
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('3112',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
+                                                          child: Text('2186658/SS',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
+                                                        ),
+                                                      SizedBox(
+                                                          child: Text('Del',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black54)
+                                                                      )
+                                                          
+                                                        ),
+                                                      Expanded( child: Padding(padding:EdgeInsetsGeometry.only(left: 10),
+                                                          
+                                                        
+                                                          child: Text('14/02/2026',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
+                                                                      )
+                                                      )
                                                         )
                                                       ]
                                                     )
@@ -439,15 +470,15 @@ class _HomeState extends ConsumerState<Home> {
                                                     children:[
                                                       SizedBox(
                                                         width: 105,
-                                                        child: Text('Data Accettazione',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                        child: Text('Quesito',
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('04/02/2026',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
+                                                          child: Text('PATOLOGIE ANIMALI DA AFFEZIONE - CANE',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -464,14 +495,14 @@ class _HomeState extends ConsumerState<Home> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Attività',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
                                                           child: Text('OFFEDU E PALA S.S.',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -488,14 +519,14 @@ class _HomeState extends ConsumerState<Home> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Codice Aziendale',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('IT052SS134',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
+                                                          child: Text('IT052SS128',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -513,14 +544,14 @@ class _HomeState extends ConsumerState<Home> {
                                                       SizedBox(
                                                         width: 105,
                                                         child: Text('Comune',
-                                                            style: TextStyle(fontSize: 17,color: Colors.black54)
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
                                                       Expanded(
                                                         child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
                                                           child: Text('ORUNE',
-                                                                      style: TextStyle(fontSize: 19,color: Colors.black87)
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
                                                         )
@@ -529,6 +560,20 @@ class _HomeState extends ConsumerState<Home> {
                                               
                                             )
                                           ),
+                                          Align(
+                                          alignment: AlignmentGeometry.centerRight,
+                                          child: Padding(
+                                            padding: EdgeInsetsGeometry.only(top: 0,bottom: 5),
+                                            child:  Row (
+                                              mainAxisSize: MainAxisSize.min,
+                                                    children:[
+                                                      Icon(Icons.picture_as_pdf,color: Colors.black,),
+                                                      Icon(Icons.attach_file,color: Colors.black,)
+                                                      ],
+                                                    ),
+                                          
+                                          )
+                                        ),
                                           
                                   ],
                                 ),
@@ -536,7 +581,7 @@ class _HomeState extends ConsumerState<Home> {
                             ),
                           ),
                         ),
-            )
+            ),
           ],
           
         ),
