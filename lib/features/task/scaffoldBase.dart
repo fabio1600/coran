@@ -24,6 +24,7 @@ class BaseScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
         title: currentIndex == 0 
                   ? Text('Home') 

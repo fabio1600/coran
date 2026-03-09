@@ -24,9 +24,7 @@ class _RicercaState extends ConsumerState<Ricerca> {
   Widget build(BuildContext context) {
     bool test=true;
 
-    return Column(
-          children: [
-            Expanded(child: SingleChildScrollView(child: Column( children: [
+    return ListView( children: [
             Padding(padding:EdgeInsetsGeometry.only(top: 20)),
             Center(
               child: 
@@ -212,10 +210,8 @@ class _RicercaState extends ConsumerState<Ricerca> {
             
           ],
           
-        ),
-    ),
-    ),],
         );
+    
         
   }
 
