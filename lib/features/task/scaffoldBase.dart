@@ -46,7 +46,10 @@ class BaseScaffold extends StatelessWidget {
   ],
   
       ),
-      body: body,
+      body: Container(
+        color: Colors.white,
+        child:  body
+        ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
           onTap: (index) {
