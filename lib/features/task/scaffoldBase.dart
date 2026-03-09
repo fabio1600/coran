@@ -55,7 +55,7 @@ class BaseScaffold extends StatelessWidget {
           onTap: (index) {
             switch (index) {
               case 0:
-                context.pushReplacement('/home');
+                context.push('/home');
                 break;
               case 1:
                 context.go('/ricerca');
