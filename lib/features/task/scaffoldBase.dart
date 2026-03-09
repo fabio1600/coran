@@ -46,16 +46,20 @@ class BaseScaffold extends StatelessWidget {
   ],
   
       ),
-      body: Container(
-        color: Colors.white,
-        child:  body
-        ),
+      body: SafeArea(
+  child: Container(
+    width: double.infinity,
+    height: double.infinity,
+    color: Colors.white,
+    child: body,
+  ),
+),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
           onTap: (index) {
             switch (index) {
               case 0:
-                context.push('/home');
+                context.go('/home');
                 break;
               case 1:
                 context.go('/ricerca');
