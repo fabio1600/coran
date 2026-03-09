@@ -282,7 +282,7 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                               child:ElevatedButton(
                                 style:ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(157, 80, 200, 255)),
                                 onPressed: (){
-                                  context.push('/rdp');
+                                  context.push('/login');
                                 },
                                 child: Column(
                                   children: [ 
@@ -426,7 +426,7 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                               child:ElevatedButton(
                                 style:ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(157, 80, 200, 255)),
                                 onPressed: (){
-                                  context.push('/login');
+                                  context.push('/rdp');
                                 },
                                 child: Column(
                                   children: [ 
