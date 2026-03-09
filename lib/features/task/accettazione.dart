@@ -240,9 +240,23 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                   child: Text('ALLEGATI PRESENTI',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,bottom: 20,right: 5),
-                                  child: Row(children: [ Text('DOC ACCOMPAGNAMENTO + PAGAMENTO',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),Icon(Icons.download)]),
-                                ),
+  padding: EdgeInsets.only(left: 17, top: 7, bottom: 20, right: 5),
+  child: Row(
+    children: [
+      Expanded(
+        child: Text(
+          'DOC ACCOMPAGNAMENTO + PAGAMENTOooooooooooooo',
+          style: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+       Icon(Icons.download)
+      
+    ],
+  ),
+)
                               ],
                             ),
                     
