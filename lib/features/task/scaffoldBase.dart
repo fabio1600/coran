@@ -24,7 +24,6 @@ class BaseScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         title: currentIndex == 0 
                   ? Text('Home') 
@@ -53,7 +52,7 @@ class BaseScaffold extends StatelessWidget {
           onTap: (index) {
             switch (index) {
               case 0:
-                context.go('/home');
+                context.pushReplacement('/home');
                 break;
               case 1:
                 context.go('/ricerca');
