@@ -18,19 +18,14 @@ class _RicercaState extends ConsumerState<Ricerca> {
 
  @override
   Widget build(BuildContext context) {
-    bool test=true;
+    
 
-    return ListView( children: [
-            Padding(padding:EdgeInsetsGeometry.only(top: 20)),
-            Center(
-              child: 
-              Text('data')
-            ),
+    return Center(child: Text('data'),);
             
             
-          ],
           
-        );
+          
+       
     
         
   }
