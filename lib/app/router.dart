@@ -11,32 +11,23 @@ import 'package:coran/features/task/scaffoldBase.dart';
 
 final GoRouter router = GoRouter(
   routes: [
-    ShellRoute(
+   ShellRoute(
       builder: (context, state, child) {
+        // child = pagina attuale della bottom bar
         int index = 0;
-
-        if (state.uri.path == '/home') {
-          index = 0;
-        } else if (state.uri.path == '/ricerca') {
-          index = 1;
-        } 
+        if (state.uri.path == '/home') index = 0;
+        if (state.uri.path == '/ricerca') index = 1;
+        if (state.uri.path == '/rdp') index = 2;
 
         return BaseScaffold(
           currentIndex: index,
-          body: child,
+          
         );
       },
       routes: [
-        GoRoute(
-          path: '/home',
-          builder: (context, state) => const Home(),
-        ),
-        GoRoute(
-          path: '/ricerca',
-          builder: (context, state) => const Ricerca(),
-        ),
-        
-        
+        GoRoute(path: '/home', builder: (context, state) => Home()),
+        GoRoute(path: '/ricerca', builder: (context, state) => Ricerca()),
+        GoRoute(path: '/rdp', builder: (context, state) => Rdp()),
       ],
     ),
     GoRoute(
