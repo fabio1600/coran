@@ -35,7 +35,13 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       appBar: AppBar(title: Text(
         _currentIndex == 0 ? 'Home' :
         _currentIndex == 1 ? 'Ricerca' : 'Impostazioni'
-      )),
+      ),
+      centerTitle: true,
+      actions: [
+        if (_currentIndex == 1)
+        IconButton( icon: const Icon(Icons.filter_list), onPressed: () { context.push('/filtri'); }, ),
+      ],
+      ),
       body: IndexedStack(
         index: _currentIndex,
         children: _pages,

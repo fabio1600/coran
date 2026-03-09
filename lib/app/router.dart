@@ -15,9 +15,9 @@ final GoRouter router = GoRouter(
       builder: (context, state, child) {
         // child = pagina attuale della bottom bar
         int index = 0;
-        if (state.uri.path == '/home') index = 0;
+        if (state.uri.path == '/') index = 0;
         if (state.uri.path == '/ricerca') index = 1;
-        if (state.uri.path == '/rdp') index = 2;
+        if (state.uri.path == '/settings') index = 2;
 
         return BaseScaffold(
           currentIndex: index,
@@ -25,9 +25,9 @@ final GoRouter router = GoRouter(
         );
       },
       routes: [
-        GoRoute(path: '/home', builder: (context, state) => Home()),
+        GoRoute(path: '/', builder: (context, state) => Home()),
         GoRoute(path: '/ricerca', builder: (context, state) => Ricerca()),
-        GoRoute(path: '/rdp', builder: (context, state) => Rdp()),
+        GoRoute(path: '/settings', builder: (context, state) => Rdp()),
       ],
     ),
     GoRoute(
@@ -43,7 +43,7 @@ final GoRouter router = GoRouter(
           builder: (context, state) => const Filtri(),
         ),
     GoRoute(
-          path: '/',
+          path: '/login',
           builder: (context, state) => const Login(),
         ),
   ],

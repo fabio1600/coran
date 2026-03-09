@@ -17,6 +17,8 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:typed_data';
 import 'dart:io';
 import 'test_pdf.dart';
+import 'sharePdf.dart';
+
 
 
 class Rdp extends ConsumerStatefulWidget {
@@ -37,11 +39,16 @@ class _RdpState extends ConsumerState<Rdp> {
       appBar: AppBar(
         title: Text('Rapporto di prova'),
         centerTitle: true,
-        
+        actions :[IconButton(
+  icon: Icon(Icons.ios_share),
+  onPressed: () {
+    sharePdf();
+  },
+)],
       ),
       body: Column( 
         children: [
-          Padding(padding: EdgeInsetsGeometry.only(left: 300), child: ElevatedButton(onPressed: (){downloadPdf();}, child:  Icon(Icons.download))),
+         
         Expanded(
         
           child: 

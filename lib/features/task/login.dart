@@ -90,14 +90,14 @@ class _LoginState extends ConsumerState<Login> {
                           height: 50,
                           child: ElevatedButton(
                             onPressed: (){
-                              context.push('/home');
+                              context.push('/accettazione');
                             },
                             child: Text('ACCEDI',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18))
                           ),
                         ),
                       ),
                     if(password_dimenticata) ...[
-                      Text('Inserire la user e cliccare su Reset Password.Verrà inviata una password temporanea alla mail associata al vostro account',style: TextStyle(fontSize: 16),textAlign: TextAlign.center,),
+                      Text('Inserire la user e cliccare su Reset Password. Verrà inviata una password temporanea alla mail associata al vostro account',style: TextStyle(fontSize: 16),textAlign: TextAlign.center,),
                       Padding(
                       padding:EdgeInsetsGeometry.only(left: 30,right: 30,top: 20),
                       child: SizedBox( 

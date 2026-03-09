@@ -29,24 +29,41 @@ class _HomeState extends ConsumerState<Home> {
           children: [
             Expanded(child: SingleChildScrollView(child: Column( children: [
             Center(
-            child: FractionallySizedBox(
+            child: Padding(padding: EdgeInsets.only(top: 20),child: FractionallySizedBox(
               widthFactor: 0.95,
               
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsetsGeometry.only(top: 20,bottom: 15),
-                  child:Column(
-                    children: [Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text('DISI FABIO - ASL 1 - SASSARI - B',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+              child: SizedBox(
+                height: 230,
+                child: Card(
+                  elevation: 3,
+                  child: Padding(padding: EdgeInsets.all(16),child: Column(
+                    children: [
+                      Icon(Icons.account_box,size: 75),
+                      Text('SANNA RITA',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      SizedBox(height: 10,),
+                      Padding(padding:EdgeInsets.only(left: 0),child: Row(
+                        children: [
+                          Icon(Icons.local_hospital,size: 30,),
+                          Text('ASL 1 SASSARI',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold))
+                        ],
                       ),
-                      
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.location_on,size: 30,),
+                          Text('DISTRETTO SASSARI',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold))
+                        ],
+                      ),
                     ],
-                  )
+                  ),
+                  ),
                 ),
               ),
-            )),
+            )),),
+            Padding(
+              padding: EdgeInsets.only(top: 30,bottom:10,left:16),
+              child: Align(alignment: Alignment.centerLeft,child: Text('ULTIME 3 ACCETTAZIONI',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),))
+            ),
             Center( 
               child: 
               FractionallySizedBox(
