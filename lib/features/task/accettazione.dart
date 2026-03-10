@@ -12,6 +12,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:typed_data';
+import 'sharePdf.dart';
 
 class Accettazione extends ConsumerStatefulWidget {
 
@@ -240,23 +241,30 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                   child: Text('ALLEGATI PRESENTI',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-  padding: EdgeInsets.only(left: 17, top: 7, bottom: 20, right: 5),
-  child: Row(
-    children: [
-      Expanded(
-        child: Text(
-          'DOC ACCOMPAGNAMENTO + PAGAMENTOooooooooooooo',
-          style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-       Icon(Icons.download)
-      
-    ],
-  ),
-)
+                                  padding: EdgeInsets.only(left: 17, top: 7, bottom: 20, right: 5),
+                                  child: Row(
+                                    
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          'DOC ACCOMPAGNAMENTO + PAGAMENTO',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),InkWell(
+                                        onTap: (){
+                                          sharePdf();
+                                        },
+                                      child:Align(
+                                      alignment: Alignment.center,
+                                      child: Icon(Icons.download),
+                                    )),
+                                      
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
                     

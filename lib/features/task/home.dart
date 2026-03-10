@@ -60,10 +60,12 @@ class _HomeState extends ConsumerState<Home> {
                 ),
               ),
             )),),
-            Padding(
-              padding: EdgeInsets.only(top: 30,bottom:10,left:16),
+            FractionallySizedBox(
+              widthFactor: 0.95,
+            child: Padding(
+              padding: EdgeInsets.only(top: 30,bottom:10,),
               child: Align(alignment: Alignment.centerLeft,child: Text('ULTIME 3 ACCETTAZIONI',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),))
-            ),
+            ),),
             Center( 
               child: 
               FractionallySizedBox(

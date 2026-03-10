@@ -1,5 +1,6 @@
 import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/home.dart';
+import 'package:coran/features/task/impostazioni.dart';
 import 'package:coran/features/task/rdp.dart';
 import 'package:coran/features/task/ricerca.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +27,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
   final List<Widget> _pages = [
     Home(),
     Ricerca(),
-    Rdp(),
+    Impostazioni(),
   ];
 
   @override

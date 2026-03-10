@@ -11,5 +11,5 @@ Future<void> sharePdf() async {
 
   await file.writeAsBytes(byteData.buffer.asUint8List());
 
-  await Share.shareXFiles([XFile(file.path)], text: 'RDP');
+  await Share.shareXFiles([XFile(file.path)]);
 }

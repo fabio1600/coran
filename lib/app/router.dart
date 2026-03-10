@@ -1,5 +1,8 @@
 import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/account.dart';
+import 'package:coran/features/task/cambioPassword.dart';
 import 'package:coran/features/task/filtri.dart';
+import 'package:coran/features/task/impostazioni.dart';
 import 'package:coran/features/task/login.dart';
 import 'package:coran/features/task/rdp.dart';
 import 'package:coran/features/task/home.dart';
@@ -17,7 +20,7 @@ final GoRouter router = GoRouter(
         int index = 0;
         if (state.uri.path == '/') index = 0;
         if (state.uri.path == '/ricerca') index = 1;
-        if (state.uri.path == '/settings') index = 2;
+        if (state.uri.path == '/impostazioni') index = 2;
 
         return BaseScaffold(
           currentIndex: index,
@@ -27,12 +30,14 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(path: '/', builder: (context, state) => Home()),
         GoRoute(path: '/ricerca', builder: (context, state) => Ricerca()),
-        GoRoute(path: '/settings', builder: (context, state) => Rdp()),
+        GoRoute(path: '/impostazioni', builder: (context, state) => Impostazioni()),
       ],
     ),
     GoRoute(
           path: '/rdp',
-          builder: (context, state) => const Rdp(),
+          pageBuilder: (context, state) => const NoTransitionPage(
+    child: Rdp(),
+  ),
         ),
     GoRoute(
           path: '/accettazione',
@@ -45,6 +50,14 @@ final GoRouter router = GoRouter(
     GoRoute(
           path: '/login',
           builder: (context, state) => const Login(),
+        ),
+    GoRoute(
+          path: '/account',
+          builder: (context, state) => const Account(),
+        ),
+    GoRoute(
+          path: '/password',
+          builder: (context, state) => const Cambiopassword(),
         ),
   ],
   
