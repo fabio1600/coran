@@ -42,7 +42,7 @@ class _ImpostazioniState extends ConsumerState<Impostazioni> {
                     title: Text('Cambio Password',style: TextStyle(fontSize: 20),),
                     trailing: Icon(Icons.chevron_right),
                     onTap: () {
-                      context.push('/password'); 
+                      context.push('/password');  
                     },
                   ),
                   ListTile(
