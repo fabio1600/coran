@@ -48,12 +48,12 @@ class _HomeState extends ConsumerState<Home> {
                         ],
                       ),
                       ),
-                      Row(
+                      Padding(padding: EdgeInsets.only(top:5),child: Row(
                         children: [
                           Icon(Icons.location_on,size: 30,),
                           Text('DISTRETTO SASSARI',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold))
                         ],
-                      ),
+                      ),),
                     ],
                   ),
                   ),
@@ -63,7 +63,7 @@ class _HomeState extends ConsumerState<Home> {
             FractionallySizedBox(
               widthFactor: 0.95,
             child: Padding(
-              padding: EdgeInsets.only(top: 30,bottom:10,),
+              padding: EdgeInsets.only(top: 30,bottom:0,),
               child: Align(alignment: Alignment.centerLeft,child: Text('ULTIME 3 ACCETTAZIONI',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),))
             ),),
             Center( 
@@ -72,7 +72,7 @@ class _HomeState extends ConsumerState<Home> {
                           alignment: Alignment.center,
                           widthFactor: 0.95,
                           child: Padding(
-                            padding:EdgeInsets.symmetric(vertical: 10) ,
+                            padding:EdgeInsets.symmetric(vertical: 5) ,
                             child:SizedBox(
                               
                               child:ElevatedButton(

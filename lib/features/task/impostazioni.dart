@@ -49,7 +49,9 @@ class _ImpostazioniState extends ConsumerState<Impostazioni> {
                     leading: Icon(Icons.notifications_active),
                     title: Text('Segnalazione',style: TextStyle(fontSize: 20),),
                     trailing: Icon(Icons.chevron_right),
-                    onTap: () {},
+                    onTap: () {
+                      context.push('/segnalazione');
+                    },
                   ),
                   ListTile(
                     leading: Icon(Icons.lock),

@@ -9,7 +9,11 @@ Future<void> sharePdf() async {
   final tempDir = await getTemporaryDirectory();
   final file = File('${tempDir.path}/rdp.pdf');
 
+  
+
+  if (!await file.exists()) {
   await file.writeAsBytes(byteData.buffer.asUint8List());
+}
 
   await Share.shareXFiles([XFile(file.path)]);
 }

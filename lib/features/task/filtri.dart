@@ -74,6 +74,15 @@ DateTime? rdpAl;
                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Padding(padding: EdgeInsets.only(left: 10,top: 16),child: 
+                            ListTile(
+                              leading: Icon(Icons.person),
+                              title: Text('Seleziona veterinario',style: TextStyle(fontSize: 20),),
+                              trailing: Icon(Icons.chevron_right),
+                              onTap: (){
+                                context.push('/veterinari');
+                              },
+                            )),
                             Container(
                               alignment: Alignment.centerLeft,
                               padding: EdgeInsets.only(left: 30,top: 30),
@@ -335,9 +344,7 @@ DateTime? rdpAl;
                             width: double.infinity,
                             padding:EdgeInsetsGeometry.only(top: 20,bottom: 30,left: 30,right: 10),
                             child: ElevatedButton(
-                              style:ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xFF209BD6),
-                              ),
+                              
                               onPressed: (){},
                               child: Text('Applica Filtri',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
                               ),

@@ -7,6 +7,8 @@ import 'package:coran/features/task/login.dart';
 import 'package:coran/features/task/rdp.dart';
 import 'package:coran/features/task/home.dart';
 import 'package:coran/features/task/ricerca.dart';
+import 'package:coran/features/task/segnalazione.dart';
+import 'package:coran/features/task/veterinari.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:coran/features/task/scaffoldBase.dart';
@@ -58,6 +60,14 @@ final GoRouter router = GoRouter(
     GoRoute(
           path: '/password',
           builder: (context, state) => const Cambiopassword(),
+        ),
+    GoRoute(
+          path: '/segnalazione',
+          builder: (context, state) => const Segnalazione(),
+        ),
+    GoRoute(
+          path: '/veterinari',
+          builder: (context, state) => const Veterinari(),
         ),
   ],
   

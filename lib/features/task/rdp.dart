@@ -31,8 +31,27 @@ class Rdp extends ConsumerStatefulWidget {
   ConsumerState<Rdp> createState() => _RdpState();
 }
 class _RdpState extends ConsumerState<Rdp> {
-  
+  ByteData? pdf;
+  bool loading=true;
+
+
+  Future<void> getPdf() async{
+    final bytes= await rootBundle.load('assets/images/rdp.pdf');
+    setState(() {
+      
+      pdf = bytes;
+      loading = false;
+     
+    });
+  }
+   
  
+@override
+  void initState() {
+    super.initState();
+    getPdf();
+  }
+
 @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,15 +65,9 @@ class _RdpState extends ConsumerState<Rdp> {
   },
 )],
       ),
-      body: Column( 
-        children: [
-         
-        Expanded(
-        
-          child: 
-         SfPdfViewer.asset('assets/images/rdp.pdf'),
-        ),]
-    ),
+      body: loading
+          ? Center(child: CircularProgressIndicator())
+          : SfPdfViewer.memory(pdf!.buffer.asUint8List()),
     
     );
   }

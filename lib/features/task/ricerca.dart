@@ -15,6 +15,8 @@ class Ricerca extends ConsumerStatefulWidget {
 }
 class _RicercaState extends ConsumerState<Ricerca> {
 
+bool eliminaFiltro= false;
+
  @override
   Widget build(BuildContext context) {
     bool test=true;
@@ -23,7 +25,47 @@ class _RicercaState extends ConsumerState<Ricerca> {
     Column(
           children: [
             Expanded(child: SingleChildScrollView(child: Column( children: [
-            
+              SingleChildScrollView(
+                padding: EdgeInsets.all( 10),
+                scrollDirection: Axis.horizontal,
+                child: Row (spacing: 5, children: [
+                if(!eliminaFiltro)
+                Chip(
+                  label: Text("DISI FABIO"),
+                  onDeleted: () {
+                    eliminaFiltro=true;
+                    setState(() {
+                      
+                    });
+                  },
+                ),
+                Chip(
+                  label: Text("Acc >= 01/01/2026"),
+                  onDeleted: () {
+                   
+                  },
+                ),
+                Chip(
+                  label: Text("Acc <= 01/10/2026"),
+                  onDeleted: () {
+                    
+                  },
+                ),
+                Chip(
+                  label: Text("Rdp: 01/01/2026-01/12/2026"),
+                  onDeleted: () {
+                    
+                  },
+                ),
+                Chip(
+                  label: Text("215698"),
+                  onDeleted: () {
+                    
+                  },
+                ),
+              ],
+            ),
+              ),
             Center( 
               child: 
               FractionallySizedBox(
