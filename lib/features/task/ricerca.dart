@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'filtriNotifier.dart';
 
 
 class Ricerca extends ConsumerStatefulWidget {
@@ -20,7 +21,7 @@ bool eliminaFiltro= false;
  @override
   Widget build(BuildContext context) {
     bool test=true;
-
+final filtri=ref.watch(providerFiltri);
     return 
     Column(
           children: [
@@ -29,40 +30,80 @@ bool eliminaFiltro= false;
                 padding: EdgeInsets.all( 10),
                 scrollDirection: Axis.horizontal,
                 child: Row (spacing: 5, children: [
-                if(!eliminaFiltro)
+                if(filtri.veterinario!=null)
                 Chip(
-                  label: Text("DISI FABIO"),
+                  label: Text("${filtri.veterinario}"),
                   onDeleted: () {
-                    eliminaFiltro=true;
-                    setState(() {
-                      
-                    });
+                    ref.read(providerFiltri.notifier).clearVet();
+                    
                   },
                 ),
+                if(filtri.richiesta!=null)
                 Chip(
-                  label: Text("Acc >= 01/01/2026"),
+                  label: Text("${filtri.richiesta}"),
                   onDeleted: () {
+                    ref.watch(providerFiltri.notifier).clearRich();
+                  },
+                ),
+                if(filtri.codiceAziendale!=null)
+                Chip(
+                  label: Text("${filtri.codiceAziendale}"),
+                  onDeleted: () {
+                    ref.watch(providerFiltri.notifier).clearCod();
+                  },
+                ),
+                if(filtri.ragioneSociale!=null)
+                Chip(
+                  label: Text("${filtri.ragioneSociale}"),
+                  onDeleted: () {
+                    ref.watch(providerFiltri.notifier).clearRag();
+                  },
+                ),
+                if(filtri.quesito!=null)
+                Chip(
+                  label: Text("${filtri.quesito}"),
+                  onDeleted: () {
+                    ref.watch(providerFiltri.notifier).clearQue();
+                  },
+                ),
+                if(filtri.verbale!=null)
+                Chip(
+                  label: Text("${filtri.verbale}"),
+                  onDeleted: () {
+                    ref.watch(providerFiltri.notifier).clearVerb();
+                  },
+                ),
+                if(filtri.accDal!=null)
+                Chip(
+                  label: Text("Acc >= ${filtri.accDal!.day}/${filtri.accDal!.month}/${filtri.accDal!.year}"),
+                  onDeleted: () {
+                    ref.watch(providerFiltri.notifier).clearAccDal();
                    
                   },
                 ),
+                if(filtri.accAl!=null)
                 Chip(
-                  label: Text("Acc <= 01/10/2026"),
+                  label: Text("Acc <= ${filtri.accAl!.day}/${filtri.accAl!.month}/${filtri.accAl!.year}"),
                   onDeleted: () {
-                    
+                    ref.watch(providerFiltri.notifier).clearAccAl();
                   },
                 ),
+                if(filtri.rdpDal!=null)
                 Chip(
-                  label: Text("Rdp: 01/01/2026-01/12/2026"),
+                  label: Text("Rdp <= ${filtri.rdpDal!.day}/${filtri.rdpDal!.month}/${filtri.rdpDal!.year}"),
                   onDeleted: () {
-                    
+                    ref.watch(providerFiltri.notifier).clearRdpDal();
                   },
                 ),
+                if(filtri.rdpAl!=null)
                 Chip(
-                  label: Text("215698"),
+                  label: Text("Rdp <= ${filtri.rdpAl!.day}/${filtri.rdpAl!.month}/${filtri.rdpAl!.year}"),
                   onDeleted: () {
-                    
+                    ref.watch(providerFiltri.notifier).clearRdpAl();
                   },
                 ),
+                
+                
               ],
             ),
               ),

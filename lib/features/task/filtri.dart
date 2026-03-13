@@ -1,15 +1,8 @@
-import 'package:coran/core/storage/servizio_preferenze.dart';
-import 'package:coran/features/task/modello_task.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'provider_task.dart';
-import 'package:coran/core/storage/servizio_preferenze.dart';
-import 'scaffoldBase.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'filtriNotifier.dart';
 
 class Filtri extends ConsumerStatefulWidget {
 
@@ -22,14 +15,17 @@ class Filtri extends ConsumerStatefulWidget {
 }
 class _FiltriState extends ConsumerState<Filtri> {
 
+  
+
 DateTime? accDal;
 DateTime? accAl;
-  TextEditingController accDalController = TextEditingController();
-  TextEditingController accAlController = TextEditingController();
+  
+
 DateTime? rdpDal;
 DateTime? rdpAl;
-  TextEditingController rdpDalController = TextEditingController();
-  TextEditingController rdpAlController = TextEditingController();
+
+
+  
 
   Future<void> _pickDate(
     DateTime? currentData,
@@ -50,12 +46,39 @@ DateTime? rdpAl;
   }
 }
 
+@override
+void initState() {
+  super.initState();
+  final filtri = ref.read(providerFiltri);
+  if(filtri.accAl==null)                  // inizializza la variabile locale
+  ref.read(providerFiltri.notifier).accAlController.text="";
+  if(filtri.accDal==null)
+  ref.read(providerFiltri.notifier).accDalController.text="";
+  if(filtri.veterinario==null)                  // inizializza la variabile locale
+  ref.read(providerFiltri.notifier).vetController.text="";
+  if(filtri.richiesta==null)                  // inizializza la variabile locale
+  ref.read(providerFiltri.notifier).richController.text="";
+  if(filtri.codiceAziendale==null)                  // inizializza la variabile locale
+  ref.read(providerFiltri.notifier).codController.text="";
+  if(filtri.ragioneSociale==null)                  // inizializza la variabile locale
+  ref.read(providerFiltri.notifier).ragController.text="";
+  if(filtri.quesito==null)                  // inizializza la variabile locale
+  ref.read(providerFiltri.notifier).queController.text="";
+  if(filtri.verbale==null)                  // inizializza la variabile locale
+  ref.read(providerFiltri.notifier).verbController.text="";
+  if(filtri.rdpDal==null)                  // inizializza la variabile locale
+  ref.read(providerFiltri.notifier).rdpDalController.text="";
+  if(filtri.rdpAl==null)                  // inizializza la variabile locale
+  ref.read(providerFiltri.notifier).rdpAlController.text="";
+}
 
 
  @override
   Widget build(BuildContext context) {
-    bool test=true;
 
+    
+    
+    
     return Scaffold(
           appBar:  AppBar(
         title: Text('Filtri',textAlign: TextAlign.left,)
@@ -95,7 +118,8 @@ DateTime? rdpAl;
                               height: 60,
                               padding: EdgeInsets.only(left: 30,top: 10,right: 10),
                               child: TextField(
-                                
+                                      controller: ref.watch(providerFiltri.notifier).richController,
+                                      onChanged: (value) => ref.watch(providerFiltri.notifier).richController.text=value,
                                       decoration: InputDecoration(
                                         
                                         border: OutlineInputBorder(),
@@ -121,7 +145,8 @@ DateTime? rdpAl;
                               height: 60,
                               padding: EdgeInsets.only(left: 30,top: 10,right: 10),
                               child: TextField(
-                                
+                                      controller: ref.watch(providerFiltri.notifier).codController,
+                                      onChanged: (value) => ref.watch(providerFiltri.notifier).codController.text=value,
                                       decoration: InputDecoration(
                                         
                                         border: OutlineInputBorder(),
@@ -145,7 +170,8 @@ DateTime? rdpAl;
                               height: 60,
                               padding: EdgeInsets.only(left: 30,top: 10,right: 10),
                               child: TextField(
-                                
+                                      controller: ref.watch(providerFiltri.notifier).ragController,
+                                      onChanged: (value) => ref.watch(providerFiltri.notifier).ragController.text=value,
                                       decoration: InputDecoration(
                                         
                                         border: OutlineInputBorder(),
@@ -169,7 +195,8 @@ DateTime? rdpAl;
                               height: 60,
                               padding: EdgeInsets.only(left: 30,top: 10,right: 10),
                               child: TextField(
-                                
+                                      controller: ref.watch(providerFiltri.notifier).queController,
+                                      onChanged: (value) => ref.watch(providerFiltri.notifier).queController.text=value,
                                       decoration: InputDecoration(
                                         
                                         border: OutlineInputBorder(),
@@ -193,7 +220,8 @@ DateTime? rdpAl;
                               height: 60,
                               padding: EdgeInsets.only(left: 30,top: 10,right: 10),
                               child: TextField(
-                                
+                                      controller: ref.watch(providerFiltri.notifier).verbController,
+                                      onChanged: (value) => ref.watch(providerFiltri.notifier).verbController.text=value,
                                       decoration: InputDecoration(
                                         focusColor: Colors.blue,
                                         border: OutlineInputBorder(),
@@ -217,18 +245,32 @@ DateTime? rdpAl;
                               height: 60,
                               padding: EdgeInsets.only(left: 30,top: 10,right: 10),
                               child: TextField(
-                                      controller: accDalController,
+                                      controller: ref.watch(providerFiltri.notifier).accDalController,
                                       readOnly: true,
                                       onTap: () {
                                                 _pickDate(accDal, (picked) {
                                                   accDal = picked;
-                                                  accDalController.text =
+                                                  ref.read(providerFiltri.notifier).accDalController.text =
                                                       "${picked.day}/${picked.month}/${picked.year}";
+                                                  
                                                 });
                                               },
+                                     
                                       decoration: InputDecoration(  
-                                      border: OutlineInputBorder(),
-                                      suffixIcon: Icon(Icons.calendar_today),
+                                        border: OutlineInputBorder(),
+                                        suffixIcon: ref.read(providerFiltri.notifier).accDalController.text.isEmpty
+                                        ? Icon(Icons.calendar_today)
+                                        : IconButton(
+                                            icon: Icon(Icons.clear),
+                                            onPressed: () {
+                                              accDal = null;
+                                              ref.watch(providerFiltri.notifier).accDalController.clear();
+
+                                              
+
+                                              setState(() {});
+                                            },
+                                          ),
                                       ),
                                     ),
                             )
@@ -249,20 +291,33 @@ DateTime? rdpAl;
                               height: 60,
                               padding: EdgeInsets.only(left: 30,top: 10,right: 10),
                               child: TextField(
-                                      controller: accAlController,
+                                      controller: ref.watch(providerFiltri.notifier).accAlController,
                                       readOnly: true,
                                       onTap: () {
                                                 _pickDate(accAl, (picked) {
                                                   accAl = picked;
-                                                  accAlController.text =
+                                                  ref.read(providerFiltri.notifier).accAlController.text =
                                                       "${picked.day}/${picked.month}/${picked.year}";
+                                                  
                                                 });
                                               },
                                 
                                       decoration: InputDecoration(  
                                         
                                       border: OutlineInputBorder(),
-                                      suffixIcon: Icon(Icons.calendar_today),
+                                        suffixIcon:  ref.read(providerFiltri.notifier).accAlController.text.isEmpty
+                                        ? Icon(Icons.calendar_today)
+                                        :  IconButton(
+                                            icon: Icon(Icons.clear),
+                                            onPressed: () {
+                                              accAl = null;
+                                              ref.watch(providerFiltri.notifier).accAlController.clear();
+
+                                              
+
+                                              setState(() {});
+                                            },
+                                          )
                                       ),
                                     ),
                             )
@@ -283,19 +338,31 @@ DateTime? rdpAl;
                               height: 60,
                               padding: EdgeInsets.only(left: 30,top: 10,right: 10),
                               child: TextField(
-                                      controller: rdpDalController,
+                                      controller: ref.watch(providerFiltri.notifier).rdpDalController,
                                       readOnly: true,
                                       onTap: () {
                                                 _pickDate(rdpDal, (picked) {
-                                                  accAl = picked;
-                                                  rdpDalController.text =
+                                                 rdpDal = picked;
+                                                  ref.watch(providerFiltri.notifier).rdpDalController.text =
                                                       "${picked.day}/${picked.month}/${picked.year}";
                                                 });
                                               },
                                 
                                       decoration: InputDecoration(  
                                       border: OutlineInputBorder(),
-                                      suffixIcon: Icon(Icons.calendar_today),
+                                      suffixIcon:  ref.read(providerFiltri.notifier).rdpDalController.text.isEmpty
+                                        ? Icon(Icons.calendar_today)
+                                        :  IconButton(
+                                            icon: Icon(Icons.clear),
+                                            onPressed: () {
+                                              rdpDal = null;
+                                              ref.watch(providerFiltri.notifier).rdpDalController.clear();
+
+                                              
+
+                                              setState(() {});
+                                            },
+                                          )
                                       ),
                                     ),
                             )
@@ -316,12 +383,12 @@ DateTime? rdpAl;
                               height: 60,
                               padding: EdgeInsets.only(left: 30,top: 10,right: 10),
                               child: TextField(
-                                      controller: rdpAlController,
+                                      controller: ref.watch(providerFiltri.notifier).rdpAlController,
                                       readOnly: true,
                                       onTap: () {
                                                 _pickDate(rdpAl, (picked) {
-                                                  accAl = picked;
-                                                  rdpAlController.text =
+                                                  rdpAl = picked;
+                                                  ref.watch(providerFiltri.notifier).rdpAlController.text =
                                                       "${picked.day}/${picked.month}/${picked.year}";
                                                 });
                                               },
@@ -329,7 +396,19 @@ DateTime? rdpAl;
                                       decoration: InputDecoration(  
                                         
                                       border: OutlineInputBorder(),
-                                      suffixIcon: Icon(Icons.calendar_today),
+                                      suffixIcon:  ref.read(providerFiltri.notifier).rdpAlController.text.isEmpty
+                                        ? Icon(Icons.calendar_today)
+                                        :  IconButton(
+                                            icon: Icon(Icons.clear),
+                                            onPressed: () {
+                                              rdpAl = null;
+                                              ref.watch(providerFiltri.notifier).rdpAlController.clear();
+
+                                              
+
+                                              setState(() {});
+                                            },
+                                          )
                                       ),
                                     ),
                             )
@@ -345,7 +424,63 @@ DateTime? rdpAl;
                             padding:EdgeInsetsGeometry.only(top: 20,bottom: 30,left: 30,right: 10),
                             child: ElevatedButton(
                               
-                              onPressed: (){},
+                              onPressed: (){
+                                final controller=ref.watch(providerFiltri.notifier); 
+                                if(accAl!=null)
+                                ref.watch(providerFiltri.notifier).setAccAl(accAl!);
+                                if(accAl==null)
+                                ref.watch(providerFiltri.notifier).clearAccAl();
+
+                                if(accDal!=null)
+                                ref.read(providerFiltri.notifier).setAccdal(accDal!);
+                                if(accDal==null)
+                                ref.watch(providerFiltri.notifier).clearAccDal();
+
+                                if(rdpDal!=null)
+                                ref.read(providerFiltri.notifier).setRdpDal(rdpDal!);
+                                if(rdpDal==null)
+                                ref.watch(providerFiltri.notifier).clearRdpDal();
+
+                                if(rdpAl!=null)
+                                ref.read(providerFiltri.notifier).setRdpAl(rdpAl!);
+                                if(rdpAl==null)
+                                ref.watch(providerFiltri.notifier).clearRdpAl();
+
+                                if(controller.vetController.text.isNotEmpty)
+                                ref.watch(providerFiltri.notifier).setVet(controller.vetController.text);
+                                if(controller.vetController.text.isEmpty)
+                                ref.watch(providerFiltri.notifier).clearVet();
+
+                                if(controller.richController.text.isNotEmpty)
+                                ref.watch(providerFiltri.notifier).setRich(controller.richController.text);
+                                if(controller.richController.text.isEmpty)
+                                ref.watch(providerFiltri.notifier).clearRich();
+
+                                if(controller.ragController.text.isNotEmpty)
+                                ref.watch(providerFiltri.notifier).setRag(controller.ragController.text);
+                                if(controller.ragController.text.isEmpty)
+                                ref.watch(providerFiltri.notifier).clearRag();
+
+                                if(controller.codController.text.isNotEmpty)
+                                ref.watch(providerFiltri.notifier).setCod(controller.codController.text);
+                                if(controller.codController.text.isEmpty)
+                                ref.watch(providerFiltri.notifier).clearCod();
+
+                                if(controller.queController.text.isNotEmpty)
+                                ref.watch(providerFiltri.notifier).setQue(controller.queController.text);
+                                if(controller.queController.text.isEmpty)
+                                ref.watch(providerFiltri.notifier).clearQue();
+
+                                if(controller.verbController.text.isNotEmpty)
+                                ref.watch(providerFiltri.notifier).setVerb(controller.verbController.text);
+                                if(controller.verbController.text.isEmpty)
+                                ref.watch(providerFiltri.notifier).clearVerb();
+
+                                
+
+
+
+                              },
                               child: Text('Applica Filtri',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
                               ),
                             ),
