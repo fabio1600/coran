@@ -1,6 +1,8 @@
 
+import 'package:coran/features/task/filtriNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 
 
@@ -75,6 +77,11 @@ class _VeterinariState extends ConsumerState<Veterinari> {
                     ListTile(
                       leading: Icon(Icons.person),
                       title: Text('DISI FABIO',style: TextStyle(fontSize: 18),),
+                      onTap: (){
+                        ref.watch(providerFiltri.notifier).setVet('DISI FABIO');
+                        ref.watch(providerFiltri.notifier).vetController.text="DISI FABIO";
+                        context.go('/ricerca');
+                      },
                     ),
                     ListTile(
                       leading: Icon(Icons.person),

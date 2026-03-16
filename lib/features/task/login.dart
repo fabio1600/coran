@@ -39,21 +39,15 @@ class _LoginState extends ConsumerState<Login> {
       
       body: 
           Center(
-          child:Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
+          child:
+               SingleChildScrollView(
+                    child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                       Padding(padding:EdgeInsetsGeometry.only(top: 250) ,child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  
-                  children: [
+                    
                     Image.asset('assets/images/app_icon.png',width: 80,),
-                    Text('Login Coran',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
-                  ],
-                )
-                ),
+                    Text('Login Coran',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                  
                 
               
               Padding(padding:EdgeInsetsGeometry.only(left: 30,right: 30,top: 30) ,child: Column(
@@ -117,14 +111,15 @@ class _LoginState extends ConsumerState<Login> {
               
                     ],
                   ),
+                  
+                  
                 ),
-              )
+              
 
 
 
               
-            ],
-          )
+         
           )
         
     

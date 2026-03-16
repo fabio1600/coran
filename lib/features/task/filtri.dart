@@ -476,7 +476,7 @@ void initState() {
                                 if(controller.verbController.text.isEmpty)
                                 ref.watch(providerFiltri.notifier).clearVerb();
 
-                                
+                                context.go('/ricerca');
 
 
 

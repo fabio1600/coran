@@ -1,12 +1,7 @@
-import 'package:coran/core/storage/servizio_preferenze.dart';
-import 'package:coran/features/task/modello_task.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'provider_task.dart';
-import 'package:coran/core/storage/servizio_preferenze.dart';
 import 'scaffoldBase.dart';
 
 class Home extends ConsumerStatefulWidget {
@@ -20,6 +15,8 @@ class Home extends ConsumerStatefulWidget {
 }
 class _HomeState extends ConsumerState<Home> {
 
+
+
  @override
   Widget build(BuildContext context) {
     bool test=true;
@@ -31,7 +28,6 @@ class _HomeState extends ConsumerState<Home> {
             Center(
             child: Padding(padding: EdgeInsets.only(top: 20),child: FractionallySizedBox(
               widthFactor: 0.95,
-              
               child: SizedBox(
                 height: 230,
                 child: Card(
@@ -63,8 +59,22 @@ class _HomeState extends ConsumerState<Home> {
             FractionallySizedBox(
               widthFactor: 0.95,
             child: Padding(
-              padding: EdgeInsets.only(top: 30,bottom:0,),
-              child: Align(alignment: Alignment.centerLeft,child: Text('ULTIME 3 ACCETTAZIONI',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),))
+              padding: EdgeInsets.only(top: 30,bottom:10,),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child:Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.history),
+                        SizedBox(width: 8),
+                        Text('ACCETTAZIONI RECENTI',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  ]
+                ) 
+              )
             ),),
             Center( 
               child: 

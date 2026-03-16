@@ -25,6 +25,7 @@ final filtri=ref.watch(providerFiltri);
     return 
     Column(
           children: [
+           
             Expanded(child: SingleChildScrollView(child: Column( children: [
               SingleChildScrollView(
                 padding: EdgeInsets.all( 10),
@@ -107,6 +108,7 @@ final filtri=ref.watch(providerFiltri);
               ],
             ),
               ),
+               
             Center( 
               child: 
               FractionallySizedBox(
