@@ -28,9 +28,6 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>UIBackgroundModes</key>
-	<array>
-	<string>remote-notification</string>
-	</array>
+	
 </dict>
 </plist>
