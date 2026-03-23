@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.coran</string>
+	<string>com.fabio.coran</string>
 	<key>PROJECT_ID</key>
 	<string>coran-a8c9f</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,7 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:223818966931:ios:558b5213f94e1d07152a66</string>
-	
+	<string>1:223818966931:ios:559a9fac9029b5aa152a66</string>
 </dict>
 </plist>
