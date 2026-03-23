@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "223818966931",
+    "project_id": "coran-a8c9f",
+    "storage_bucket": "coran-a8c9f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223818966931:android:74cbfc9fba65cdd1152a66",
+        "android_client_info": {
+          "package_name": "com.example.coran"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANDMzNE6Fxmof_z6MTUyWdB_gEbQyiFvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

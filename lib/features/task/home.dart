@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'scaffoldBase.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class Home extends ConsumerStatefulWidget {
 
@@ -14,8 +15,24 @@ class Home extends ConsumerStatefulWidget {
   ConsumerState<Home> createState() => _HomeState();
 }
 class _HomeState extends ConsumerState<Home> {
+String? _token;
+Future<void> initPush() async {
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
 
+  await messaging.requestPermission();
 
+  String? token = await messaging.getToken();
+  print("TOKEN: $token");
+  setState(() {
+    _token=token;
+  });
+}
+
+@override
+void initState() {
+  super.initState();
+  initPush();
+}
 
  @override
   Widget build(BuildContext context) {
@@ -47,7 +64,7 @@ class _HomeState extends ConsumerState<Home> {
                       Padding(padding: EdgeInsets.only(top:5),child: Row(
                         children: [
                           Icon(Icons.location_on,size: 30,),
-                          Text('DISTRETTO SASSARI',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold))
+                           Expanded(child: Text('${_token} ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)))
                         ],
                       ),),
                     ],

@@ -36,7 +36,7 @@ class _RdpState extends ConsumerState<Rdp> {
 
 
   Future<void> getPdf() async{
-    final bytes= await rootBundle.load('assets/images/rdp.pdf');
+    final bytes= await rootBundle.load('assets/images/rdp2.pdf');
     setState(() {
       
       pdf = bytes;
@@ -67,7 +67,7 @@ class _RdpState extends ConsumerState<Rdp> {
       ),
       body: loading
           ? Center(child: CircularProgressIndicator())
-          : SfPdfViewer.memory(pdf!.buffer.asUint8List()),
+          :   SfPdfViewer.memory(pdf!.buffer.asUint8List()),
     
     );
   }

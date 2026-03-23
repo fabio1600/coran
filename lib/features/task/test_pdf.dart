@@ -11,7 +11,7 @@ import 'dart:typed_data';
 Future<void> downloadPdf() async {
   try {
     // 1️⃣ Carico il PDF dagli assets (simula BLOB)
-    final data = await rootBundle.load('assets/images/rdp.pdf');
+    final data = await rootBundle.load('assets/images/rdp2.pdf');
     final Uint8List pdfBytes = data.buffer.asUint8List();
 
     // 2️⃣ Scelgo la directory

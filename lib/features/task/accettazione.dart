@@ -59,189 +59,152 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                               borderRadius: BorderRadius.circular(8),
                               color: const Color.fromARGB(255, 236, 236, 236)
                               ),
-                      
-                            child:Column(
+                            child:FractionallySizedBox(
+                              widthFactor: 0.9,
+                              child:Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 15,right: 5),
+                                  padding: EdgeInsetsGeometry.only(top: 15,right: 5),
                                   child: Text('DATA ACCETTAZIONE',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7),
+                                  padding: EdgeInsetsGeometry.only(top: 7),
                                   child: Text('25/02/2026',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
-                                Center(child: 
-                                  FractionallySizedBox(
-                                    alignment: Alignment.center,
-                                    widthFactor: 0.9,
+                                Center(
                                     child: Container(
                                     margin: EdgeInsets.symmetric(vertical: 12),
                                     height: 1,
                                     color: const Color.fromARGB(255, 189, 188, 188),
                                     ),
-                                  ),
+                                  
                                 ),
                         
                     
                       
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17),
+                                  padding: EdgeInsetsGeometry.only(left: 0),
 
                                   child: Text('ATTIVITÀ',style: TextStyle(fontSize: 17),),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
+                                  padding: EdgeInsetsGeometry.only(top: 7,right: 5),
                                   child: Text('SOCIETA AGRICOLA TRES CORONAS S.S.',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
-                                Center(child: 
-                                  FractionallySizedBox(
-                                    alignment: Alignment.center,
-                                    widthFactor: 0.9,
+                               Center(
                                     child: Container(
                                     margin: EdgeInsets.symmetric(vertical: 12),
                                     height: 1,
                                     color: const Color.fromARGB(255, 189, 188, 188),
                                     ),
-                                  ),
+                                  
                                 ),
                         
                       
+                                Text('INDIRIZZO',style: TextStyle(fontSize: 17)),
+                                
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17),
-                                  child: Text('INDIRIZZO',style: TextStyle(fontSize: 17),),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
+                                  padding: EdgeInsetsGeometry.only(top: 7,right: 5),
                                   child: Text('TRES CORONAS OZIERI (07014)',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
-                                Center(child: 
-                                  FractionallySizedBox(
-                                    alignment: Alignment.center,
-                                    widthFactor: 0.9,
+                                Center(
                                     child: Container(
                                     margin: EdgeInsets.symmetric(vertical: 12),
                                     height: 1,
                                     color: const Color.fromARGB(255, 189, 188, 188),
                                     ),
-                                  ),
+                                  
                                 ),
                         
                       
                       
+                                Text('RICHIEDENETE',style: TextStyle(fontSize: 17),),
+                                
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17),
-                                  child: Text('RICHIEDENETE',style: TextStyle(fontSize: 17),),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
+                                  padding: EdgeInsetsGeometry.only(top: 7,right: 5),
                                   child: Text('SANNA RITA',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
-                                Center(child: 
-                                  FractionallySizedBox(
-                                    alignment: Alignment.center,
-                                    widthFactor: 0.9,
+                                Center(
                                     child: Container(
                                     margin: EdgeInsets.symmetric(vertical: 12),
                                     height: 1,
                                     color: const Color.fromARGB(255, 189, 188, 188),
                                     ),
-                                  ),
+                                  
                                 ),
                         
                       
+                                Text('QUESITO',style: TextStyle(fontSize: 17),),
+                                
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17),
-                                  child: Text('QUESITO',style: TextStyle(fontSize: 17),),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
+                                  padding: EdgeInsetsGeometry.only(top: 7,right: 5),
                                   child: Text('TRIC3: RICERCA TRICHINELLA - MACELLAZIONI USO FAMILIARE',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
-                                Center(child: 
-                                  FractionallySizedBox(
-                                    alignment: Alignment.center,
-                                    widthFactor: 0.9,
+                                Center(
                                     child: Container(
                                     margin: EdgeInsets.symmetric(vertical: 12),
                                     height: 1,
                                     color: const Color.fromARGB(255, 189, 188, 188),
                                     ),
-                                  ),
+                                  
                                 ),
                           
                         
                       
+                                Text('UTENTE',style: TextStyle(fontSize: 17),),
+                                
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17),
-                                  child: Text('UTENTE',style: TextStyle(fontSize: 17),),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
+                                  padding: EdgeInsetsGeometry.only(top: 7,right: 5),
                                   child: Text('A.S.L. 1 SASSARI',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
-                                Center(child: 
-                                  FractionallySizedBox(
-                                    alignment: Alignment.center,
-                                    widthFactor: 0.9,
+                                Center(
                                     child: Container(
                                     margin: EdgeInsets.symmetric(vertical: 12),
                                     height: 1,
                                     color: const Color.fromARGB(255, 189, 188, 188),
                                     ),
-                                  ),
+                                  
                                 ),
                           
                         
                       
+                                Text('CODICE AZIENDA',style: TextStyle(fontSize: 17),),
+                                
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17),
-                                  child: Text('CODICE AZIENDA',style: TextStyle(fontSize: 17),),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
+                                  padding: EdgeInsetsGeometry.only(top: 7,right: 5),
                                   child: Text('IT052SS299',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
-                                Center(child: 
-                                  FractionallySizedBox(
-                                    alignment: Alignment.center,
-                                    widthFactor: 0.9,
+                                Center(
                                     child: Container(
                                     margin: EdgeInsets.symmetric(vertical: 12),
                                     height: 1,
                                     color: const Color.fromARGB(255, 189, 188, 188),
                                     ),
-                                  ),
+                                  
                                 ),
                           
                         
                       
+                                Text('ASL',style: TextStyle(fontSize: 17),),
+                                
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17),
-                                  child: Text('ASL',style: TextStyle(fontSize: 17),),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17,top: 7,right: 5),
+                                  padding: EdgeInsetsGeometry.only(top: 7,right: 5),
                                   child: Text('AUSL 1 - SASSARI / OZIERI',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                                 ),
-                                Center(child: 
-                                  FractionallySizedBox(
-                                    alignment: Alignment.center,
-                                    widthFactor: 0.9,
+                                Center(
                                     child: Container(
                                     margin: EdgeInsets.symmetric(vertical: 12),
                                     height: 1,
                                     color: const Color.fromARGB(255, 189, 188, 188),
                                     ),
-                                  ),
+                                  
                                 ),
 
+                                Text('ALLEGATI PRESENTI',style: TextStyle(fontSize: 17),),
+                                
                                 Padding(
-                                  padding: EdgeInsetsGeometry.only(left: 17),
-                                  child: Text('ALLEGATI PRESENTI',style: TextStyle(fontSize: 17),),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 17, top: 7, bottom: 20, right: 5),
+                                  padding: EdgeInsets.only(top: 7, bottom: 20),
                                   child: Row(
                                     
                                     children: [
@@ -257,16 +220,17 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                                         onTap: (){
                                           sharePdf();
                                         },
-                                      child:Align(
-                                      alignment: Alignment.center,
+                                     
                                       child: Icon(Icons.download),
-                                    )),
+                                    ),
                                       
                                     ],
                                   ),
                                 )
                               ],
                             ),
+                            )
+                            
                     
                           ),
                         ),
@@ -274,7 +238,14 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
                             children: [
                               Padding(
                                 padding: EdgeInsetsGeometry.only(left: 11,top: 30,bottom: 10),
-                                child: Text('RAPPORTI DI PROVA',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.fact_check_outlined),
+                                    SizedBox(width: 8,),
+                                    Text('RAPPORTI DI PROVA',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                    
+                                  ],
+                                  ) 
                               ),
                             ],
                           ),
