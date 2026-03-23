@@ -11,10 +11,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  /*await Firebase.initializeApp();
+  await Firebase.initializeApp();
 
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler); // 👈 AGGIUNGI
-*/
+  
+
 await Firebase.initializeApp();
   runApp(
     ProviderScope(
