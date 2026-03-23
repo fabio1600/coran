@@ -31,7 +31,9 @@ Future<void> initPush() async {
 @override
 void initState() {
   super.initState();
-  initPush();
+   WidgetsBinding.instance.addPostFrameCallback((_) {
+    initPush(); // ora viene chiamato dopo che il widget è montato
+  });
 }
 
  @override
