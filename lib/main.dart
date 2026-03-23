@@ -1,3 +1,5 @@
+import 'package:coran/features/task/token.dart';
+
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:coran/app/router.dart';
@@ -5,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app/app.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 
 void main() async {
@@ -16,14 +18,19 @@ await Firebase.initializeApp(
   options: DefaultFirebaseOptions.currentPlatform,
 );
 
+await FirebaseMessaging.instance.requestPermission();
   
 
 
-  runApp(
+  /*runApp(
     ProviderScope(
       child: MyApp(),
     ),
-  );
+  );*/
+
+  runApp(const MaterialApp(
+  home: ShowTokenScreen(),
+));
 }
 class MyApp extends StatefulWidget {
   @override
