@@ -11,23 +11,35 @@ void main() async {
 
   await Firebase.initializeApp();
 
-FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-NotificationSettings settings = await messaging.requestPermission(
-  alert: true,
-  badge: true,
-  sound: true,
-);
-
-String? token = await FirebaseMessaging.instance.getToken();
-
   runApp(
     ProviderScope(
       child: MyApp(),
     ),
   );
 }
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+   @override
+  void initState() {
+    super.initState();
+    initFirebaseMessaging();
+  }
+
+  Future<void> initFirebaseMessaging() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    await messaging.requestPermission();
+
+    String? token = await messaging.getToken();
+
+    print("TOKEN: $token");
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
