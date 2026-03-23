@@ -30,7 +30,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-   @override
+   /*@override
   void initState() {
     super.initState();
     initFirebaseMessaging();
@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
     String? token = await messaging.getToken();
 
     print("TOKEN: $token");
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {

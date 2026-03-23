@@ -15,7 +15,7 @@ class Home extends ConsumerStatefulWidget {
   ConsumerState<Home> createState() => _HomeState();
 }
 class _HomeState extends ConsumerState<Home> {
-String? _token;
+/*String? _token;
 Future<void> initPush() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -34,7 +34,7 @@ void initState() {
    WidgetsBinding.instance.addPostFrameCallback((_) {
     initPush(); // ora viene chiamato dopo che il widget è montato
   });
-}
+}*/
 
  @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ void initState() {
                       Padding(padding: EdgeInsets.only(top:5),child: Row(
                         children: [
                           Icon(Icons.location_on,size: 30,),
-                           Expanded(child: Text('${_token} ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)))
+                           Expanded(child: Text('testo',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)))
                         ],
                       ),),
                     ],
