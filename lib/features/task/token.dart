@@ -9,19 +9,34 @@ class ShowTokenScreen extends StatefulWidget {
 }
 
 class _ShowTokenScreenState extends State<ShowTokenScreen> {
-  String? token;
+  String text = "Caricando...";
 
   @override
   void initState() {
     super.initState();
-    _loadToken();
+    init();
   }
 
-  Future<void> _loadToken() async {
-    final t = await FirebaseMessaging.instance.getToken();
-    setState(() {
-      token = t;
-    });
+  Future<void> init() async {
+    try {
+      final settings = await FirebaseMessaging.instance.getNotificationSettings();
+      setState(() {
+        text = "Stato permessi: ${settings.authorizationStatus}";
+      });
+
+      if (settings.authorizationStatus == AuthorizationStatus.notDetermined) {
+        await FirebaseMessaging.instance.requestPermission();
+      }
+
+      final token = await FirebaseMessaging.instance.getToken();
+      setState(() {
+        text = token ?? "TOKEN NULL — controlla Info.plist / APNs key";
+      });
+    } catch (e) {
+      setState(() {
+        text = "ERRORE: $e";
+      });
+    }
   }
 
   @override
@@ -29,12 +44,7 @@ class _ShowTokenScreenState extends State<ShowTokenScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("FCM Token")),
       body: Center(
-        child: token == null
-            ? const CircularProgressIndicator()
-            : SelectableText(
-                token!,
-                style: const TextStyle(fontSize: 16),
-              ),
+        child: SelectableText(text),
       ),
     );
   }
