@@ -15,7 +15,7 @@ void main() async {
 
   
 
-await Firebase.initializeApp();
+
   runApp(
     ProviderScope(
       child: MyApp(),
