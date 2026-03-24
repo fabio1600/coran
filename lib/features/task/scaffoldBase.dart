@@ -40,6 +40,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       centerTitle: true,
       actions: [
         if (_currentIndex == 1)
+        Text('Filtri'),
         IconButton( icon: const Icon(Icons.filter_list), onPressed: () { context.push('/filtri'); }, ),
       ],
       ),

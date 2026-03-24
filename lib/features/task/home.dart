@@ -15,26 +15,7 @@ class Home extends ConsumerStatefulWidget {
   ConsumerState<Home> createState() => _HomeState();
 }
 class _HomeState extends ConsumerState<Home> {
-/*String? _token;
-Future<void> initPush() async {
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-  await messaging.requestPermission();
-
-  String? token = await messaging.getToken();
-  print("TOKEN: $token");
-  setState(() {
-    _token=token;
-  });
-}
-
-@override
-void initState() {
-  super.initState();
-   WidgetsBinding.instance.addPostFrameCallback((_) {
-    initPush(); // ora viene chiamato dopo che il widget è montato
-  });
-}*/
 
  @override
   Widget build(BuildContext context) {
@@ -66,7 +47,7 @@ void initState() {
                       Padding(padding: EdgeInsets.only(top:5),child: Row(
                         children: [
                           Icon(Icons.location_on,size: 30,),
-                           Expanded(child: Text('testo',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)))
+                           Expanded(child: Text('DISTRETTO SASSARI',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)))
                         ],
                       ),),
                     ],
