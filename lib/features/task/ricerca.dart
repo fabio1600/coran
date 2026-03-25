@@ -85,7 +85,7 @@ final filtri=ref.watch(providerFiltri);
                 ),
                 if(filtri.accDal!=null)
                 Chip(
-                  label: Text("Acc >= ${filtri.accDal!.day}/${filtri.accDal!.month}/${filtri.accDal!.year}"),
+                  label: Text("Acc dal ${filtri.accDal!.day}/${filtri.accDal!.month}/${filtri.accDal!.year}"),
                   onDeleted: () {
                     ref.watch(providerFiltri.notifier).clearAccDal();
                    
@@ -93,21 +93,21 @@ final filtri=ref.watch(providerFiltri);
                 ),
                 if(filtri.accAl!=null)
                 Chip(
-                  label: Text("Acc <= ${filtri.accAl!.day}/${filtri.accAl!.month}/${filtri.accAl!.year}"),
+                  label: Text("Acc al ${filtri.accAl!.day}/${filtri.accAl!.month}/${filtri.accAl!.year}"),
                   onDeleted: () {
                     ref.watch(providerFiltri.notifier).clearAccAl();
                   },
                 ),
                 if(filtri.rdpDal!=null)
                 Chip(
-                  label: Text("Rdp <= ${filtri.rdpDal!.day}/${filtri.rdpDal!.month}/${filtri.rdpDal!.year}"),
+                  label: Text("Rdp dal ${filtri.rdpDal!.day}/${filtri.rdpDal!.month}/${filtri.rdpDal!.year}"),
                   onDeleted: () {
                     ref.watch(providerFiltri.notifier).clearRdpDal();
                   },
                 ),
                 if(filtri.rdpAl!=null)
                 Chip(
-                  label: Text("Rdp <= ${filtri.rdpAl!.day}/${filtri.rdpAl!.month}/${filtri.rdpAl!.year}"),
+                  label: Text("Rdp al ${filtri.rdpAl!.day}/${filtri.rdpAl!.month}/${filtri.rdpAl!.year}"),
                   onDeleted: () {
                     ref.watch(providerFiltri.notifier).clearRdpAl();
                   },
