@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'scaffoldBase.dart';
+import 'filtriNotifier.dart';
 
 
 class Home extends ConsumerStatefulWidget {
@@ -90,6 +91,9 @@ class _HomeState extends ConsumerState<Home> {
                                 onPressed: (){
                                   context.push('/accettazione');
                                 },
+                                onLongPress: (){
+                                  ref.read(providerFiltri.notifier).setPreferito();
+                                },
                                 child: Column(
                                   children: [ 
                                         
@@ -113,7 +117,12 @@ class _HomeState extends ConsumerState<Home> {
                                                                       )
                                                                     )
                                                         ),
-                                                      
+                                                      Row (
+                                                          mainAxisSize: MainAxisSize.min,
+                                                          children:[
+                                                            Icon(ref.watch(providerFiltri).icona,color: Colors.black,)
+                                                          ]
+                                                        )
                                                       ]
                                                     )
                                           )
@@ -461,7 +470,7 @@ class _HomeState extends ConsumerState<Home> {
                               child:ElevatedButton(
                                 style:ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)),
                                 onPressed: (){
-                                  context.push('/login');
+                                  context.push('/accettazione');
                                 },
                                 child: Column(
                                   children: [ 
@@ -473,7 +482,7 @@ class _HomeState extends ConsumerState<Home> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Richiesta',
                                                             style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
@@ -486,25 +495,40 @@ class _HomeState extends ConsumerState<Home> {
                                                                       )
                                                                     )
                                                         ),
-                                                      SizedBox(
-                                                          child: Text('Del',
-                                                                      style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                                      )
-                                                          
-                                                        ),
-                                                      Expanded( child: Padding(padding:EdgeInsetsGeometry.only(left: 10),
-                                                          
-                                                        
-                                                          child: Text('14/02/2026',
-                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                      )
+                                                      Row (
+                                                          mainAxisSize: MainAxisSize.min,
+                                                          children:[
+                                                            Icon(ref.watch(providerFiltri).icona,color: Colors.black,)
+                                                          ]
                                                         )
                                                       ]
                                                     )
                                           )
                                         ),
-                                      
+                                    Align(
+                                          alignment: AlignmentGeometry.centerLeft,
+                                          child: Padding(
+                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10),
+                                            child: Row (
+                                                    children:[
+                                                      SizedBox(
+                                                        width: 120,
+                                                        child: Text('Data accettazione',
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
+                                                          ),
+                                                      ),
+                                                      Expanded(
+                                                        child:Padding(
+                                                          padding:EdgeInsetsGeometry.only(left: 0),
+                                                          child: Text('14/02/2026',
+                                                                      style: TextStyle(fontSize: 16,color: Colors.black87,fontWeight: FontWeight.bold)
+                                                                      )
+                                                                    )
+                                                        )
+                                                      ]
+                                                    )
+                                          )
+                                        ),  
                                     
                                     Align(
                                           alignment: AlignmentGeometry.centerLeft,
@@ -513,7 +537,7 @@ class _HomeState extends ConsumerState<Home> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Quesito',
                                                             style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
@@ -537,7 +561,7 @@ class _HomeState extends ConsumerState<Home> {
                                             child: Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Attività',
                                                             style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
@@ -561,7 +585,7 @@ class _HomeState extends ConsumerState<Home> {
                                             child:Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Codice Aziendale',
                                                             style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
@@ -586,7 +610,7 @@ class _HomeState extends ConsumerState<Home> {
                                             child:Row (
                                                     children:[
                                                       SizedBox(
-                                                        width: 105,
+                                                        width: 120,
                                                         child: Text('Comune',
                                                             style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),

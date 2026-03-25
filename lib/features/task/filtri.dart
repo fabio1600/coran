@@ -25,6 +25,7 @@ DateTime? rdpDal;
 DateTime? rdpAl;
 
 
+String ordine='Data accettazione decrescente';
   
 
   Future<void> _pickDate(
@@ -70,6 +71,9 @@ void initState() {
   ref.read(providerFiltri.notifier).rdpDalController.text="";
   if(filtri.rdpAl==null)                  // inizializza la variabile locale
   ref.read(providerFiltri.notifier).rdpAlController.text="";
+  if(filtri.ordine!=null){
+    ordine=filtri.ordine!;
+  }
 }
 
 
@@ -106,6 +110,105 @@ void initState() {
                                 context.push('/veterinari');
                               },
                             )),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              padding: EdgeInsets.only(left: 30,top: 10),
+                              child: Text('Ordina per',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              padding: EdgeInsets.only(left: 30,top: 10,right: 10),
+                              child: Row(
+                                spacing: 10,
+                                children: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                                      
+                                      side: BorderSide(
+                                        color: const Color.fromARGB(255, 71, 71, 71), // 👈 colore bordo
+                                        width: ordine=='Data accettazione decrescente'
+                                            ? 2
+                                            : 0.9,          
+                                      ),
+                                      
+                                      
+                                    ),
+                                    onPressed: (){
+                                      
+                                      setState(() {
+                                        ordine='Data accettazione decrescente';
+                                      });
+                                    }, 
+                                    child: Text('Data accettazione decrescente',style: ordine=='Data accettazione decrescente' ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                                      
+                                      side: BorderSide(
+                                        color: const Color.fromARGB(255, 71, 71, 71), // 👈 colore bordo
+                                        width: ordine=='Data accettazione crescente'
+                                            ? 2
+                                            : 0.9,          
+                                      ),
+                                      
+                                      
+                                    ),
+                                    onPressed: (){
+                                      
+                                      setState(() {
+                                        ordine='Data accettazione crescente';
+                                      });
+                                    }, 
+                                    child: Text('Data accettazione crescente',style: ordine=='Data accettazione crescente' ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                                      
+                                      side: BorderSide(
+                                        color: const Color.fromARGB(255, 71, 71, 71), // 👈 colore bordo
+                                        width: ordine=='Data rapporto di prova decrescente'
+                                            ? 2
+                                            : 0.9,          
+                                      ),
+                                      
+                                      
+                                    ),
+                                    onPressed: (){
+                                      
+                                      setState(() {
+                                        ordine='Data rapporto di prova decrescente';
+                                      });
+                                    }, 
+                                    child: Text('Data rapporto di prova decrescente',style: ordine=='Data rapporto di prova decrescente' ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                                      
+                                      side: BorderSide(
+                                        color: const Color.fromARGB(255, 71, 71, 71), // 👈 colore bordo
+                                        width: ordine=='Data rapporto di prova crescente'
+                                            ? 2
+                                            : 0.9,          
+                                      ),
+                                      
+                                      
+                                    ),
+                                    onPressed: (){
+                                      
+                                      setState(() {
+                                        ordine='Data rapporto di prova crescente';
+                                      });
+                                    }, 
+                                    child: Text('Data rapporto di prova crescente',style: ordine=='Data rapporto di prova crescente' ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
+                                  ),
+                                  
+                                ],
+                              ),
+                            ),
                             Container(
                               alignment: Alignment.centerLeft,
                               padding: EdgeInsets.only(left: 30,top: 30),
@@ -425,6 +528,9 @@ void initState() {
                             child: ElevatedButton(
                               
                               onPressed: (){
+
+                                ref.watch(providerFiltri.notifier).setOrdine(ordine);
+
                                 final controller=ref.watch(providerFiltri.notifier); 
                                 if(accAl!=null)
                                 ref.watch(providerFiltri.notifier).setAccAl(accAl!);

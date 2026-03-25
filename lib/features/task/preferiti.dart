@@ -5,16 +5,16 @@ import 'package:go_router/go_router.dart';
 import 'filtriNotifier.dart';
 
 
-class Ricerca extends ConsumerStatefulWidget {
+class Preferiti extends ConsumerStatefulWidget {
 
 
-  const Ricerca({super.key});
+  const Preferiti({super.key});
 
 
   @override
-  ConsumerState<Ricerca> createState() => _RicercaState();
+  ConsumerState<Preferiti> createState() => _PreferitiState();
 }
-class _RicercaState extends ConsumerState<Ricerca> {
+class _PreferitiState extends ConsumerState<Preferiti> {
 
 bool eliminaFiltro= false;
 
@@ -28,96 +28,13 @@ bool eliminaFiltro= false;
  @override
   Widget build(BuildContext context) {
     
-    bool test=true;
-final filtri=ref.watch(providerFiltri);
+
     return 
     Column(
           children: [
            
-            Expanded(child: SingleChildScrollView(child: Column( children: [
-              SingleChildScrollView(
-                padding: EdgeInsets.all( 10),
-                scrollDirection: Axis.horizontal,
-                child: Row (spacing: 5, children: [
-                if(filtri.veterinario!=null)
-                Chip(
-                  label: Text("${filtri.veterinario}"),
-                  onDeleted: () {
-                    ref.read(providerFiltri.notifier).clearVet();
-                    
-                  },
-                ),
-                
-                if(filtri.richiesta!=null)
-                Chip(
-                  label: Text("${filtri.richiesta}"),
-                  onDeleted: () {
-                    ref.watch(providerFiltri.notifier).clearRich();
-                  },
-                ),
-                if(filtri.codiceAziendale!=null)
-                Chip(
-                  label: Text("${filtri.codiceAziendale}"),
-                  onDeleted: () {
-                    ref.watch(providerFiltri.notifier).clearCod();
-                  },
-                ),
-                if(filtri.ragioneSociale!=null)
-                Chip(
-                  label: Text("${filtri.ragioneSociale}"),
-                  onDeleted: () {
-                    ref.watch(providerFiltri.notifier).clearRag();
-                  },
-                ),
-                if(filtri.quesito!=null)
-                Chip(
-                  label: Text("${filtri.quesito}"),
-                  onDeleted: () {
-                    ref.watch(providerFiltri.notifier).clearQue();
-                  },
-                ),
-                if(filtri.verbale!=null)
-                Chip(
-                  label: Text("${filtri.verbale}"),
-                  onDeleted: () {
-                    ref.watch(providerFiltri.notifier).clearVerb();
-                  },
-                ),
-                if(filtri.accDal!=null)
-                Chip(
-                  label: Text("Acc >= ${filtri.accDal!.day}/${filtri.accDal!.month}/${filtri.accDal!.year}"),
-                  onDeleted: () {
-                    ref.watch(providerFiltri.notifier).clearAccDal();
-                   
-                  },
-                ),
-                if(filtri.accAl!=null)
-                Chip(
-                  label: Text("Acc <= ${filtri.accAl!.day}/${filtri.accAl!.month}/${filtri.accAl!.year}"),
-                  onDeleted: () {
-                    ref.watch(providerFiltri.notifier).clearAccAl();
-                  },
-                ),
-                if(filtri.rdpDal!=null)
-                Chip(
-                  label: Text("Rdp <= ${filtri.rdpDal!.day}/${filtri.rdpDal!.month}/${filtri.rdpDal!.year}"),
-                  onDeleted: () {
-                    ref.watch(providerFiltri.notifier).clearRdpDal();
-                  },
-                ),
-                if(filtri.rdpAl!=null)
-                Chip(
-                  label: Text("Rdp <= ${filtri.rdpAl!.day}/${filtri.rdpAl!.month}/${filtri.rdpAl!.year}"),
-                  onDeleted: () {
-                    ref.watch(providerFiltri.notifier).clearRdpAl();
-                  },
-                ),
-                
-                
-              ],
-            ),
-              ),
-               
+            Expanded(child: SingleChildScrollView(child: Column( children: [  
+              SizedBox(height: 20,), 
             Center( 
               child: 
               FractionallySizedBox(

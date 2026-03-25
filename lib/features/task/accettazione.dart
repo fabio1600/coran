@@ -1,4 +1,5 @@
 import 'package:coran/core/storage/servizio_preferenze.dart';
+import 'package:coran/features/task/filtriRicerca.dart';
 import 'package:coran/features/task/modello_task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +14,7 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:typed_data';
 import 'sharePdf.dart';
+import 'filtriNotifier.dart';
 
 class Accettazione extends ConsumerStatefulWidget {
 
@@ -40,6 +42,12 @@ class _AccettazioneState extends ConsumerState<Accettazione> {
         title: Text('Richiesta 3562'),
                               
         centerTitle: true,
+        actions: [
+          
+          IconButton( icon: Icon(ref.watch(providerFiltri).icona), onPressed: () {
+            ref.read(providerFiltri.notifier).setPreferito();
+           }, ),
+        ],
         
       ),
       body:Column(

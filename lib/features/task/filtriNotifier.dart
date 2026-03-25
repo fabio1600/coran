@@ -109,6 +109,18 @@ void setRdpAl (DateTime rdpAl){
   }
 
 TextEditingController rdpAlController = TextEditingController();
+
+void setPreferito() {
+  state = state.copyWith(
+    icona: state.icona == Icons.star_border
+        ? Icons.star
+        : Icons.star_border,
+  );
+}
+
+void setOrdine(String ordine){
+  state=state.copyWith(ordine: ordine);
+}
   
 }
 

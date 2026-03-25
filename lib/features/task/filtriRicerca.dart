@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class filtriRicerca {
   final String? veterinario;
   final String? richiesta;
@@ -9,6 +11,8 @@ class filtriRicerca {
   final DateTime? accAl;
   final DateTime? rdpDal;
   final DateTime? rdpAl;
+  final IconData? icona;
+  final String? ordine;
 
   filtriRicerca({
   this.veterinario,
@@ -21,7 +25,8 @@ class filtriRicerca {
   this.accAl,
   this.rdpDal,
   this.rdpAl,
-
+  this.icona = Icons.star_border,
+  this.ordine
   });
 
 filtriRicerca copyWith({
@@ -45,6 +50,8 @@ filtriRicerca copyWith({
     DateTime? accAl,
     DateTime? rdpDal,
     DateTime? rdpAl,
+    IconData? icona,
+    String? ordine
   }) {
     return filtriRicerca(
       veterinario: clearVet ? null : (veterinario ?? this.veterinario),
@@ -57,6 +64,8 @@ filtriRicerca copyWith({
       accAl: clearAccAl ? null :( accAl ?? this.accAl),
       rdpDal: clearRdpDal ? null :( rdpDal ?? this.rdpDal),
       rdpAl: clearRdpAl ? null :( rdpAl ?? this.rdpAl),
+      icona: icona ?? this.icona,
+      ordine: ordine ?? this.ordine
     );
   }
 

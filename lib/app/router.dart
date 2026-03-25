@@ -22,7 +22,8 @@ final GoRouter router = GoRouter(
         int index = 0;
         if (state.uri.path == '/') index = 0;
         if (state.uri.path == '/ricerca') index = 1;
-        if (state.uri.path == '/impostazioni') index = 2;
+        if (state.uri.path == '/preferiti') index = 2;
+        if (state.uri.path == '/impostazioni') index = 3;
 
         return BaseScaffold(
           currentIndex: index,
@@ -32,6 +33,7 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(path: '/', builder: (context, state) => Home()),
         GoRoute(path: '/ricerca', builder: (context, state) => Ricerca()),
+        GoRoute(path: '/preferiti', builder: (context, state) => Ricerca()),
         GoRoute(path: '/impostazioni', builder: (context, state) => Impostazioni()),
       ],
     ),

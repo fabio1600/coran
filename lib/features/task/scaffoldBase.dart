@@ -1,6 +1,7 @@
 import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/home.dart';
 import 'package:coran/features/task/impostazioni.dart';
+import 'package:coran/features/task/preferiti.dart';
 import 'package:coran/features/task/rdp.dart';
 import 'package:coran/features/task/ricerca.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,6 +28,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
   final List<Widget> _pages = [
     Home(),
     Ricerca(),
+    Preferiti(),
     Impostazioni(),
   ];
 
@@ -35,7 +37,8 @@ class _BaseScaffoldState extends State<BaseScaffold> {
     return Scaffold(
       appBar: AppBar(title: Text(
         _currentIndex == 0 ? 'Home' :
-        _currentIndex == 1 ? 'Ricerca' : 'Impostazioni'
+        _currentIndex == 1 ? 'Ricerca' :
+        _currentIndex == 2 ? 'Preferiti' : 'Impostazioni'
       ),
       centerTitle: true,
       actions: [
@@ -50,11 +53,13 @@ class _BaseScaffoldState extends State<BaseScaffold> {
         children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Ricerca'),
+          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Preferiti'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Impostazioni'),
         ],
       ),
