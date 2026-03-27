@@ -1,5 +1,6 @@
 
-
+import 'package:coran/features/task/accettazione.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:coran/app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +15,14 @@ void main() async {
   
 
 
-
+  await Hive.initFlutter();
+Hive.registerAdapter(AccettazioneAdapter());
+  await Hive.openBox<Accettazione>('accettazioni');
+  
+  await Hive.openBox('preferiti');
+  
+ 
+  
   
 
 
@@ -33,21 +41,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-   /*@override
-  void initState() {
-    super.initState();
-    initFirebaseMessaging();
-  }
-
-  Future<void> initFirebaseMessaging() async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-    await messaging.requestPermission();
-
-    String? token = await messaging.getToken();
-
-    print("TOKEN: $token");
-  }*/
+   
 
   @override
   Widget build(BuildContext context) {

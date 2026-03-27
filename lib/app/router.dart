@@ -1,4 +1,4 @@
-import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/paginaAccettazione.dart';
 import 'package:coran/features/task/account.dart';
 import 'package:coran/features/task/cambioPassword.dart';
 import 'package:coran/features/task/filtri.dart';
@@ -44,8 +44,11 @@ final GoRouter router = GoRouter(
   ),
         ),
     GoRoute(
-          path: '/accettazione',
-          builder: (context, state) => const Accettazione(),
+          path: '/accettazione/:id',
+  builder: (context, state) {
+    final id = int.parse(state.pathParameters['id']!);
+    return paginaAccettazione(id: id);
+  },
         ),
     GoRoute(
           path: '/filtri',

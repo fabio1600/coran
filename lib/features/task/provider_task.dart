@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/services/connectivity_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -131,3 +133,5 @@ void  checkConnection() async {
     print("Sei online");
   }
 }
+
+

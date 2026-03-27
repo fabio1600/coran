@@ -1,4 +1,4 @@
-import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/paginaAccettazione.dart';
 import 'package:coran/features/task/home.dart';
 import 'package:coran/features/task/impostazioni.dart';
 import 'package:coran/features/task/preferiti.dart';

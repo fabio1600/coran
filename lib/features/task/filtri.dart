@@ -80,7 +80,13 @@ void initState() {
  @override
   Widget build(BuildContext context) {
 
-    
+    List<String> ordinamenti=['Data accettazione crescente','Data accettazione decrescente','Data rapporto di prova crescente','Data rapporto di prova decrescente'];
+    void ordina(String ordine){
+      {ordinamenti.remove(ordine);ordinamenti.insert(0, ordine);}
+    }
+    if(ref.watch(providerFiltri).ordine!=null){
+      ordina(ref.watch(providerFiltri).ordine!);
+    }
     
     
     return Scaffold(
@@ -115,100 +121,46 @@ void initState() {
                               padding: EdgeInsets.only(left: 30,top: 10),
                               child: Text('Ordina per',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                             ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              padding: EdgeInsets.only(left: 30,top: 10,right: 10),
-                              child: Row(
-                                spacing: 10,
-                                children: [
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                                      
-                                      side: BorderSide(
-                                        color: const Color.fromARGB(255, 71, 71, 71), // 👈 colore bordo
-                                        width: ordine=='Data accettazione decrescente'
-                                            ? 2
-                                            : 0.9,          
-                                      ),
-                                      
-                                      
-                                    ),
-                                    onPressed: (){
-                                      
-                                      setState(() {
-                                        ordine='Data accettazione decrescente';
-                                      });
-                                    }, 
-                                    child: Text('Data accettazione decrescente',style: ordine=='Data accettazione decrescente' ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
-                                  ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                                      
-                                      side: BorderSide(
-                                        color: const Color.fromARGB(255, 71, 71, 71), // 👈 colore bordo
-                                        width: ordine=='Data accettazione crescente'
-                                            ? 2
-                                            : 0.9,          
-                                      ),
-                                      
-                                      
-                                    ),
-                                    onPressed: (){
-                                      
-                                      setState(() {
-                                        ordine='Data accettazione crescente';
-                                      });
-                                    }, 
-                                    child: Text('Data accettazione crescente',style: ordine=='Data accettazione crescente' ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
-                                  ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                                      
-                                      side: BorderSide(
-                                        color: const Color.fromARGB(255, 71, 71, 71), // 👈 colore bordo
-                                        width: ordine=='Data rapporto di prova decrescente'
-                                            ? 2
-                                            : 0.9,          
-                                      ),
-                                      
-                                      
-                                    ),
-                                    onPressed: (){
-                                      
-                                      setState(() {
-                                        ordine='Data rapporto di prova decrescente';
-                                      });
-                                    }, 
-                                    child: Text('Data rapporto di prova decrescente',style: ordine=='Data rapporto di prova decrescente' ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
-                                  ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                                      
-                                      side: BorderSide(
-                                        color: const Color.fromARGB(255, 71, 71, 71), // 👈 colore bordo
-                                        width: ordine=='Data rapporto di prova crescente'
-                                            ? 2
-                                            : 0.9,          
-                                      ),
-                                      
-                                      
-                                    ),
-                                    onPressed: (){
-                                      
-                                      setState(() {
-                                        ordine='Data rapporto di prova crescente';
-                                      });
-                                    }, 
-                                    child: Text('Data rapporto di prova crescente',style: ordine=='Data rapporto di prova crescente' ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
-                                  ),
-                                  
-                                ],
-                              ),
-                            ),
+                            
+                                SizedBox(
+                                  height: 60,
+                                  child: ListView.builder(
+                                  padding: EdgeInsets.only(left: 30,top: 10),
+                                  physics: const ClampingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: ordinamenti.length,
+                                  itemBuilder:(context, index) {
+                                    final item=ordinamenti[index];
+                                    return Padding(
+                                      padding:EdgeInsets.only(right: 10), 
+                                      child: ElevatedButton(
+                                    
+                                        style: ElevatedButton.styleFrom(
+                                          
+                                          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                                          
+                                          side: BorderSide(
+                                            color: const Color.fromARGB(255, 71, 71, 71), // 👈 colore bordo
+                                            width: ordine==item
+                                                ? 2
+                                                : 0.9,          
+                                          ),
+                                        ),
+                                      onPressed: (){
+                                        
+                                        setState(() {
+                                          ordine=item;
+                                        });
+                                      }, 
+                                      child: Text(item,style: ordine==item ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
+                                    )
+                                  );
+                                    
+                                  }
+                                ),
+                                ),
+                              
                             Container(
                               alignment: Alignment.centerLeft,
                               padding: EdgeInsets.only(left: 30,top: 30),
@@ -221,7 +173,7 @@ void initState() {
                               height: 60,
                               padding: EdgeInsets.only(left: 30,top: 10,right: 10),
                               child: TextField(
-                                      controller: ref.watch(providerFiltri.notifier).richController,
+                                      controller: ref.read(providerFiltri.notifier).richController,
                                       onChanged: (value) => ref.watch(providerFiltri.notifier).richController.text=value,
                                       decoration: InputDecoration(
                                         
@@ -558,7 +510,7 @@ void initState() {
                                 ref.watch(providerFiltri.notifier).clearVet();
 
                                 if(controller.richController.text.isNotEmpty)
-                                ref.watch(providerFiltri.notifier).setRich(controller.richController.text);
+                                ref.read(providerFiltri.notifier).setRich(controller.richController.text);
                                 if(controller.richController.text.isEmpty)
                                 ref.watch(providerFiltri.notifier).clearRich();
 

@@ -1,4 +1,5 @@
 
+import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/filtriRicerca.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +34,7 @@ class Filtrinotifier extends StateNotifier<filtriRicerca> {
     state= state.copyWith(clearRich: true);
   }
   TextEditingController richController = TextEditingController();
+  
 
   void setCod(String cod){
     state= state.copyWith( codiceAziendale: cod);
@@ -122,5 +124,7 @@ void setOrdine(String ordine){
   state=state.copyWith(ordine: ordine);
 }
   
+
+
 }
 
