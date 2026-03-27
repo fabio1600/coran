@@ -36,8 +36,8 @@ bool rispettaFiltri(Accettazione acc,String? rich,String? cod,String? rag,String
   /*if(verb!=null&&acc.Richiedente!=rich)return false;*/
   if(accDal!=null&&acc.DataAccettazione.isBefore(accDal))return false;
   if(accAl!=null&&acc.DataAccettazione.isAfter(accAl))return false;
-  if(rdpDal!=null&&acc.DataRdp!=null&&acc.DataRdp!.isBefore(rdpDal))return false;
-  if(rdpAl!=null&&acc.DataRdp!=null&&acc.DataRdp!.isAfter(rdpAl))return false;
+  if(rdpDal!=null&&((acc.DataRdp!=null&&acc.DataRdp!.isBefore(rdpDal))||(acc.DataRdp==null)))return false;
+  if(rdpAl!=null&&((acc.DataRdp!=null&&acc.DataRdp!.isAfter(rdpAl))||(acc.DataRdp==null)))return false;
   return true;
 }
 

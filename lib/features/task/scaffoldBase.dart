@@ -1,14 +1,14 @@
-import 'package:coran/features/task/paginaAccettazione.dart';
+
 import 'package:coran/features/task/home.dart';
 import 'package:coran/features/task/impostazioni.dart';
 import 'package:coran/features/task/preferiti.dart';
-import 'package:coran/features/task/rdp.dart';
 import 'package:coran/features/task/ricerca.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'filtriNotifier.dart';
 
-class BaseScaffold extends StatefulWidget {
+class BaseScaffold extends ConsumerStatefulWidget {
   final int currentIndex;
   // opzionale, se vuoi sostituire IndexedStack
 
@@ -19,10 +19,10 @@ class BaseScaffold extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BaseScaffoldState createState() => _BaseScaffoldState();
+  ConsumerState<BaseScaffold> createState() => _BaseScaffoldState();
 }
 
-class _BaseScaffoldState extends State<BaseScaffold> {
+class _BaseScaffoldState extends ConsumerState<BaseScaffold> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
@@ -34,8 +34,10 @@ class _BaseScaffoldState extends State<BaseScaffold> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-      appBar: AppBar(title: Text(
+      appBar: AppBar(
+        title: Text(
         _currentIndex == 0 ? 'Home' :
         _currentIndex == 1 ? 'Ricerca' :
         _currentIndex == 2 ? 'Preferiti' : 'Impostazioni'
@@ -47,6 +49,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
         IconButton( icon: const Icon(Icons.filter_list), onPressed: () { context.push('/filtri'); }, ),
         ]
       ],
+      
       ),
       body: IndexedStack(
         index: _currentIndex,

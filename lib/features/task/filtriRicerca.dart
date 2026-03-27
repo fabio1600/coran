@@ -26,7 +26,7 @@ class filtriRicerca {
   this.rdpDal,
   this.rdpAl,
   this.icona = Icons.star_border,
-  this.ordine
+  this.ordine='Data accettazione decrescente'
   });
 
 filtriRicerca copyWith({

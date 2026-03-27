@@ -80,7 +80,7 @@ void initState() {
  @override
   Widget build(BuildContext context) {
 
-    List<String> ordinamenti=['Data accettazione crescente','Data accettazione decrescente','Data rapporto di prova crescente','Data rapporto di prova decrescente'];
+    List<String> ordinamenti=['Data accettazione decrescente','Data accettazione crescente','Data rapporto di prova crescente','Data rapporto di prova decrescente'];
     void ordina(String ordine){
       {ordinamenti.remove(ordine);ordinamenti.insert(0, ordine);}
     }
