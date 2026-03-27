@@ -40,7 +40,17 @@ class Accettazionenotifier extends StateNotifier<List<Accettazione>> {
       state = state.where((e) => e.id != id).toList();
     }
 
+    void modStato(String stato,Accettazione acc){
+      var nuovaAcc=acc.copyWith(stato: stato);
+      
+      box.put(acc.id, nuovaAcc);
+      final index = state.indexWhere((e) => e.id == acc.id);
 
+      state = [
+    for (final e in state)
+      if (e.id == nuovaAcc.id) nuovaAcc else e
+  ];
+    }
     
   
 }

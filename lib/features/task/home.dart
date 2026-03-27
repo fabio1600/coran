@@ -29,7 +29,7 @@ class _HomeState extends ConsumerState<Home> {
   
   final lista=ref.watch(providerAccettazione).toList();
   lista.sort((a, b) => b.DataAccettazione.compareTo(a.DataAccettazione));
-  lista.take(5);
+  lista.take(5).toList();
     
 
     return 
@@ -108,7 +108,9 @@ class _HomeState extends ConsumerState<Home> {
                               child:ElevatedButton(
                                 style:item.stato=='Non letto'?  ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 80, 200, 255)) : item.stato=='Letto' ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)) : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)),
                                 onPressed: (){
+                                  
                                   context.push('/accettazione/${item.id}');
+                                  ref.read(providerAccettazione.notifier).modStato('Letto',item);
                                 },
                                 onLongPress: (){
                                   ref.read(providerFiltri.notifier).setPreferito();

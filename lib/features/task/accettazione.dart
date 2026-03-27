@@ -66,4 +66,29 @@ class Accettazione extends HiveObject{
     required this.stato,
     this.DataRdp
   });
+
+  Accettazione copyWith({
+    String? allegati,
+    String? pathAllegati,
+    List<int>? rapportiDiProva,
+    DateTime? dataRdp,
+    String? stato
+    }) {return Accettazione(
+      id: this.id,
+      DataAccettazione: this.DataAccettazione,
+      Attivita: this.Attivita,
+      Indirizzo: this.Indirizzo,
+      Richiedente: this.Richiedente,
+      Quesito: this.Quesito,
+      Utente: this.Utente,
+      CodiceAzienda: this.CodiceAzienda,
+      Asl: this.Asl,
+      Allegati: allegati ?? this.Allegati,
+      PathAllegati: pathAllegati ?? this.PathAllegati,
+      Comune: this.Comune,
+      RapportiDiProva: rapportiDiProva?? this.RapportiDiProva,
+      DataRdp: dataRdp?? this.DataRdp,
+      stato:stato ?? this.stato,
+      );
+    }
 }

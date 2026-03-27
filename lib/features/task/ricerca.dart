@@ -27,7 +27,7 @@ bool eliminaFiltro= false;
     super.initState();
   }
 
-bool rispettaFiltri(Accettazione acc,String? rich,String? cod,String? rag,String? que,String? verb,DateTime? accDal,DateTime? accAl,DateTime? rdpDal,DateTime? rdpAl){
+bool rispettaFiltri(Accettazione acc,String? rich,String? cod,String? rag,String? que,String? verb,DateTime? accDal,DateTime? accAl,DateTime? rdpDal,DateTime? rdpAl,String? stato){
   
   if(rich!=null&&acc.id!=int.parse(rich))return false;
   if(cod!=null&&acc.CodiceAzienda!=cod)return false;
@@ -38,6 +38,7 @@ bool rispettaFiltri(Accettazione acc,String? rich,String? cod,String? rag,String
   if(accAl!=null&&acc.DataAccettazione.isAfter(accAl))return false;
   if(rdpDal!=null&&((acc.DataRdp!=null&&acc.DataRdp!.isBefore(rdpDal))||(acc.DataRdp==null)))return false;
   if(rdpAl!=null&&((acc.DataRdp!=null&&acc.DataRdp!.isAfter(rdpAl))||(acc.DataRdp==null)))return false;
+  if(stato!=null&&acc.stato!=stato)return false;
   return true;
 }
 
@@ -73,7 +74,7 @@ void ordinaPer(List<Accettazione> lista,String? ordine){
     final listaFiltrata =listaOrginale.where((item) =>
   rispettaFiltri(item, filtri.richiesta, filtri.codiceAziendale, filtri.ragioneSociale,
                 filtri.quesito, filtri.verbale, filtri.accDal, filtri.accAl,
-                filtri.rdpDal, filtri.rdpAl)
+                filtri.rdpDal, filtri.rdpAl,filtri.stato)
 ).toList();
 
 ordinaPer(listaFiltrata, filtri.ordine);
@@ -97,7 +98,13 @@ ordinaPer(listaFiltrata, filtri.ordine);
                     
                   },
                 ),
-                
+                if(filtri.stato!=null)
+                Chip(
+                  label: Text("${filtri.stato}"),
+                  onDeleted: () {
+                    ref.watch(providerFiltri.notifier).clearStato();
+                  },
+                ),
                 if(filtri.richiesta!=null)
                 Chip(
                   label: Text("${filtri.richiesta}"),

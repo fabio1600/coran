@@ -13,6 +13,7 @@ class filtriRicerca {
   final DateTime? rdpAl;
   final IconData? icona;
   final String? ordine;
+  final String? stato;
 
   filtriRicerca({
   this.veterinario,
@@ -26,7 +27,8 @@ class filtriRicerca {
   this.rdpDal,
   this.rdpAl,
   this.icona = Icons.star_border,
-  this.ordine='Data accettazione decrescente'
+  this.ordine='Data accettazione decrescente',
+  this.stato='Non letto'
   });
 
 filtriRicerca copyWith({
@@ -46,12 +48,14 @@ filtriRicerca copyWith({
     bool clearAccAl= false,
     bool clearRdpAl= false,
     bool clearRdpDal= false,
+    bool clearStato=false,
     DateTime? accDal,
     DateTime? accAl,
     DateTime? rdpDal,
     DateTime? rdpAl,
     IconData? icona,
-    String? ordine
+    String? ordine,
+    String? stato
   }) {
     return filtriRicerca(
       veterinario: clearVet ? null : (veterinario ?? this.veterinario),
@@ -65,7 +69,8 @@ filtriRicerca copyWith({
       rdpDal: clearRdpDal ? null :( rdpDal ?? this.rdpDal),
       rdpAl: clearRdpAl ? null :( rdpAl ?? this.rdpAl),
       icona: icona ?? this.icona,
-      ordine: ordine ?? this.ordine
+      ordine: ordine ?? this.ordine,
+      stato: clearStato ? null:(stato ?? this.stato)
     );
   }
 

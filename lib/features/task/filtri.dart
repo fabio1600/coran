@@ -26,6 +26,7 @@ DateTime? rdpAl;
 
 
 String ordine='Data accettazione decrescente';
+String? stato;
   
 
   Future<void> _pickDate(
@@ -74,6 +75,9 @@ void initState() {
   if(filtri.ordine!=null){
     ordine=filtri.ordine!;
   }
+  if(filtri.stato!=null){
+    stato=filtri.stato;
+  }
 }
 
 
@@ -88,6 +92,11 @@ void initState() {
       ordina(ref.watch(providerFiltri).ordine!);
     }
     
+
+    List<String> stati=['Non letto','Letto','Positivo'];
+    void ordinaStato(String stato){
+      {stati.remove(stato);ordinamenti.insert(0, stato);}
+    }
     
     return Scaffold(
           appBar:  AppBar(
@@ -160,7 +169,52 @@ void initState() {
                                   }
                                 ),
                                 ),
-                              
+
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              padding: EdgeInsets.only(left: 30,top: 10),
+                              child: Text('Seleziona stato',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                            ),
+                            
+                                SizedBox(
+                                  height: 60,
+                                  child: ListView.builder(
+                                  padding: EdgeInsets.only(left: 30,top: 10),
+                                  physics: const ClampingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: stati.length,
+                                  itemBuilder:(context, index) {
+                                    final item=stati[index];
+                                    return Padding(
+                                      padding:EdgeInsets.only(right: 10), 
+                                      child: ElevatedButton(
+                                    
+                                        style: ElevatedButton.styleFrom(
+                                          
+                                          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                                          
+                                          side: BorderSide(
+                                            color: const Color.fromARGB(255, 71, 71, 71), // 👈 colore bordo
+                                            width: stato==item
+                                                ? 2
+                                                : 0.9,          
+                                          ),
+                                        ),
+                                      onPressed: (){
+                                        
+                                        setState(() {
+                                          stato=item;
+                                        });
+                                      }, 
+                                      child: Text(item,style: ordine==item ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
+                                    )
+                                  );
+                                    
+                                  }
+                                ),
+                                ), 
+
                             Container(
                               alignment: Alignment.centerLeft,
                               padding: EdgeInsets.only(left: 30,top: 30),
@@ -482,6 +536,10 @@ void initState() {
                               onPressed: (){
 
                                 ref.watch(providerFiltri.notifier).setOrdine(ordine);
+
+                                if(stato!=null){
+                                  ref.watch(providerFiltri.notifier).setStato(stato!);
+                                }
 
                                 final controller=ref.watch(providerFiltri.notifier); 
                                 if(accAl!=null)

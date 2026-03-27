@@ -124,7 +124,13 @@ void setOrdine(String ordine){
   state=state.copyWith(ordine: ordine);
 }
   
+void setStato(String stato){
+  state=state.copyWith(stato: stato);
+}
 
+void clearStato(){
+  state=state.copyWith(clearStato: true);
+}
 
 }
 
