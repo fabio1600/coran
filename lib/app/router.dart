@@ -12,9 +12,11 @@ import 'package:coran/features/task/veterinari.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:coran/features/task/scaffoldBase.dart';
+import 'package:hive_flutter/adapters.dart';
 
 
 final GoRouter router = GoRouter(
+  
   routes: [
    ShellRoute(
       builder: (context, state, child) {
@@ -74,6 +76,14 @@ final GoRouter router = GoRouter(
           path: '/veterinari',
           builder: (context, state) => const Veterinari(),
         ),
+        
   ],
-  
+  redirect: (context, state) {
+    var box = Hive.box('login');
+    bool isLogged = box.get('islogged', defaultValue: false);
+
+    if (!isLogged && state.uri.path != '/login') return '/login';
+    if (isLogged && state.uri.path == '/login') return '/';
+    return null;
+  },
 );

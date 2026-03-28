@@ -3,6 +3,7 @@ import 'package:coran/features/task/modello_task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -30,8 +31,9 @@ class Login extends ConsumerStatefulWidget {
   ConsumerState<Login> createState() => _LoginState();
 }
 class _LoginState extends ConsumerState<Login> {
-
+String? user;
  bool password_dimenticata=false; 
+ var box=Hive.box('login');
  
 @override
   Widget build(BuildContext context) {
@@ -56,6 +58,7 @@ class _LoginState extends ConsumerState<Login> {
                   children: [
                     
                     TextField(
+                      onChanged:(value) => user=value,
                       decoration: InputDecoration(
                         labelText: 'Username',
                         border: OutlineInputBorder(),
@@ -84,7 +87,16 @@ class _LoginState extends ConsumerState<Login> {
                           height: 50,
                           child: ElevatedButton(
                             onPressed: (){
-                              context.push('/accettazione');
+                              if(user=='user'){
+                                box.put('islogged', true);
+                                box.put('utente', 1);
+                              }else if(user=='admin'){
+                                box.put('islogged', true);
+                                box.put('utente', 2);
+                              }
+                              
+                              context.go('/');
+                              
                             },
                             child: Text('ACCEDI',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18))
                           ),

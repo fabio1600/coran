@@ -85,6 +85,15 @@ class _VeterinariState extends ConsumerState<Veterinari> {
                     ),
                     ListTile(
                       leading: Icon(Icons.person),
+                      title: Text('SANNA RITA',style: TextStyle(fontSize: 18),),
+                      onTap: (){
+                        ref.watch(providerFiltri.notifier).setVet('SANNA RITA');
+                        ref.watch(providerFiltri.notifier).vetController.text="SANNA RITA";
+                        context.go('/ricerca');
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.person),
                       title: Text('FAEDDA NATHALIE',style: TextStyle(fontSize: 18),),
                     ),
                     ListTile(

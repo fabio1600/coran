@@ -172,7 +172,7 @@ void initState() {
 
                             Container(
                               alignment: Alignment.centerLeft,
-                              padding: EdgeInsets.only(left: 30,top: 10),
+                              padding: EdgeInsets.only(left: 30,top: 30),
                               child: Text('Seleziona stato',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                             ),
                             
@@ -207,7 +207,7 @@ void initState() {
                                           stato=item;
                                         });
                                       }, 
-                                      child: Text(item,style: ordine==item ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
+                                      child: Text(item,style: stato==item ? TextStyle(color: Colors.black,fontWeight: FontWeight.bold) : TextStyle(color: Colors.black))
                                     )
                                   );
                                     

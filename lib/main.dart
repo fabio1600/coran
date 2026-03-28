@@ -1,5 +1,6 @@
 
 import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/utente.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:coran/app/router.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +18,16 @@ void main() async {
 
   await Hive.initFlutter();
 Hive.registerAdapter(AccettazioneAdapter());
+Hive.registerAdapter(UtenteAdapter());
   await Hive.openBox<Accettazione>('accettazioni');
-  
+  await Hive.openBox('login');
+  await Hive.openBox<Utente>('utente');
   await Hive.openBox('preferiti');
   
+  
+  var box = Hive.box('login');
+  bool isLogged = box.get('isLogged', defaultValue: false);
+
  
   
   
@@ -28,13 +35,18 @@ Hive.registerAdapter(AccettazioneAdapter());
 
   runApp(
     ProviderScope(
-      child: MyApp(),
+      child: MyApp(isLogged:isLogged),
     ),
   );
 
  
 }
 class MyApp extends StatefulWidget {
+
+  final bool isLogged;
+
+  MyApp({required this.isLogged});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -45,6 +57,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp.router(
       routerConfig: router,
       theme: ThemeData(

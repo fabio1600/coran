@@ -1,6 +1,8 @@
 
+import 'package:coran/features/task/utente.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 
 
 
@@ -16,6 +18,15 @@ class Account extends ConsumerStatefulWidget {
 }
 class _AccountState extends ConsumerState<Account> {
 
+  
+var box= Hive.box<Utente>('utente');
+
+var box2= Hive.box('login');
+
+ int? id;
+ Utente? utente;
+
+
  TextEditingController controllerEmail = TextEditingController();
  TextEditingController controllerCellulare = TextEditingController();
  TextEditingController controllerUfficio = TextEditingController();
@@ -23,11 +34,13 @@ class _AccountState extends ConsumerState<Account> {
 
   @override
 void initState() {
+  id=box2.get('utente');
+  utente=box.get(id);
   super.initState();
-  controllerEmail.text = "fabio.disi@izs-sardegna.it";
-  controllerCellulare.text="3400551142";
-  controllerUfficio.text="07892274";
-  controllerCodFisc.text="DSIFBA00T07I452E";
+  controllerEmail.text = utente!.mail!;
+  controllerCellulare.text=utente!.cellulare!;
+  controllerUfficio.text=utente!.telefono!;
+  controllerCodFisc.text=utente!.codiceFiscale!;
 } 
  
 @override

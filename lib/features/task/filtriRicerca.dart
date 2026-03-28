@@ -28,7 +28,7 @@ class filtriRicerca {
   this.rdpAl,
   this.icona = Icons.star_border,
   this.ordine='Data accettazione decrescente',
-  this.stato='Non letto'
+  this.stato
   });
 
 filtriRicerca copyWith({
