@@ -30,7 +30,7 @@ class _HomeState extends ConsumerState<Home> {
 
   Utente utente=ref.watch(providerUtente.notifier).getUtente();
   
-  final lista=ref.watch(providerAccettazione).toList();
+  final lista=ref.watch(providerAccettazione).where((acc)=>acc.Richiedente==utente.nome).toList();
   lista.sort((a, b) => b.DataAccettazione.compareTo(a.DataAccettazione));
   lista.take(5).toList();
     
@@ -110,7 +110,7 @@ class _HomeState extends ConsumerState<Home> {
                             child:SizedBox(
                               
                               child:ElevatedButton(
-                                style:item.stato=='Non letto'?  ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 80, 200, 255)) : item.stato=='Letto' ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)) : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)),
+                                style:(item.positivo==true&&item.stato=='Non letto') ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)): item.stato=='Non letto'?  ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 80, 200, 255))  : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)),
                                 onPressed: (){
                                   
                                   context.push('/accettazione/${item.id}');
@@ -282,7 +282,8 @@ class _HomeState extends ConsumerState<Home> {
                                             child:  Row (
                                               mainAxisSize: MainAxisSize.min,
                                                     children:[
-                                                      item.RapportiDiProva !=null ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black),),
+                                                      item.positivo==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
+                                                      item.RapportiDiProva !=null ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black87,fontSize: 16),),
                                                       item.Allegati!=null ? Icon(Icons.attach_file,color: Colors.black,) : SizedBox.shrink()
                                                       ],
                                                     ),

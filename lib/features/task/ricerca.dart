@@ -1,5 +1,7 @@
 
 import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/utente.dart';
+import 'package:coran/features/task/utenteNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -70,7 +72,8 @@ void ordinaPer(List<Accettazione> lista,String? ordine){
 
  @override
   Widget build(BuildContext context) {
-    final listaOrginale=ref.watch(providerAccettazione);
+    Utente utente=ref.watch(providerUtente.notifier).getUtente();
+    final listaOrginale=ref.watch(providerAccettazione).where((acc)=>acc.Richiedente==utente.nome);
     final filtri=ref.watch(providerFiltri);
     final listaFiltrata =listaOrginale.where((item) =>
   rispettaFiltri(item, filtri.richiesta, filtri.codiceAziendale, filtri.ragioneSociale,
@@ -189,7 +192,7 @@ ordinaPer(listaFiltrata, filtri.ordine);
                             child:SizedBox(
                               
                               child:ElevatedButton(
-                                style:item.stato=='Non letto'?  ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 80, 200, 255)) : item.stato=='Letto' ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)) : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)),
+                                 style:(item.positivo==true&&item.stato=='Non letto') ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)): item.stato=='Non letto'?  ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 80, 200, 255))  : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)),
                                 onPressed: (){
                                   context.push('/accettazione/${item.id}');
                                 },
@@ -359,7 +362,8 @@ ordinaPer(listaFiltrata, filtri.ordine);
                                             child:  Row (
                                               mainAxisSize: MainAxisSize.min,
                                                     children:[
-                                                      item.RapportiDiProva !=null ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black),),
+                                                      item.positivo==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
+                                                      item.RapportiDiProva !=null ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black87,fontSize: 16),),
                                                       item.Allegati!=null ? Icon(Icons.attach_file,color: Colors.black,) : SizedBox.shrink()
                                                       ],
                                                     ),

@@ -49,6 +49,9 @@ class Accettazione extends HiveObject{
   @HiveField(14)
   final DateTime? DataRdp;
 
+  @HiveField(15)
+  final bool? positivo;
+
   Accettazione({
     required this.id,
     required this.DataAccettazione,
@@ -64,7 +67,8 @@ class Accettazione extends HiveObject{
     required this.Comune,
     this.RapportiDiProva,
     required this.stato,
-    this.DataRdp
+    this.DataRdp,
+    this.positivo
   });
 
   Accettazione copyWith({
@@ -72,7 +76,8 @@ class Accettazione extends HiveObject{
     String? pathAllegati,
     List<int>? rapportiDiProva,
     DateTime? dataRdp,
-    String? stato
+    String? stato,
+    bool? positivo
     }) {return Accettazione(
       id: this.id,
       DataAccettazione: this.DataAccettazione,
@@ -89,6 +94,7 @@ class Accettazione extends HiveObject{
       RapportiDiProva: rapportiDiProva?? this.RapportiDiProva,
       DataRdp: dataRdp?? this.DataRdp,
       stato:stato ?? this.stato,
+      positivo: positivo ?? this.positivo
       );
     }
 }

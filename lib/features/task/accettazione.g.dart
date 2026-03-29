@@ -32,13 +32,14 @@ class AccettazioneAdapter extends TypeAdapter<Accettazione> {
       RapportiDiProva: (fields[12] as List?)?.cast<int>(),
       stato: fields[13] as String,
       DataRdp: fields[14] as DateTime?,
+      positivo: fields[15] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Accettazione obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -68,7 +69,9 @@ class AccettazioneAdapter extends TypeAdapter<Accettazione> {
       ..writeByte(13)
       ..write(obj.stato)
       ..writeByte(14)
-      ..write(obj.DataRdp);
+      ..write(obj.DataRdp)
+      ..writeByte(15)
+      ..write(obj.positivo);
   }
 
   @override

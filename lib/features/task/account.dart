@@ -1,7 +1,9 @@
 
 import 'package:coran/features/task/utente.dart';
+import 'package:coran/features/task/utenteNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 
 
@@ -32,19 +34,48 @@ var box2= Hive.box('login');
  TextEditingController controllerUfficio = TextEditingController();
  TextEditingController controllerCodFisc = TextEditingController();
 
+ 
+
   @override
 void initState() {
   id=box2.get('utente');
   utente=box.get(id);
   super.initState();
+  
   controllerEmail.text = utente!.mail!;
-  controllerCellulare.text=utente!.cellulare!;
-  controllerUfficio.text=utente!.telefono!;
-  controllerCodFisc.text=utente!.codiceFiscale!;
+  if(utente!.cellulare!=null){
+    controllerCellulare.text=utente!.cellulare!;
+  }else{
+    controllerCellulare.text='';
+  }
+  if(utente!.telefono!=null){
+    controllerUfficio.text=utente!.telefono!;
+  }else{
+    controllerUfficio.text='';
+  }
+  if(utente!.codiceFiscale!=null){
+    controllerCodFisc.text=utente!.codiceFiscale!;
+  }else{
+    controllerCodFisc.text='';
+  }
+
+  
 } 
+
+String? mail;
+String? cellulare;
+String? telefono;
+String? codiceFiscale;
  
 @override
   Widget build(BuildContext context) {
+    mail=controllerEmail.text;
+    cellulare=controllerCellulare.text;
+    telefono=controllerUfficio.text;
+    codiceFiscale=controllerCodFisc.text;
+
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Account'),
@@ -67,6 +98,7 @@ void initState() {
                           Text('E-mail',style: TextStyle(fontSize: 20),),
                           TextField(
                             controller: controllerEmail,
+                            onChanged: (value) => mail=value,
                             decoration: InputDecoration(
                               
                             ),
@@ -82,6 +114,7 @@ void initState() {
                           Text('Cellulare',style: TextStyle(fontSize: 20),),
                           TextField(
                             controller: controllerCellulare,
+                            onChanged: (value) => cellulare=value,
                             decoration: InputDecoration(
                               
                             ),
@@ -97,6 +130,7 @@ void initState() {
                           Text('Telefono Ufficio',style: TextStyle(fontSize: 20),),
                           TextField(
                             controller: controllerUfficio,
+                            onChanged: (value) => telefono=value,
                             decoration: InputDecoration(
                               
                             ),
@@ -112,9 +146,11 @@ void initState() {
                           Text('Codice Fiscale',style: TextStyle(fontSize: 20),),
                           TextField(
                             controller: controllerCodFisc,
+                            onChanged: (value) => codiceFiscale=value,
                             decoration: InputDecoration(
                               
                             ),
+                            
                           )
                         ],
                       ),
@@ -123,7 +159,27 @@ void initState() {
                       height: 50,
                       width: 200,
                     child: ElevatedButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        ref.watch(providerUtente.notifier).modificaDati(mail!, cellulare!, telefono!, codiceFiscale!, utente!);
+                        controllerEmail.text=mail!;
+                        controllerCellulare.text=cellulare!;
+                        controllerUfficio.text=telefono!;
+                        controllerCodFisc.text=codiceFiscale!;
+                       
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Color(0xFF209BD6),
+                            content: const Text("Dati aggiornati!",style: TextStyle(fontSize: 16),),
+                            behavior: SnackBarBehavior.floating,
+                            margin: const EdgeInsets.all(20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            duration: const Duration(seconds: 3),
+                          ),
+                        );
+                      },
                       child: Text('Aggiorna dati',style: TextStyle(fontSize: 18),)
                       )
                     ),

@@ -28,7 +28,7 @@ class Utentenotifier extends StateNotifier<List<Utente>> {
       if(exists != -1){
         box.put(utente.id,utente);
         state = state.where((e) => e.id != utente.id).toList();
-        box.put(utente.id, utente);
+        
       state=[...state,utente];
       }else{
       box.put(utente.id, utente);
@@ -48,5 +48,15 @@ class Utentenotifier extends StateNotifier<List<Utente>> {
     utente=box2.get(id);
     return utente!;
   }
+
+  void modificaDati(String mail,String cellulare,String telefono,String codiceFiscale,Utente utente){
+    var utenteMod= utente.copyWith(mail: mail,cellulare: cellulare,telefono: telefono,codiceFiscale: codiceFiscale);
+    box.put(utenteMod.id,utenteMod);
+        state = state.where((e) => e.id != utenteMod.id).toList();
+        
+      state=[...state,utenteMod];
+  }
+
+  
 }
 
