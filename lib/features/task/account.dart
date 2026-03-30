@@ -62,14 +62,14 @@ void initState() {
   
 } 
 
-String? mail;
+
 String? cellulare;
 String? telefono;
 String? codiceFiscale;
  
 @override
   Widget build(BuildContext context) {
-    mail=controllerEmail.text;
+
     cellulare=controllerCellulare.text;
     telefono=controllerUfficio.text;
     codiceFiscale=controllerCodFisc.text;
@@ -98,10 +98,8 @@ String? codiceFiscale;
                           Text('E-mail',style: TextStyle(fontSize: 20),),
                           TextField(
                             controller: controllerEmail,
-                            onChanged: (value) => mail=value,
-                            decoration: InputDecoration(
-                              
-                            ),
+                            readOnly: true,
+                            
                           )
                         ],
                       ),
@@ -161,15 +159,14 @@ String? codiceFiscale;
                     child: ElevatedButton(
                       onPressed: (){
                         FocusManager.instance.primaryFocus?.unfocus();
-                        ref.watch(providerUtente.notifier).modificaDati(mail!, cellulare!, telefono!, codiceFiscale!, utente!);
-                        controllerEmail.text=mail!;
+                        ref.watch(providerUtente.notifier).modificaDati(cellulare!, telefono!, codiceFiscale!, utente!);
                         controllerCellulare.text=cellulare!;
                         controllerUfficio.text=telefono!;
                         controllerCodFisc.text=codiceFiscale!;
                        
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            backgroundColor: Color(0xFF209BD6),
+                            backgroundColor: Colors.blue,
                             content: const Text("Dati aggiornati!",style: TextStyle(fontSize: 16),),
                             behavior: SnackBarBehavior.floating,
                             margin: const EdgeInsets.all(20),

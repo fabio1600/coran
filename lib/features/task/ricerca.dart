@@ -1,5 +1,6 @@
 
 import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/rdpNotifier.dart';
 import 'package:coran/features/task/utente.dart';
 import 'package:coran/features/task/utenteNotifier.dart';
 import 'package:flutter/material.dart';
@@ -29,18 +30,19 @@ bool eliminaFiltro= false;
     super.initState();
   }
 
-bool rispettaFiltri(Accettazione acc,String? rich,String? cod,String? rag,String? que,String? verb,DateTime? accDal,DateTime? accAl,DateTime? rdpDal,DateTime? rdpAl,String? stato,String? vet){
-  
+bool rispettaFiltri(Accettazione acc,String? rich,String? cod,String? rag,String? que,String? verb,DateTime? accDal,DateTime? accAl,DateTime? rdpDal,DateTime? rdpAl,String? stato,String? vet,bool? positivo){
+  final rapportiDiProva=ref.watch(providerRdp).where((a)=>acc.RapportiDiProva!.contains(a.id));
   if(rich!=null&&acc.id!=int.parse(rich))return false;
   if(cod!=null&&acc.CodiceAzienda!=cod)return false;
-  if(rag!=null&&acc.Attivita!=rag)return false;
+  if(rag!=null&&acc.Attivita.contains(rag))return false;
   if(que!=null&&(!acc.Quesito.contains(que)))return false;
   /*if(verb!=null&&acc.Richiedente!=rich)return false;*/
   if(accDal!=null&&acc.DataAccettazione.isBefore(accDal))return false;
   if(accAl!=null&&acc.DataAccettazione.isAfter(accAl))return false;
-  if(rdpDal!=null&&((acc.DataRdp!=null&&acc.DataRdp!.isBefore(rdpDal))||(acc.DataRdp==null)))return false;
-  if(rdpAl!=null&&((acc.DataRdp!=null&&acc.DataRdp!.isAfter(rdpAl))||(acc.DataRdp==null)))return false;
+  if(rdpDal!=null&&(rapportiDiProva.isNotEmpty&&(!rapportiDiProva.any((a)=>a.data!.isAfter(rdpDal)))||(rapportiDiProva.isEmpty)))return false;
+  if(rdpAl!=null&&(rapportiDiProva.isNotEmpty&&(!rapportiDiProva.any((a)=>a.data!.isBefore(rdpAl)))||(rapportiDiProva.isEmpty)))return false;
   if(stato!=null&&acc.stato!=stato)return false;
+  if(positivo==true&&acc.positivo==false) return false;       
   if(vet!=null&&acc.Richiedente!=vet)return false;
   return true;
 }
@@ -78,13 +80,16 @@ void ordinaPer(List<Accettazione> lista,String? ordine){
     final listaFiltrata =listaOrginale.where((item) =>
   rispettaFiltri(item, filtri.richiesta, filtri.codiceAziendale, filtri.ragioneSociale,
                 filtri.quesito, filtri.verbale, filtri.accDal, filtri.accAl,
-                filtri.rdpDal, filtri.rdpAl,filtri.stato,filtri.veterinario)
+                filtri.rdpDal, filtri.rdpAl,filtri.stato,filtri.veterinario,filtri.positivo)
 ).toList();
 
 ordinaPer(listaFiltrata, filtri.ordine);
     bool test=true;
-
+final rdp=ref.watch(providerRdp);
+  final acc=ref.watch(providerAccettazione);
+  
     return 
+    
     Column(
           children: [
            
@@ -105,6 +110,13 @@ ordinaPer(listaFiltrata, filtri.ordine);
                 if(filtri.stato!=null)
                 Chip(
                   label: Text("${filtri.stato}"),
+                  onDeleted: () {
+                    ref.watch(providerFiltri.notifier).clearStato();
+                  },
+                ),
+                if(filtri.positivo==true)
+                Chip(
+                  label: Text("Positivo"),
                   onDeleted: () {
                     ref.watch(providerFiltri.notifier).clearStato();
                   },
@@ -180,9 +192,10 @@ ordinaPer(listaFiltrata, filtri.ordine);
               itemCount: listaFiltrata.length,
               itemBuilder:(context, index) {
               final item = listaFiltrata[index];
-
+              final positivi=ref.watch(providerRdp.notifier).getPositivi(item.RapportiDiProva!);
               
               return Center( 
+              
               child: 
               FractionallySizedBox(
                           alignment: Alignment.center,
@@ -192,7 +205,7 @@ ordinaPer(listaFiltrata, filtri.ordine);
                             child:SizedBox(
                               
                               child:ElevatedButton(
-                                 style:(item.positivo==true&&item.stato=='Non letto') ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)): item.stato=='Non letto'?  ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 80, 200, 255))  : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)),
+                                 style:(positivi ==true&&item.stato=='Non letto') ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)): (positivi ==false&&item.stato=='Non letto')?  ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 80, 200, 255))  : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)),
                                 onPressed: (){
                                   context.push('/accettazione/${item.id}');
                                 },
@@ -362,7 +375,7 @@ ordinaPer(listaFiltrata, filtri.ordine);
                                             child:  Row (
                                               mainAxisSize: MainAxisSize.min,
                                                     children:[
-                                                      item.positivo==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
+                                                      positivi==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
                                                       item.RapportiDiProva !=null ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black87,fontSize: 16),),
                                                       item.Allegati!=null ? Icon(Icons.attach_file,color: Colors.black,) : SizedBox.shrink()
                                                       ],

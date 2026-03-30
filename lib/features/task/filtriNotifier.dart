@@ -125,11 +125,21 @@ void setOrdine(String ordine){
 }
   
 void setStato(String stato){
-  state=state.copyWith(stato: stato);
+  if(stato=="Positivo"){
+    state=state.copyWith(positivo: true);
+  }else{
+    state=state.copyWith(stato: stato);
+  }
+  
 }
 
 void clearStato(){
-  state=state.copyWith(clearStato: true);
+  if(state.positivo==true){
+    state=state.copyWith(positivo: false);
+  }else{
+    state=state.copyWith(clearStato: true);
+  }
+  
 }
 
 }

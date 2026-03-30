@@ -68,7 +68,7 @@ class Accettazione extends HiveObject{
     this.RapportiDiProva,
     required this.stato,
     this.DataRdp,
-    this.positivo
+    this.positivo=false
   });
 
   Accettazione copyWith({

@@ -1,5 +1,7 @@
 
 import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/paginaRdp.dart';
+import 'package:coran/features/task/rdp.dart';
 import 'package:coran/features/task/utente.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:coran/app/router.dart';
@@ -19,9 +21,11 @@ void main() async {
   await Hive.initFlutter();
 Hive.registerAdapter(AccettazioneAdapter());
 Hive.registerAdapter(UtenteAdapter());
+Hive.registerAdapter(RdpAdapter());
   await Hive.openBox<Accettazione>('accettazioni');
   await Hive.openBox('login');
   await Hive.openBox<Utente>('utente');
+  await Hive.openBox<Rdp>('rdp');
   await Hive.openBox('preferiti');
   
   

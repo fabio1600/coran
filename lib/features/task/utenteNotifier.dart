@@ -49,14 +49,22 @@ class Utentenotifier extends StateNotifier<List<Utente>> {
     return utente!;
   }
 
-  void modificaDati(String mail,String cellulare,String telefono,String codiceFiscale,Utente utente){
-    var utenteMod= utente.copyWith(mail: mail,cellulare: cellulare,telefono: telefono,codiceFiscale: codiceFiscale);
+  void modificaDati(String cellulare,String telefono,String codiceFiscale,Utente utente){
+    var utenteMod= utente.copyWith(cellulare: cellulare,telefono: telefono,codiceFiscale: codiceFiscale);
     box.put(utenteMod.id,utenteMod);
         state = state.where((e) => e.id != utenteMod.id).toList();
         
       state=[...state,utenteMod];
   }
 
+  void modificaPassword(String password,Utente utente){
+    var utenteMod= utente.copyWith(password: password);
+    box.put(utenteMod.id,utenteMod);
+        state = state.where((e) => e.id != utenteMod.id).toList();
+        
+      state=[...state,utenteMod];
+
+  }
   
 }
 

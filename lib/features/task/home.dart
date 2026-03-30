@@ -1,5 +1,6 @@
 
 import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/rdpNotifier.dart';
 import 'package:coran/features/task/utente.dart';
 import 'package:coran/features/task/utenteNotifier.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,8 @@ class _HomeState extends ConsumerState<Home> {
 
 
 
+
+
  @override
   Widget build(BuildContext context) {
   
@@ -34,7 +37,9 @@ class _HomeState extends ConsumerState<Home> {
   lista.sort((a, b) => b.DataAccettazione.compareTo(a.DataAccettazione));
   lista.take(5).toList();
     
-
+  final rdp=ref.watch(providerRdp);
+  final acc=ref.watch(providerAccettazione);
+  
     return 
     Column(
           children: [
@@ -100,6 +105,7 @@ class _HomeState extends ConsumerState<Home> {
               itemCount: lista.length,
               itemBuilder:(context, index) {
               final item = lista[index];
+              final positivi=ref.watch(providerRdp.notifier).getPositivi(item.RapportiDiProva!);
               return Center( 
               child: 
               FractionallySizedBox(
@@ -110,11 +116,13 @@ class _HomeState extends ConsumerState<Home> {
                             child:SizedBox(
                               
                               child:ElevatedButton(
-                                style:(item.positivo==true&&item.stato=='Non letto') ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)): item.stato=='Non letto'?  ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 80, 200, 255))  : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)),
+                                
+                                style:(positivi ==true&&item.stato=='Non letto') ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)): (positivi ==false&&item.stato=='Non letto')?  ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 80, 200, 255))  : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)),
                                 onPressed: (){
                                   
                                   context.push('/accettazione/${item.id}');
-                                  ref.read(providerAccettazione.notifier).modStato('Letto',item);
+                                  
+                                  
                                 },
                                 onLongPress: (){
                                   ref.read(providerFiltri.notifier).setPreferito();
@@ -282,7 +290,7 @@ class _HomeState extends ConsumerState<Home> {
                                             child:  Row (
                                               mainAxisSize: MainAxisSize.min,
                                                     children:[
-                                                      item.positivo==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
+                                                      positivi==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
                                                       item.RapportiDiProva !=null ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black87,fontSize: 16),),
                                                       item.Allegati!=null ? Icon(Icons.attach_file,color: Colors.black,) : SizedBox.shrink()
                                                       ],

@@ -4,7 +4,7 @@ import 'package:coran/features/task/cambioPassword.dart';
 import 'package:coran/features/task/filtri.dart';
 import 'package:coran/features/task/impostazioni.dart';
 import 'package:coran/features/task/login.dart';
-import 'package:coran/features/task/rdp.dart';
+import 'package:coran/features/task/paginaRdp.dart';
 import 'package:coran/features/task/home.dart';
 import 'package:coran/features/task/ricerca.dart';
 import 'package:coran/features/task/segnalazione.dart';
@@ -42,7 +42,7 @@ final GoRouter router = GoRouter(
     GoRoute(
           path: '/rdp',
           pageBuilder: (context, state) => const NoTransitionPage(
-    child: Rdp(),
+    child: Paginardp(),
   ),
         ),
     GoRoute(

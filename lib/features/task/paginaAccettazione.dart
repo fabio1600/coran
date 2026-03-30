@@ -1,5 +1,7 @@
 
 import 'package:coran/features/task/accettazioniNotifier.dart';
+import 'package:coran/features/task/rdp.dart';
+import 'package:coran/features/task/rdpNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -22,13 +24,27 @@ class _paginaAccettazioneState extends ConsumerState<paginaAccettazione> {
  
 
 
-
+List<Rdp> rapportiDiProva=[];
   
   
 
  @override
   Widget build(BuildContext context) {
     final accettazione=ref.watch(providerAccettazione).firstWhere((element) => element.id==widget.id);
+    if(accettazione.RapportiDiProva!=null){
+       rapportiDiProva= ref.watch(providerRdp).where((element)=>accettazione.RapportiDiProva!.contains(element.id)).toList();
+       if(rapportiDiProva.any((a)=>a.letto==false)){
+        
+        rapportiDiProva.sort((a,b)=>b.positivo.toString().compareTo(a.positivo.toString()));
+        rapportiDiProva.sort((a,b)=>a.letto.toString().compareTo(b.letto.toString()));
+        
+        
+       }else{
+        rapportiDiProva.sort((a,b)=>b.id.compareTo(a.id));
+       }
+       
+    }
+    
 
     return  Scaffold(
       appBar: AppBar(
@@ -46,8 +62,8 @@ class _paginaAccettazioneState extends ConsumerState<paginaAccettazione> {
       body:Column(
           children: [
            Expanded(
-            child: SingleChildScrollView(
-              child:Column(
+            child: ListView(
+              
                 children: [
                   Container(
                     child: Column(
@@ -250,19 +266,28 @@ class _paginaAccettazioneState extends ConsumerState<paginaAccettazione> {
                               ),
                             ],
                           ),
-                
-            
-                        FractionallySizedBox(
+
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: rapportiDiProva.length,
+                          itemBuilder: (context,index){
+                            final item=rapportiDiProva[index];
+                            return FractionallySizedBox(
                           alignment: Alignment.center,
                           widthFactor: 0.95,
                           child: Padding(
-                            padding:EdgeInsets.symmetric(vertical: 10) ,
+                            padding:EdgeInsets.symmetric(vertical: 5) ,
                             child:SizedBox(
                               
                               child:ElevatedButton(
-                                style:ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(157, 80, 200, 255)),
+                                style:item.positivo==true&&item.letto==false ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)) : item.letto==false ? ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(157, 80, 200, 255)) : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)),
                                 onPressed: (){
-                                  context.push('/login');
+                                  ref.watch(providerRdp.notifier).setLetto(item);
+                                  if(rapportiDiProva.where((item)=>item.letto==false).length==1){
+                                    ref.watch(providerAccettazione.notifier).modStato('Letto', accettazione);
+                                  }
+                                  context.push('/rdp');
                                 },
                                 child: Column(
                                   children: [ 
@@ -281,7 +306,7 @@ class _paginaAccettazioneState extends ConsumerState<paginaAccettazione> {
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('6509',
+                                                          child: Text(item.id.toString(),
                                                                       style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
@@ -305,7 +330,7 @@ class _paginaAccettazioneState extends ConsumerState<paginaAccettazione> {
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('1',
+                                                          child: Text(item.conferimento,
                                                                       style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
@@ -331,7 +356,7 @@ class _paginaAccettazioneState extends ConsumerState<paginaAccettazione> {
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('MUSCOLO/MUSCOLO SUINO',
+                                                          child: Text(item.tipo,
                                                                       style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
@@ -355,7 +380,7 @@ class _paginaAccettazioneState extends ConsumerState<paginaAccettazione> {
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('SUINO',
+                                                          child: Text(item.specie,
                                                                       style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
@@ -379,7 +404,7 @@ class _paginaAccettazioneState extends ConsumerState<paginaAccettazione> {
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('1',
+                                                          child: Text(item.campioni,
                                                                       style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
@@ -389,307 +414,39 @@ class _paginaAccettazioneState extends ConsumerState<paginaAccettazione> {
                                               
                                             )
                                           ),
+                                          Align(
+                                          alignment: AlignmentGeometry.centerRight,
+                                          child: Padding(
+                                            padding: EdgeInsetsGeometry.only(top: 0,bottom: 5),
+                                            child:  Row (
+                                              mainAxisSize: MainAxisSize.min,
+                                                    children:[
+                                                      item.positivo==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
+                                                      
+                                                      
+                                                      ],
+                                                    ),
+                                          
+                                          )
+                                        ),
                                           
                                   ],
                                 ),
                                 ),
                             ),
                           ),
+                        );
+                          }
                         ),
-                        FractionallySizedBox(
-                          alignment: Alignment.center,
-                          widthFactor: 0.95,
-                          child: Padding(
-                            padding:EdgeInsets.symmetric(vertical: 10) ,
-                            child:SizedBox(
-                              
-                              child:ElevatedButton(
-                                style:ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(157, 80, 200, 255)),
-                                onPressed: (){
-                                  context.push('/rdp');
-                                },
-                                child: Column(
-                                  children: [ 
-                                        Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10),
-                                            child: Row (
-                                                    children:[
-                                                      SizedBox(
-                                                        width: 120,
-                                                        child: Text('RDP',
-                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                          ),
-                                                      ),
-                                                      Expanded(
-                                                        child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('6909',
-                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                                    )
-                                                        )
-                                                      ]
-                                                    )
-                                          )
-                                        ),
-                                        Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10),
-                                            child: Row (
-                                                    children:[
-                                                      SizedBox(
-                                                        width: 120,
-                                                        child: Text('Conferimento',
-                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                          ),
-                                                      ),
-                                                      Expanded(
-                                                        child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('2',
-                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                                    )
-                                                        )
-                                                      ]
-                                                    )
-                                          )
-                                        ),
-                                      
-                                    
-                                    Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10),
-                                            child: Row (
-                                                    children:[
-                                                      SizedBox(
-                                                        width: 120,
-                                                        child: Text('Tipo',
-                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                          ),
-                                                      ),
-                                                      Expanded(
-                                                        child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('MUSCOLO/MUSCOLO SUINO ',
-                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                                    )
-                                                        )
-                                                      ]
-                                                    )
-                                          )
-                                        ),
-                                    Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10),
-                                            child: Row (
-                                                    children:[
-                                                      SizedBox(
-                                                        width: 120,
-                                                        child: Text('Specie',
-                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                          ),
-                                                      ),
-                                                      Expanded(
-                                                        child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('SUINO',
-                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                                    )
-                                                        )
-                                                      ]
-                                                    )
-                                          )
-                                        ),
-                                    Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10,bottom: 10),
-                                            child:Row (
-                                                    children:[
-                                                      SizedBox(
-                                                        width: 120,
-                                                        child: Text('Campioni',
-                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                          ),
-                                                      ),
-                                                      Expanded(
-                                                        child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('1',
-                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                                    )
-                                                        )
-                                                      ]
-                                                    )
-                                              
-                                            )
-                                          ),
-                                          
-                                  ],
-                                ),
-                                ),
-                            ),
-                          ),
-                        ),
-                        FractionallySizedBox(
-                          alignment: Alignment.center,
-                          widthFactor: 0.95,
-                          child: Padding(
-                            padding:EdgeInsets.symmetric(vertical: 10) ,
-                            child:SizedBox(
-                              
-                              child:ElevatedButton(
-                                style:ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(117, 238, 72, 108)),
-                                onPressed: (){
-                                  context.push('/test');
-                                },
-                                child: Column(
-                                  children: [
-                                        Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10),
-                                            child: Row (
-                                                    children:[
-                                                      SizedBox(
-                                                        width: 120,
-                                                        child: Text('RDP',
-                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                          ),
-                                                      ),
-                                                      Expanded(
-                                                        child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('7145',
-                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                                    )
-                                                        )
-                                                      ]
-                                                    )
-                                          )
-                                        ), 
-                                        Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10),
-                                            child: Row (
-                                                    children:[
-                                                      SizedBox(
-                                                        width: 120,
-                                                        child: Text('Conferimento',
-                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                          ),
-                                                      ),
-                                                      Expanded(
-                                                        child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('3',
-                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                                    )
-                                                        )
-                                                      ]
-                                                    )
-                                          )
-                                        ),
-                                      
-                                    
-                                    Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10),
-                                            child: Row (
-                                                    children:[
-                                                      SizedBox(
-                                                        width: 120,
-                                                        child: Text('Tipo',
-                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                          ),
-                                                      ),
-                                                      Expanded(
-                                                        child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('MUSCOLO/MUSCOLO SUINO ',
-                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                                    )
-                                                        )
-                                                      ]
-                                                    )
-                                          )
-                                        ),
-                                    Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10),
-                                            child: Row (
-                                                    children:[
-                                                      SizedBox(
-                                                        width: 120,
-                                                        child: Text('Specie',
-                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                          ),
-                                                      ),
-                                                      Expanded(
-                                                        child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('SUINO',
-                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                                    )
-                                                        )
-                                                      ]
-                                                    )
-                                          )
-                                        ),
-                                    Align(
-                                          alignment: AlignmentGeometry.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10,bottom: 10),
-                                            child:Row (
-                                                    children:[
-                                                      SizedBox(
-                                                        width: 120,
-                                                        child: Text('Campioni',
-                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
-                                                          ),
-                                                      ),
-                                                      Expanded(
-                                                        child:Padding(
-                                                          padding:EdgeInsetsGeometry.only(left: 25),
-                                                          child: Text('1',
-                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
-                                                                      )
-                                                                    )
-                                                        )
-                                                      ]
-                                                    )
-                                              
-                                            )
-                                          ),
-                                          
-                                  ],
-                                ),
-                                ),
-                            ),
-                          ),
-                        ),
+                        
+                        
+                        
                       ],
               
                     ),
                   ),
                 ],
-              ),
+              
             ),
            ),
           ],

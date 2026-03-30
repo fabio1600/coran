@@ -33,6 +33,7 @@ class Login extends ConsumerStatefulWidget {
 class _LoginState extends ConsumerState<Login> {
 String? user;
  bool password_dimenticata=false; 
+bool errore=false;
  var box=Hive.box('login');
  
 @override
@@ -50,9 +51,9 @@ String? user;
                     Image.asset('assets/images/app_icon.png',width: 80,),
                     Text('Login Coran',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
                   
-                
+                errore==true ? Padding(padding: EdgeInsets.only(top: 12),child: Text('Utente e/o password errati',style: TextStyle(color: Colors.red,fontSize: 16)),) : SizedBox.shrink(),
               
-              Padding(padding:EdgeInsetsGeometry.only(left: 30,right: 30,top: 30) ,child: Column(
+              Padding(padding:EdgeInsetsGeometry.only(left: 30,right: 30,top: 20) ,child: Column(
                   
                   
                   children: [
@@ -90,12 +91,18 @@ String? user;
                               if(user=='user'){
                                 box.put('islogged', true);
                                 box.put('utente', 1);
+                                context.go('/');
                               }else if(user=='admin'){
                                 box.put('islogged', true);
                                 box.put('utente', 2);
+                                context.go('/');
+                              }else{
+                                setState(() {
+                                  errore=true;
+                                });
                               }
                               
-                              context.go('/');
+                              
                               
                             },
                             child: Text('ACCEDI',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18))

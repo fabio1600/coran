@@ -51,6 +51,19 @@ class Accettazionenotifier extends StateNotifier<List<Accettazione>> {
       if (e.id == nuovaAcc.id) nuovaAcc else e
   ];
     }
+
+    void setPositivo(Accettazione accettazione){
+      var nuovaAcc=accettazione.copyWith(positivo: true);
+       box.put(accettazione.id, nuovaAcc);
+      final index = state.indexWhere((e) => e.id == accettazione.id);
+
+      state = [
+    for (final e in state)
+      if (e.id == nuovaAcc.id) nuovaAcc else e
+  ];
+    }
+
+    
     
   
 }

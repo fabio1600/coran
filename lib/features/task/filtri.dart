@@ -93,7 +93,7 @@ void initState() {
     }
     
 
-    List<String> stati=['Non letto','Letto','Positivo'];
+    List<String> stati=['Non letto','Letto','Positivo','Analisi in corso'];
     void ordinaStato(String stato){
       {stati.remove(stato);ordinamenti.insert(0, stato);}
     }

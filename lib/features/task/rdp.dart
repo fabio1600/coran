@@ -1,76 +1,68 @@
-import 'package:coran/core/storage/servizio_preferenze.dart';
-import 'package:coran/features/task/modello_task.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:hive_flutter/adapters.dart';
 
-import 'provider_task.dart';
-import 'package:coran/core/storage/servizio_preferenze.dart';
-import 'scaffoldBase.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:typed_data';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'dart:typed_data';
-import 'dart:io';
-import 'test_pdf.dart';
-import 'sharePdf.dart';
+part 'rdp.g.dart';
+
+@HiveType(typeId: 2)
+class Rdp extends HiveObject{
 
 
+  @HiveField(0)
+  final int id;
 
-class Rdp extends ConsumerStatefulWidget {
+  @HiveField(1)
+  final String conferimento;
 
+  @HiveField(2)
+  final String tipo;
 
-  const Rdp({super.key});
+  @HiveField(3)
+  final String specie;
 
+  @HiveField(4)
+  final String campioni;
 
-  @override
-  ConsumerState<Rdp> createState() => _RdpState();
-}
-class _RdpState extends ConsumerState<Rdp> {
-  ByteData? pdf;
-  bool loading=true;
+  @HiveField(5)
+  final String pathPdf;
 
+  @HiveField(6)
+  final bool? letto;
 
-  Future<void> getPdf() async{
-    final bytes= await rootBundle.load('assets/images/rdp2.pdf');
-    setState(() {
-      
-      pdf = bytes;
-      loading = false;
-     
-    });
+  @HiveField(7)
+  final bool? positivo;
+
+  @HiveField(8)
+  final DateTime? data;
+
+  @HiveField(9)
+  final int? idAcc;
+
+  Rdp({
+    required this.id,
+    required this.conferimento,
+    required this.tipo,
+    required this.specie,
+    required this.campioni,
+    required this.pathPdf,
+    this.letto=false,
+    required this.positivo,
+    required this.data,
+    required this.idAcc
+  });
+
+  Rdp copyWith({
+    bool? letto
+  }){return Rdp(
+    id: this.id,
+    conferimento: this.conferimento,
+    tipo: this.tipo,
+    specie: this.specie,
+    campioni: this.campioni,
+    pathPdf: this.pathPdf,
+    letto: letto ?? this.letto,
+    positivo: this.positivo,
+    data: this.data,
+    idAcc: this.idAcc
+  );
   }
-   
- 
-@override
-  void initState() {
-    super.initState();
-    getPdf();
-  }
-
-@override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Rapporto di prova'),
-        centerTitle: true,
-        actions :[IconButton(
-  icon: Icon(Icons.ios_share),
-  onPressed: () {
-    sharePdf();
-  },
-)],
-      ),
-      body: loading
-          ? Center(child: CircularProgressIndicator())
-          :   SfPdfViewer.memory(pdf!.buffer.asUint8List()),
-    
-    );
-  }
-
-
+  
 }

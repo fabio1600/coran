@@ -14,6 +14,7 @@ class filtriRicerca {
   final IconData? icona;
   final String? ordine;
   final String? stato;
+  final bool? positivo;
 
   filtriRicerca({
   this.veterinario,
@@ -28,7 +29,8 @@ class filtriRicerca {
   this.rdpAl,
   this.icona = Icons.star_border,
   this.ordine='Data accettazione decrescente',
-  this.stato
+  this.stato,
+  this.positivo=false
   });
 
 filtriRicerca copyWith({
@@ -55,7 +57,8 @@ filtriRicerca copyWith({
     DateTime? rdpAl,
     IconData? icona,
     String? ordine,
-    String? stato
+    String? stato,
+    bool? positivo
   }) {
     return filtriRicerca(
       veterinario: clearVet ? null : (veterinario ?? this.veterinario),
@@ -70,7 +73,8 @@ filtriRicerca copyWith({
       rdpAl: clearRdpAl ? null :( rdpAl ?? this.rdpAl),
       icona: icona ?? this.icona,
       ordine: ordine ?? this.ordine,
-      stato: clearStato ? null:(stato ?? this.stato)
+      stato: clearStato ? null:(stato ?? this.stato),
+      positivo: positivo ?? this.positivo
     );
   }
 
