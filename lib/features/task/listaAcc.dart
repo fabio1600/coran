@@ -39,6 +39,34 @@ ListView getListaAcc(List<Accettazione> lista,WidgetRef ref){
                                 },
                                 onLongPress: (){
                                   ref.watch(providerAccettazione.notifier).setPreferito(item);
+                                  if(item.preferito==true){
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.blue,
+                                        content: const Text("Rimosso dai preferiti!",style: TextStyle(fontSize: 16),),
+                                        behavior: SnackBarBehavior.floating,
+                                        margin: const EdgeInsets.all(20),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        duration: const Duration(seconds: 3),
+                                      ),
+                                  );
+                                  }else{
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.blue,
+                                        content: const Text("Aggiunto ai preferiti!",style: TextStyle(fontSize: 16),),
+                                        behavior: SnackBarBehavior.floating,
+                                        margin: const EdgeInsets.all(20),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        duration: const Duration(seconds: 3),
+                                      ),
+                                  );
+                                  }
+                                    
                                 },
                                 child: Column(
                                   children: [ 

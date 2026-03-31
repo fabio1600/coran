@@ -53,8 +53,35 @@ List<Rdp> rapportiDiProva=[];
         centerTitle: true,
         actions: [
           
-          IconButton( icon: Icon(ref.watch(providerFiltri).icona), onPressed: () {
-            ref.read(providerFiltri.notifier).setPreferito();
+          IconButton( icon: accettazione.preferito==true ? Icon(Icons.star) : Icon(Icons.star_border), onPressed: () {
+            ref.read(providerAccettazione.notifier).setPreferito(accettazione);
+            if(accettazione.preferito==true){
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.blue,
+                                        content: const Text("Rimosso dai preferiti!",style: TextStyle(fontSize: 16),),
+                                        behavior: SnackBarBehavior.floating,
+                                        margin: const EdgeInsets.all(20),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        duration: const Duration(seconds: 3),
+                                      ),
+                                  );
+                                  }else{
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.blue,
+                                        content: const Text("Aggiunto ai preferiti!",style: TextStyle(fontSize: 16),),
+                                        behavior: SnackBarBehavior.floating,
+                                        margin: const EdgeInsets.all(20),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        duration: const Duration(seconds: 3),
+                                      ),
+                                  );
+                                  }
            }, ),
         ],
         
