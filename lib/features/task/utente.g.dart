@@ -26,13 +26,14 @@ class UtenteAdapter extends TypeAdapter<Utente> {
       telefono: fields[6] as String?,
       codiceFiscale: fields[7] as String?,
       password: fields[8] as String?,
+      coordinatore: fields[9] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Utente obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class UtenteAdapter extends TypeAdapter<Utente> {
       ..writeByte(7)
       ..write(obj.codiceFiscale)
       ..writeByte(8)
-      ..write(obj.password);
+      ..write(obj.password)
+      ..writeByte(9)
+      ..write(obj.coordinatore);
   }
 
   @override

@@ -286,7 +286,7 @@ List<Rdp> rapportiDiProva=[];
                                   children: [
                                     Icon(Icons.fact_check_outlined),
                                     SizedBox(width: 8,),
-                                    Text('RAPPORTI DI PROVA',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                    Text('${rapportiDiProva.length} RAPPORTI DI PROVA',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                                     
                                   ],
                                   ) 
@@ -432,6 +432,31 @@ List<Rdp> rapportiDiProva=[];
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
                                                           child: Text(item.campioni,
+                                                                      style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
+                                                                      )
+                                                                    )
+                                                        )
+                                                      ]
+                                                    )
+                                              
+                                            )
+                                          ),
+                                    Align(
+                                          alignment: AlignmentGeometry.centerLeft,
+                                          child: Padding(
+                                            padding: EdgeInsetsGeometry.only(left: 0,top: 10,bottom: 10),
+                                            child:Row (
+                                                    children:[
+                                                      SizedBox(
+                                                        width: 120,
+                                                        child: Text('Data Rdp',
+                                                            style: TextStyle(fontSize: 16,color: Colors.black54)
+                                                          ),
+                                                      ),
+                                                      Expanded(
+                                                        child:Padding(
+                                                          padding:EdgeInsetsGeometry.only(left: 25),
+                                                          child: Text(DateFormat('dd/MM/yyyy').format(item.data!),
                                                                       style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )

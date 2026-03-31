@@ -1,5 +1,6 @@
 
 import 'package:coran/features/task/accettazioniNotifier.dart';
+import 'package:coran/features/task/utente.dart';
 import 'package:coran/features/task/utenteNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -91,6 +92,8 @@ void initState() {
  @override
   Widget build(BuildContext context) {
 
+    Utente utente=ref.watch(providerUtente.notifier).getUtente();
+
     List<String> ordinamenti=['Data accettazione decrescente','Data accettazione crescente','Data rapporto di prova crescente','Data rapporto di prova decrescente'];
     void ordina(String ordine){
       {ordinamenti.remove(ordine);ordinamenti.insert(0, ordine);}
@@ -123,8 +126,9 @@ void initState() {
                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(padding: EdgeInsets.only(left: 10,top: 16),child: 
-                            ListTile(
+                            if(utente.coordinatore==true)
+                              Padding(padding: EdgeInsets.only(left: 10,top: 16),child: 
+                              ListTile(
                               leading: Icon(Icons.person),
                               title: Text('Seleziona veterinario',style: TextStyle(fontSize: 20),),
                               trailing: Icon(Icons.chevron_right),
@@ -132,9 +136,11 @@ void initState() {
                                 context.push('/veterinari');
                               },
                             )),
+                            
+                            
                             Container(
                               alignment: Alignment.centerLeft,
-                              padding: EdgeInsets.only(left: 30,top: 10),
+                              padding: EdgeInsets.only(left: 30,top: 20),
                               child: Text('Ordina per',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                             ),
                             

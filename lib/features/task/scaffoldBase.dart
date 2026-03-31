@@ -58,11 +58,12 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
+        
         onTap: (index) => setState(() => _currentIndex = index),
-        items: const [
+        items:  [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Ricerca'),
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Preferiti'),
+          BottomNavigationBarItem(icon: Icon(Icons.search),label: 'Ricerca'),
+          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Preferiti',),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Impostazioni'),
         ],
       ),

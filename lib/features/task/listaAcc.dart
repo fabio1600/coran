@@ -49,7 +49,7 @@ ListView getListaAcc(List<Accettazione> lista,WidgetRef ref){
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(12),
                                         ),
-                                        duration: const Duration(seconds: 3),
+                                        duration: const Duration(seconds: 2),
                                       ),
                                   );
                                   }else{
@@ -62,7 +62,7 @@ ListView getListaAcc(List<Accettazione> lista,WidgetRef ref){
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(12),
                                         ),
-                                        duration: const Duration(seconds: 3),
+                                        duration: const Duration(seconds: 2),
                                       ),
                                   );
                                   }

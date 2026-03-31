@@ -75,10 +75,10 @@ class _ImpostazioniState extends ConsumerState<Impostazioni> {
 
     
 
-    Utente utente=Utente(id: 1, nome: 'SANNA RITA', utenzaRiferimento: 'ASL 1 SASSARI - B',distretto: 'DISTRETTO DI SASSARI', mail: 'fabio.disi@izs-sardegna.ittttt', cellulare: '3400551142', telefono: '07892274', codiceFiscale: 'DSIFBA00T07I452E', password: 'password');
+    Utente utente=Utente(id: 1, nome: 'SANNA RITA', utenzaRiferimento: 'ASL 1 SASSARI - B',distretto: 'DISTRETTO DI SASSARI', mail: 'fabio.disi@izs-sardegna.ittttt', cellulare: '3400551142', telefono: '07892274', codiceFiscale: 'DSIFBA00T07I452E', password: 'password',coordinatore: true);
     ref.watch(providerUtente.notifier).addUtente(utente);
 
-    Utente utente2=Utente(id: 2, nome: 'MANCONI MARIA', utenzaRiferimento: 'ASL 1 Sassari - A',distretto: 'DISTRETTO DEL GOCEANO', mail: 'fabio.disi@izs-sardegna.it', cellulare: '340000000', telefono: '07840047', codiceFiscale: 'IDBCWICBWDUICB', password: 'password2');
+    Utente utente2=Utente(id: 2, nome: 'MANCONI MARIA', utenzaRiferimento: 'ASL 1 Sassari - A',distretto: 'DISTRETTO DEL GOCEANO', mail: 'fabio.disi@izs-sardegna.it', cellulare: '340000000', telefono: '07840047', codiceFiscale: 'IDBCWICBWDUICB', password: 'password2',coordinatore: false);
     ref.watch(providerUtente.notifier).addUtente(utente2);
   }
  
