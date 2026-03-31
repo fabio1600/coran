@@ -1,5 +1,6 @@
 
 import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/utente.dart';
 import 'filtriNotifier.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,6 +62,16 @@ class Accettazionenotifier extends StateNotifier<List<Accettazione>> {
     for (final e in state)
       if (e.id == nuovaAcc.id) nuovaAcc else e
   ];
+    }
+
+    List<String> getQuesiti(String? nomeRichiedente){
+      List<String> lista=['Tutti'];
+      for(Accettazione a in box.values){
+        if(a.Richiedente==nomeRichiedente&&!lista.contains(a.Quesito)){
+          lista.add(a.Quesito);
+        }
+      }
+      return lista;
     }
 
     

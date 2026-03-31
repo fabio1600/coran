@@ -1,12 +1,9 @@
-
-import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/rdpNotifier.dart';
 import 'package:coran/features/task/utente.dart';
 import 'package:coran/features/task/utenteNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'filtriNotifier.dart';
 import 'accettazioniNotifier.dart';
@@ -290,8 +287,8 @@ class _HomeState extends ConsumerState<Home> {
                                             child:  Row (
                                               mainAxisSize: MainAxisSize.min,
                                                     children:[
-                                                      positivi==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
-                                                      item.RapportiDiProva !=null ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black87,fontSize: 16),),
+                                                      item.positivo==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
+                                                      item.RapportiDiProva!.isNotEmpty ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black87,fontSize: 16),),
                                                       item.Allegati!=null ? Icon(Icons.attach_file,color: Colors.black,) : SizedBox.shrink()
                                                       ],
                                                     ),

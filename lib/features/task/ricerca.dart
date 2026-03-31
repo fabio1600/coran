@@ -31,16 +31,22 @@ bool eliminaFiltro= false;
   }
 
 bool rispettaFiltri(Accettazione acc,String? rich,String? cod,String? rag,String? que,String? verb,DateTime? accDal,DateTime? accAl,DateTime? rdpDal,DateTime? rdpAl,String? stato,String? vet,bool? positivo){
+  
+  
+  
   final rapportiDiProva=ref.watch(providerRdp).where((a)=>acc.RapportiDiProva!.contains(a.id));
   if(rich!=null&&acc.id!=int.parse(rich))return false;
   if(cod!=null&&acc.CodiceAzienda!=cod)return false;
   if(rag!=null&&acc.Attivita.contains(rag))return false;
   if(que!=null&&(!acc.Quesito.contains(que)))return false;
   /*if(verb!=null&&acc.Richiedente!=rich)return false;*/
-  if(accDal!=null&&acc.DataAccettazione.isBefore(accDal))return false;
-  if(accAl!=null&&acc.DataAccettazione.isAfter(accAl))return false;
-  if(rdpDal!=null&&(rapportiDiProva.isNotEmpty&&(!rapportiDiProva.any((a)=>a.data!.isAfter(rdpDal)))||(rapportiDiProva.isEmpty)))return false;
-  if(rdpAl!=null&&(rapportiDiProva.isNotEmpty&&(!rapportiDiProva.any((a)=>a.data!.isBefore(rdpAl)))||(rapportiDiProva.isEmpty)))return false;
+  if(accDal!=null&&accAl==null&&(acc.DataAccettazione.isBefore(accDal)&&!acc.DataAccettazione.isAtSameMomentAs(accDal)))return false;
+  if(accAl!=null&&accDal==null&&(acc.DataAccettazione.isAfter(accAl)||!acc.DataAccettazione.isAtSameMomentAs(accAl)))return false;
+  if(accAl!=null&&accDal!=null&&!(!acc.DataAccettazione.isAfter(accAl)&&!acc.DataAccettazione.isBefore(accDal))) return false;
+  if(rdpDal!=null&&rdpAl==null&&(rapportiDiProva.isNotEmpty&&(!rapportiDiProva.any((a)=>(a.data!.isAfter(rdpDal))||(a.data!.isAtSameMomentAs(rdpDal))))||(rapportiDiProva.isEmpty)))return false;
+  if(rdpAl!=null&&rdpDal==null&&(rapportiDiProva.isNotEmpty&&(!rapportiDiProva.any((a)=>(a.data!.isBefore(rdpAl))||(a.data!.isAtSameMomentAs(rdpAl))))||(rapportiDiProva.isEmpty)))return false;
+  if(rdpDal!=null&&rdpAl!=null&&(rapportiDiProva.isNotEmpty&&((!rapportiDiProva.any((a)=>(!a.data!.isAfter(rdpAl))&&(!a.data!.isBefore(rdpDal)))))||(rapportiDiProva.isEmpty)))return false;
+
   if(stato!=null&&acc.stato!=stato)return false;
   if(positivo==true&&acc.positivo==false) return false;       
   if(vet!=null&&acc.Richiedente!=vet)return false;
@@ -375,7 +381,7 @@ final rdp=ref.watch(providerRdp);
                                             child:  Row (
                                               mainAxisSize: MainAxisSize.min,
                                                     children:[
-                                                      positivi==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
+                                                      item.positivo==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
                                                       item.RapportiDiProva !=null ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black87,fontSize: 16),),
                                                       item.Allegati!=null ? Icon(Icons.attach_file,color: Colors.black,) : SizedBox.shrink()
                                                       ],

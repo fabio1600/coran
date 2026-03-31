@@ -1,4 +1,6 @@
 
+import 'package:coran/features/task/accettazioniNotifier.dart';
+import 'package:coran/features/task/utenteNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -48,6 +50,8 @@ String? stato;
   }
 }
 
+String? quesSel;
+
 @override
 void initState() {
   super.initState();
@@ -64,8 +68,11 @@ void initState() {
   ref.read(providerFiltri.notifier).codController.text="";
   if(filtri.ragioneSociale==null)                  // inizializza la variabile locale
   ref.read(providerFiltri.notifier).ragController.text="";
-  if(filtri.quesito==null)                  // inizializza la variabile locale
-  ref.read(providerFiltri.notifier).queController.text="";
+  
+  if(filtri.quesito!=null){
+    quesSel=filtri.quesito!;
+  }
+
   if(filtri.verbale==null)                  // inizializza la variabile locale
   ref.read(providerFiltri.notifier).verbController.text="";
   if(filtri.rdpDal==null)                  // inizializza la variabile locale
@@ -79,7 +86,7 @@ void initState() {
     stato=filtri.stato;
   }
 }
-
+  
 
  @override
   Widget build(BuildContext context) {
@@ -298,19 +305,27 @@ void initState() {
                               child: Text('Quesito',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                             ),
                             Container(
-                              
                               alignment: Alignment.centerLeft,
-                              
-                              height: 60,
-                              padding: EdgeInsets.only(left: 30,top: 10,right: 10),
-                              child: TextField(
-                                      controller: ref.watch(providerFiltri.notifier).queController,
-                                      onChanged: (value) => ref.watch(providerFiltri.notifier).queController.text=value,
-                                      decoration: InputDecoration(
-                                        
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
+                              padding: EdgeInsets.only(left: 30,top: 20),
+                              child:
+                            DropdownButton<String>(
+                            underline: SizedBox(),
+                            isExpanded: true,
+                            value: quesSel,
+                            hint:  const Text("Seleziona"),
+                            items: ref.watch(providerAccettazione.notifier).getQuesiti(ref.watch(providerUtente.notifier).getUtente().nome).map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                quesSel=value;
+                                ref.watch(providerFiltri.notifier).setQue(value!);
+                              });
+                            },
+                          ),
                             )
                           ],
                         ),
@@ -582,9 +597,9 @@ void initState() {
                                 if(controller.codController.text.isEmpty)
                                 ref.watch(providerFiltri.notifier).clearCod();
 
-                                if(controller.queController.text.isNotEmpty)
-                                ref.watch(providerFiltri.notifier).setQue(controller.queController.text);
-                                if(controller.queController.text.isEmpty)
+                                if(quesSel!=null)
+                                ref.watch(providerFiltri.notifier).setQue(quesSel!);
+                                if(quesSel=='Tutti')
                                 ref.watch(providerFiltri.notifier).clearQue();
 
                                 if(controller.verbController.text.isNotEmpty)
