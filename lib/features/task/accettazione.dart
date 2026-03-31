@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 part 'accettazione.g.dart';
@@ -52,6 +53,9 @@ class Accettazione extends HiveObject{
   @HiveField(15)
   final bool? positivo;
 
+  @HiveField(16)
+  final bool? preferito;
+
   Accettazione({
     required this.id,
     required this.DataAccettazione,
@@ -68,7 +72,8 @@ class Accettazione extends HiveObject{
     this.RapportiDiProva,
     required this.stato,
     this.DataRdp,
-    this.positivo=false
+    this.positivo=false,
+    this.preferito=false
   });
 
   Accettazione copyWith({
@@ -77,7 +82,8 @@ class Accettazione extends HiveObject{
     List<int>? rapportiDiProva,
     DateTime? dataRdp,
     String? stato,
-    bool? positivo
+    bool? positivo,
+    bool? preferito
     }) {return Accettazione(
       id: this.id,
       DataAccettazione: this.DataAccettazione,
@@ -94,7 +100,8 @@ class Accettazione extends HiveObject{
       RapportiDiProva: rapportiDiProva?? this.RapportiDiProva,
       DataRdp: dataRdp?? this.DataRdp,
       stato:stato ?? this.stato,
-      positivo: positivo ?? this.positivo
+      positivo: positivo ?? this.positivo,
+      preferito: preferito ?? this.preferito
       );
     }
 }

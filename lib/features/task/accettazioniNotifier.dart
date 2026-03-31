@@ -1,6 +1,7 @@
 
 import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/utente.dart';
+import 'package:flutter/material.dart';
 import 'filtriNotifier.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -72,6 +73,27 @@ class Accettazionenotifier extends StateNotifier<List<Accettazione>> {
         }
       }
       return lista;
+    }
+
+    void setPreferito(Accettazione acc)async{
+      var nuovaAcc;
+      if(acc.preferito==false){
+      var box2=Hive.box('preferiti');
+      box2.put('id', acc.id);
+       nuovaAcc=acc.copyWith(preferito: true);
+      }else if(acc.preferito==true){
+        var box2=Hive.box('preferiti');
+        await box2.delete(acc.id);
+       nuovaAcc=acc.copyWith(preferito: false);
+      }
+      
+      box.put(acc.id, nuovaAcc);
+      final index = state.indexWhere((e) => e.id == acc.id);
+
+      state = [
+    for (final e in state)
+      if (e.id == nuovaAcc.id) nuovaAcc else e
+  ];
     }
 
     

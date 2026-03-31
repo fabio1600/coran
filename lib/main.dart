@@ -23,6 +23,7 @@ Hive.registerAdapter(AccettazioneAdapter());
 Hive.registerAdapter(UtenteAdapter());
 Hive.registerAdapter(RdpAdapter());
   await Hive.openBox<Accettazione>('accettazioni');
+
   await Hive.openBox('login');
   await Hive.openBox<Utente>('utente');
   await Hive.openBox<Rdp>('rdp');

@@ -1,7 +1,7 @@
 
 import 'package:coran/features/task/home.dart';
 import 'package:coran/features/task/impostazioni.dart';
-import 'package:coran/features/task/preferiti.dart';
+import 'package:coran/features/task/paginaPreferiti.dart';
 import 'package:coran/features/task/ricerca.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,7 +28,7 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold> {
   final List<Widget> _pages = [
     Home(),
     Ricerca(),
-    Preferiti(),
+    Paginapreferiti(),
     Impostazioni(),
   ];
 

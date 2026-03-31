@@ -4,6 +4,7 @@ import 'package:coran/features/task/cambioPassword.dart';
 import 'package:coran/features/task/filtri.dart';
 import 'package:coran/features/task/impostazioni.dart';
 import 'package:coran/features/task/login.dart';
+import 'package:coran/features/task/paginaPreferiti.dart';
 import 'package:coran/features/task/paginaRdp.dart';
 import 'package:coran/features/task/home.dart';
 import 'package:coran/features/task/ricerca.dart';
@@ -35,7 +36,7 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(path: '/', builder: (context, state) => Home()),
         GoRoute(path: '/ricerca', builder: (context, state) => Ricerca()),
-        GoRoute(path: '/preferiti', builder: (context, state) => Ricerca()),
+        GoRoute(path: '/preferiti', builder: (context, state) => Paginapreferiti()),
         GoRoute(path: '/impostazioni', builder: (context, state) => Impostazioni()),
       ],
     ),
