@@ -1,6 +1,7 @@
 
 import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/utente.dart';
+import 'package:coran/services/connectivity_service.dart';
 import 'filtriNotifier.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -65,6 +66,9 @@ class Utentenotifier extends StateNotifier<List<Utente>> {
       state=[...state,utenteMod];
 
   }
+
+
+  
   
 }
 

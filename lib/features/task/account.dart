@@ -1,6 +1,7 @@
 
 import 'package:coran/features/task/utente.dart';
 import 'package:coran/features/task/utenteNotifier.dart';
+import 'package:coran/services/connectivity_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -34,10 +35,15 @@ var box2= Hive.box('login');
  TextEditingController controllerUfficio = TextEditingController();
  TextEditingController controllerCodFisc = TextEditingController();
 
- 
 
+  
+Future<void> checkConn()async{
+
+       
+  }
   @override
 void initState() {
+  
   id=box2.get('utente');
   utente=box.get(id);
   super.initState();
@@ -66,9 +72,12 @@ void initState() {
 String? cellulare;
 String? telefono;
 String? codiceFiscale;
+
  
 @override
   Widget build(BuildContext context) {
+
+    var ut=ref.watch(providerUtente);
 
     cellulare=controllerCellulare.text;
     telefono=controllerUfficio.text;
@@ -157,25 +166,47 @@ String? codiceFiscale;
                       height: 50,
                       width: 200,
                     child: ElevatedButton(
-                      onPressed: (){
-                        FocusManager.instance.primaryFocus?.unfocus();
-                        ref.watch(providerUtente.notifier).modificaDati(cellulare!, telefono!, codiceFiscale!, utente!);
-                        controllerCellulare.text=cellulare!;
-                        controllerUfficio.text=telefono!;
-                        controllerCodFisc.text=codiceFiscale!;
-                       
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: Colors.blue,
-                            content: const Text("Dati aggiornati!",style: TextStyle(fontSize: 16),),
-                            behavior: SnackBarBehavior.floating,
-                            margin: const EdgeInsets.all(20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                      onPressed: () async{
+                          bool risultato= await ConnectivityService.hasInternet();   
+                          if(risultato==false){
+                            FocusManager.instance.primaryFocus?.unfocus();
+                                              
+                                            
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.red,
+                                content: const Text("Non connesso ad internet!",style: TextStyle(fontSize: 16),),
+                                behavior: SnackBarBehavior.floating,
+                                margin: const EdgeInsets.all(20),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                duration: const Duration(seconds: 3),
+                              ),
+                            );
+                            return;
+                          }
+                        
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          ref.watch(providerUtente.notifier).modificaDati(cellulare!, telefono!, codiceFiscale!, utente!);
+                          controllerCellulare.text=cellulare!;
+                          controllerUfficio.text=telefono!;
+                          controllerCodFisc.text=codiceFiscale!;
+                        
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Colors.blue,
+                              content: const Text("Dati aggiornati!",style: TextStyle(fontSize: 16),),
+                              behavior: SnackBarBehavior.floating,
+                              margin: const EdgeInsets.all(20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              duration: const Duration(seconds: 3),
                             ),
-                            duration: const Duration(seconds: 3),
-                          ),
-                        );
+                          );
+                        
+                        
                       },
                       child: Text('Aggiorna dati',style: TextStyle(fontSize: 18),)
                       )

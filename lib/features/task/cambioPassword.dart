@@ -1,6 +1,7 @@
 
 import 'package:coran/features/task/utente.dart';
 import 'package:coran/features/task/utenteNotifier.dart';
+import 'package:coran/services/connectivity_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,6 +19,10 @@ class Cambiopassword extends ConsumerStatefulWidget {
 }
 class _CambiopasswordState extends ConsumerState<Cambiopassword> {
 
+bool? conn;
+Future<void> checkConn()async{
+     conn= await ConnectivityService.hasInternet();   
+}
  
 String? errore;
     String? errore2;
@@ -110,7 +115,27 @@ String? errore;
                       height: 50,
                       width: 200,
                     child: ElevatedButton(
-                      onPressed: (){
+                      onPressed: ()async{
+                        
+                          bool risultato= await ConnectivityService.hasInternet();   
+                          if(risultato==false){
+                            FocusManager.instance.primaryFocus?.unfocus();
+                                              
+                                            
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.red,
+                                content: const Text("Non connesso ad internet!",style: TextStyle(fontSize: 16),),
+                                behavior: SnackBarBehavior.floating,
+                                margin: const EdgeInsets.all(20),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                duration: const Duration(seconds: 3),
+                              ),
+                            );
+                            return;
+                          }
                         
                         setState(() {
                           if(passwordAttuale==utente.password){

@@ -10,7 +10,6 @@ import 'package:coran/features/task/home.dart';
 import 'package:coran/features/task/ricerca.dart';
 import 'package:coran/features/task/segnalazione.dart';
 import 'package:coran/features/task/veterinari.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:coran/features/task/scaffoldBase.dart';
 import 'package:hive_flutter/adapters.dart';

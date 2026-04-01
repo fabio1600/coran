@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Lista Task',
+      title: 'Coran',
       routerConfig: router,
       debugShowCheckedModeBanner: false,
     );
