@@ -1,5 +1,6 @@
 import 'package:coran/core/storage/servizio_preferenze.dart';
 import 'package:coran/features/task/modello_task.dart';
+import 'package:coran/services/connectivity_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -87,7 +88,27 @@ bool errore=false;
                           width: 300,
                           height: 50,
                           child: ElevatedButton(
-                            onPressed: (){
+                            onPressed: ()async{
+                        
+                                bool risultato= await ConnectivityService.hasInternet();   
+                                if(risultato==false){
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                                    
+                                            
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Colors.red,
+                                      content: const Text("Non connesso ad internet!",style: TextStyle(fontSize: 16),),
+                                      behavior: SnackBarBehavior.floating,
+                                      margin: const EdgeInsets.all(20),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      duration: const Duration(seconds: 3),
+                                    ),
+                                  );
+                                  return;
+                                }
                               if(user=='user'){
                                 box.put('islogged', true);
                                 box.put('utente', 1);

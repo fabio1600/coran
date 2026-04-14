@@ -22,7 +22,7 @@ class Rdp extends HiveObject{
   final String campioni;
 
   @HiveField(5)
-  final String pathPdf;
+  final String? pathPdf;
 
   @HiveField(6)
   final bool? letto;
@@ -42,7 +42,7 @@ class Rdp extends HiveObject{
     required this.tipo,
     required this.specie,
     required this.campioni,
-    required this.pathPdf,
+    this.pathPdf,
     this.letto=false,
     required this.positivo,
     required this.data,
@@ -50,14 +50,15 @@ class Rdp extends HiveObject{
   });
 
   Rdp copyWith({
-    bool? letto
+    bool? letto,
+    String? pathPdf
   }){return Rdp(
     id: this.id,
     conferimento: this.conferimento,
     tipo: this.tipo,
     specie: this.specie,
     campioni: this.campioni,
-    pathPdf: this.pathPdf,
+    pathPdf: pathPdf ?? this.pathPdf,
     letto: letto ?? this.letto,
     positivo: this.positivo,
     data: this.data,

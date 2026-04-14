@@ -1,35 +1,38 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:flutter/services.dart';
-import 'dart:typed_data';
 
-Future<void> downloadPdf() async {
+
+
+Future<void> downloadPdf(Uint8List pdfBytes,String nome) async {
   try {
     // 1️⃣ Carico il PDF dagli assets (simula BLOB)
-    final data = await rootBundle.load('assets/images/rdp2.pdf');
-    final Uint8List pdfBytes = data.buffer.asUint8List();
+    
 
     // 2️⃣ Scelgo la directory
     Directory? dir;
 
-    if (Platform.isAndroid) {
-      dir = Directory('/storage/emulated/0/Download');
-    } else {
-      dir = await getApplicationDocumentsDirectory();
+    
+    dir = await getApplicationDocumentsDirectory();
+    final rdpDir = Directory('${dir.path}/rdp');
+
+    // crea la cartella se non esiste
+    if (!await rdpDir.exists()) {
+      await rdpDir.create(recursive: true);
     }
 
+    
     // 3️⃣ Creo il file
-    final file = File('${dir.path}/miofile.pdf');
+    final file = File('${dir.path}/rdp/${nome}.pdf');
 
-    // 4️⃣ Scrivo i bytes
-    await file.writeAsBytes(pdfBytes);
+    if(!await file.exists()){
+      await file.writeAsBytes(pdfBytes);
+      
+    }
 
-    print("PDF salvato in: ${file.path}");
+
+    
   } catch (e) {
     print("Errore download: $e");
   }

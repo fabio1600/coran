@@ -262,7 +262,7 @@ List<Rdp> rapportiDiProva=[];
                                         ),
                                       ),InkWell(
                                         onTap: (){
-                                          sharePdf();
+                                          sharePdf(accettazione.PathAllegati!);
                                         },
                                      
                                       child: Icon(Icons.download),
@@ -314,7 +314,7 @@ List<Rdp> rapportiDiProva=[];
                                   if(rapportiDiProva.where((item)=>item.letto==false).length==1){
                                     ref.watch(providerAccettazione.notifier).modStato('Letto', accettazione);
                                   }
-                                  context.push('/rdp');
+                                  context.push('/rdp/${accettazione.id}/${item.id}');
                                 },
                                 child: Column(
                                   children: [ 

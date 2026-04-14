@@ -133,25 +133,25 @@ void initState() {
                               trailing: Icon(Icons.chevron_right),
                               onTap: ()async{
                         
-                          bool risultato= await ConnectivityService.hasInternet();   
-                          if(risultato==false){
-                            FocusManager.instance.primaryFocus?.unfocus();
-                                              
+                                bool risultato= await ConnectivityService.hasInternet();   
+                                if(risultato==false){
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                                    
                                             
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.red,
-                                content: const Text("Non connesso ad internet!",style: TextStyle(fontSize: 16),),
-                                behavior: SnackBarBehavior.floating,
-                                margin: const EdgeInsets.all(20),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                duration: const Duration(seconds: 3),
-                              ),
-                            );
-                            return;
-                          }
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Colors.red,
+                                      content: const Text("Non connesso ad internet!",style: TextStyle(fontSize: 16),),
+                                      behavior: SnackBarBehavior.floating,
+                                      margin: const EdgeInsets.all(20),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      duration: const Duration(seconds: 3),
+                                    ),
+                                  );
+                                  return;
+                                }
                                 context.push('/veterinari');
                               },
                             )),

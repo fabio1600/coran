@@ -40,11 +40,14 @@ final GoRouter router = GoRouter(
       ],
     ),
     GoRoute(
-          path: '/rdp',
-          pageBuilder: (context, state) => const NoTransitionPage(
-    child: Paginardp(),
+          path: '/rdp/:id/:idAcc',
+          builder: (context, state) {
+    final id = int.parse(state.pathParameters['id']!);
+    final id2 = int.parse(state.pathParameters['idAcc']!);
+    return Paginardp(id: id, id2: id2);
+  },
   ),
-        ),
+        
     GoRoute(
           path: '/accettazione/:id',
   builder: (context, state) {
