@@ -4,29 +4,16 @@ import 'package:share_plus/share_plus.dart';
 import 'dart:io';
 
 Future<void> sharePdf(String path) async {
-  try {
-    final byteData = await rootBundle.load('assets/pdfs/$path.pdf');
+  final byteData = await rootBundle.load('assets/images/${path}');
 
-    final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}/$path.pdf');
+  final tempDir = await getTemporaryDirectory();
+  final file = File('${tempDir.path}/${path}');
 
-    await file.writeAsBytes(
-      byteData.buffer.asUint8List(),
-      flush: true,
-    );
+  
 
-    await Future.delayed(const Duration(milliseconds: 200));
+  if (!await file.exists()) {
+  await file.writeAsBytes(byteData.buffer.asUint8List());
+}
 
-    await Share.shareXFiles(
-      [
-        XFile(
-          file.path,
-          mimeType: 'application/pdf',
-        ),
-      ],
-      fileNameOverrides: ['$path.pdf'],
-    );
-  } catch (e) {
-    print("ERRORE SHARE: $e");
-  }
+  await Share.shareXFiles([XFile(file.path)]);
 }
