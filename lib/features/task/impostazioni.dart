@@ -35,7 +35,7 @@ class _ImpostazioniState extends ConsumerState<Impostazioni> {
     List<int> ids2 = lista2.map((u) => u.id).toList();
     
     
-    Accettazione acc=Accettazione(id: 8878,DataAccettazione: DateTime(2026,03,05),Attivita: 'RUIU RAIMONDO',Indirizzo: 'LOC. SA COA   ::    ESPORLATU (07030)',Richiedente: 'SANNA RITA',Quesito: 'CONTROLLO SCRAPIE SU PICCOLI RUMINANTI REGOLARMENTE MACELLAT',Utente: 'A.S.L. 1 SASSARI',CodiceAzienda: 'IT028SS028',Asl: 'AUSL 1 - SASSARI / OZIERI',Allegati: 'DOCUMENTO DI ACCOMPAGNAMENTO',PathAllegati: 'path',Comune: 'ESPORLATU',RapportiDiProva:ids,DataRdp: DateTime(2026,03,08), stato: 'Non letto',positivo: true);
+    Accettazione acc=Accettazione(id: 8878,DataAccettazione: DateTime(2026,03,05),Attivita: 'RUIU RAIMONDO',Indirizzo: 'LOC. SA COA   ::    ESPORLATU (07030)',Richiedente: 'SANNA RITA',Quesito: 'CONTROLLO SCRAPIE SU PICCOLI RUMINANTI REGOLARMENTE MACELLAT',Utente: 'A.S.L. 1 SASSARI',CodiceAzienda: 'IT028SS028',Asl: 'AUSL 1 - SASSARI / OZIERI',Allegati: 'DOCUMENTO DI ACCOMPAGNAMENTO',PathAllegati: 'rdp.pdf',Comune: 'ESPORLATU',RapportiDiProva:ids,DataRdp: DateTime(2026,03,08), stato: 'Non letto',positivo: true);
     ref.read(providerAccettazione.notifier).addAccettazione(acc);
     Accettazione acc1=Accettazione(id: 8523,DataAccettazione: DateTime(2026,03,03),Attivita: 'BARAGLIU PIERLUIGI',Indirizzo: 'NUGHEDU SAN NICOLO (07010)',Richiedente: 'SANNA RITA',Quesito: 'RICERCA TRICHINELLA - MACELLAZIONI USO FAMILIARE',Utente: 'A.S.L. 1 SASSARI',CodiceAzienda: 'IT044SS121',Asl: 'AUSL 1 - SASSARI / OZIERI',Allegati: 'DOCUMENTO DI ACCOMPAGNAMENTO',Comune: 'NUGHEDU SAN NICOLO',stato: 'Non letto',RapportiDiProva: ids2);
     ref.read(providerAccettazione.notifier).addAccettazione(acc1);

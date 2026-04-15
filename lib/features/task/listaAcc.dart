@@ -1,12 +1,9 @@
 import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/rdpNotifier.dart';
-import 'package:coran/features/task/utente.dart';
-import 'package:coran/features/task/utenteNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'filtriNotifier.dart';
 import 'accettazioniNotifier.dart';
 
 
@@ -37,37 +34,7 @@ ListView getListaAcc(List<Accettazione> lista,WidgetRef ref){
                                   
                                   
                                 },
-                                onLongPress: (){
-                                  ref.watch(providerAccettazione.notifier).setPreferito(item);
-                                  if(item.preferito==true){
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        backgroundColor: Colors.blue,
-                                        content: const Text("Rimosso dai preferiti!",style: TextStyle(fontSize: 16),),
-                                        behavior: SnackBarBehavior.floating,
-                                        margin: const EdgeInsets.all(20),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(12),
-                                        ),
-                                        duration: const Duration(seconds: 2),
-                                      ),
-                                  );
-                                  }else{
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        backgroundColor: Colors.blue,
-                                        content: const Text("Aggiunto ai preferiti!",style: TextStyle(fontSize: 16),),
-                                        behavior: SnackBarBehavior.floating,
-                                        margin: const EdgeInsets.all(20),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(12),
-                                        ),
-                                        duration: const Duration(seconds: 2),
-                                      ),
-                                  );
-                                  }
-                                    
-                                },
+                                
                                 child: Column(
                                   children: [ 
                                         
@@ -94,7 +61,41 @@ ListView getListaAcc(List<Accettazione> lista,WidgetRef ref){
                                                       Row (
                                                           mainAxisSize: MainAxisSize.min,
                                                           children:[
-                                                            item.preferito==true? Icon(Icons.star,color: Colors.black,) : Icon(Icons.star_border,color: Colors.black,)
+                                                            InkWell(
+                                                              onTap: (){
+                                                              ref.watch(providerAccettazione.notifier).setPreferito(item);
+                                                              if(item.preferito==true){
+                                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                                  SnackBar(
+                                                                    backgroundColor: Colors.blue,
+                                                                    content: const Text("Rimosso dai preferiti!",style: TextStyle(fontSize: 16),),
+                                                                    behavior: SnackBarBehavior.floating,
+                                                                    margin: const EdgeInsets.all(20),
+                                                                    shape: RoundedRectangleBorder(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                    ),
+                                                                    duration: const Duration(seconds: 2),
+                                                                  ),
+                                                              );
+                                                              }else{
+                                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                                  SnackBar(
+                                                                    backgroundColor: Colors.blue,
+                                                                    content: const Text("Aggiunto ai preferiti!",style: TextStyle(fontSize: 16),),
+                                                                    behavior: SnackBarBehavior.floating,
+                                                                    margin: const EdgeInsets.all(20),
+                                                                    shape: RoundedRectangleBorder(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                    ),
+                                                                    duration: const Duration(seconds: 2),
+                                                                  ),
+                                                              );
+                                                              }
+                                                                
+                                                            },
+                                                              child: item.preferito==true? Icon(Icons.star,color: Colors.black) : Icon(Icons.star_border,color: Colors.black,),
+                                                            )
+                                                            
                                                           ]
                                                         )
                                                       ]
