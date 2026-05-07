@@ -190,13 +190,17 @@ Future<void> caricaAnalisi()async{
                       Icon(Icons.account_box,size: 75),
                       Text(utente.nome!.toUpperCase(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       SizedBox(height: 10,),
-                      Padding(padding:EdgeInsets.only(left: 0),child: Row(
+                       Padding(padding:EdgeInsets.only(left: 0),child: Row(
                         children: [
                           Icon(Icons.local_hospital,size: 30,),
-                          Text(utente.utenzaRiferimento!,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold))
+                          SizedBox(width: 10,),
+                          Expanded(child:Text(utente.utenzaRiferimento!,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)))
+                          
                         ],
                       ),
                       ),
+                      
+                      
                       utente.distretto!=null ?
                       Padding(padding: EdgeInsets.only(top:5),child: Row(
                         children: [
