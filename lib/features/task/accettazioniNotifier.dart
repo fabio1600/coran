@@ -1,9 +1,13 @@
 
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:coran/features/task/Allegato.dart';
 import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/test_pdf.dart';
 import 'package:coran/features/task/utente.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'filtriNotifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -99,7 +103,7 @@ class Accettazionenotifier extends StateNotifier<List<Accettazione>> {
     }
 
     void addAllegati(String? descrizione,int? idAllegato,int anno,int richiesta,Accettazione acc) async{
-      var urlPdf= Uri.parse('http://192.168.0.167:8080/pdf/${idAllegato}/${anno}/${richiesta}');
+      var urlPdf= Uri.parse('http://192.168.0.167:8080/pdfAllegati/${idAllegato}/${anno}/${richiesta}');
       String token=Hive.box('login').get('token');
       var risposta = await http.get(
         urlPdf,
@@ -125,6 +129,39 @@ class Accettazionenotifier extends StateNotifier<List<Accettazione>> {
       
     }
 
+
+Future<void> downloadPdf(Uint8List pdfBytes,String nome) async {
+  try {
+    // 1️⃣ Carico il PDF dagli assets (simula BLOB)
+    
+
+    // 2️⃣ Scelgo la directory
+    Directory? dir;
+
+    
+    dir = await getApplicationDocumentsDirectory();
+    final rdpDir = Directory('${dir.path}/rdp');
+
+    // crea la cartella se non esiste
+    if (!await rdpDir.exists()) {
+      await rdpDir.create(recursive: true);
+    }
+
+    
+    // 3️⃣ Creo il file
+    final file = File('${dir.path}/rdp/${nome}.pdf');
+
+    if(!await file.exists()){
+      await file.writeAsBytes(pdfBytes);
+      
+    }
+
+
+    
+  } catch (e) {
+    print("Errore download: $e");
+  }
+}
     
     
   
