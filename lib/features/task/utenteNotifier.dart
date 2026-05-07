@@ -1,9 +1,11 @@
 
+import 'dart:convert';
+
 import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/utente.dart';
 import 'package:coran/services/connectivity_service.dart';
 import 'filtriNotifier.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
@@ -39,16 +41,19 @@ class Utentenotifier extends StateNotifier<List<Utente>> {
     
     
   
+  
   Utente getUtente(){
     int? id;
-    Utente? utente;
+    
     var box=Hive.box('login');
     var box2=Hive.box<Utente>('utente');
 
     id=box.get('utente');
-    utente=box2.get(id);
-    return utente!;
-  }
+    Utente? utente;
+      utente=box2.get(id);
+      return utente!;
+    }
+  
 
   void modificaDati(String cellulare,String telefono,String codiceFiscale,Utente utente){
     var utenteMod= utente.copyWith(cellulare: cellulare,telefono: telefono,codiceFiscale: codiceFiscale);

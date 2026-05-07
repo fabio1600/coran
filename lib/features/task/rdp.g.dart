@@ -22,18 +22,19 @@ class RdpAdapter extends TypeAdapter<Rdp> {
       tipo: fields[2] as String,
       specie: fields[3] as String,
       campioni: fields[4] as String,
-      pathPdf: fields[5] as String,
+      pathPdf: fields[5] as String?,
       letto: fields[6] as bool?,
       positivo: fields[7] as bool?,
       data: fields[8] as DateTime?,
       idAcc: fields[9] as int?,
+      seqRichiesta: fields[10] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Rdp obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -53,7 +54,9 @@ class RdpAdapter extends TypeAdapter<Rdp> {
       ..writeByte(8)
       ..write(obj.data)
       ..writeByte(9)
-      ..write(obj.idAcc);
+      ..write(obj.idAcc)
+      ..writeByte(10)
+      ..write(obj.seqRichiesta);
   }
 
   @override

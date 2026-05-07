@@ -33,6 +33,9 @@ List<Rdp> rapportiDiProva=[];
     final accettazione=ref.watch(providerAccettazione).firstWhere((element) => element.id==widget.id);
     if(accettazione.RapportiDiProva!=null){
        rapportiDiProva= ref.watch(providerRdp).where((element)=>accettazione.RapportiDiProva!.contains(element.id)).toList();
+       for(var r in rapportiDiProva){
+        print(r.id);
+       }
        if(rapportiDiProva.any((a)=>a.letto==false)){
         
         rapportiDiProva.sort((a,b)=>b.positivo.toString().compareTo(a.positivo.toString()));
@@ -45,6 +48,9 @@ List<Rdp> rapportiDiProva=[];
        
     }
     
+    var numAllegati;
+    if(accettazione.Allegati==null){numAllegati=0;}
+    else{numAllegati=accettazione.Allegati!.length;}
 
     return  Scaffold(
       appBar: AppBar(
@@ -245,31 +251,41 @@ List<Rdp> rapportiDiProva=[];
                                   
                                 ),
 
-                                Text('ALLEGATI PRESENTI',style: TextStyle(fontSize: 17),),
+                                Text('ALLEGATI PRESENTI  :  ${numAllegati}',style: TextStyle(fontSize: 17),),
                                 
                                 Padding(
                                   padding: EdgeInsets.only(top: 7, bottom: 20),
-                                  child: Row(
+                                  child: accettazione.Allegati==null ? SizedBox.shrink() :  ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: accettazione.Allegati!.length,
+                                        itemBuilder:(context, index) {
+                                        final item = accettazione.Allegati![index];
+                                        return Row(
                                     
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          '${accettazione.Allegati}',
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),InkWell(
-                                        onTap: (){
-                                          sharePdf(accettazione.PathAllegati!);
-                                        },
-                                     
-                                      child: Icon(Icons.download),
-                                    ),
-                                      
-                                    ],
-                                  ),
+                                            children: [
+                                              
+                                              Expanded(
+                                                child: Text(
+                                                  item.descrizione!,
+                                                  style: TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),InkWell(
+                                                onTap: (){
+                                                  sharePdf(item.pathAllegato!);
+                                                },
+                                            
+                                              child: Icon(Icons.download),
+                                            ),
+                                              
+                                            ],
+                                          );
+                                        }
+                                      )
+                                   
                                 )
                               ],
                             ),

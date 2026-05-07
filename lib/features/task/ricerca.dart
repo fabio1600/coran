@@ -82,7 +82,7 @@ void ordinaPer(List<Accettazione> lista,String? ordine){
  @override
   Widget build(BuildContext context) {
     Utente utente=ref.watch(providerUtente.notifier).getUtente();
-    final listaOrginale=ref.watch(providerAccettazione).where((acc)=>acc.Richiedente==utente.nome);
+    final listaOrginale=ref.watch(providerAccettazione).where((acc)=>acc.idRichiedente==utente.id);
     final filtri=ref.watch(providerFiltri);
     final listaFiltrata =listaOrginale.where((item) =>
   rispettaFiltri(item, filtri.richiesta, filtri.codiceAziendale, filtri.ragioneSociale,

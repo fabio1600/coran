@@ -1,9 +1,11 @@
 
+import 'package:coran/features/task/Allegato.dart';
 import 'package:coran/features/task/accettazione.dart';
+import 'package:coran/features/task/test_pdf.dart';
 import 'package:coran/features/task/utente.dart';
 import 'package:flutter/material.dart';
 import 'filtriNotifier.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
@@ -65,10 +67,10 @@ class Accettazionenotifier extends StateNotifier<List<Accettazione>> {
   ];
     }
 
-    List<String> getQuesiti(String? nomeRichiedente){
+    List<String> getQuesiti(int? id){
       List<String> lista=['Tutti'];
       for(Accettazione a in box.values){
-        if(a.Richiedente==nomeRichiedente&&!lista.contains(a.Quesito)){
+        if(a.idRichiedente==id&&!lista.contains(a.Quesito)){
           lista.add(a.Quesito);
         }
       }
@@ -94,6 +96,33 @@ class Accettazionenotifier extends StateNotifier<List<Accettazione>> {
     for (final e in state)
       if (e.id == nuovaAcc.id) nuovaAcc else e
   ];
+    }
+
+    void addAllegati(String? descrizione,int? idAllegato,int anno,int richiesta,Accettazione acc) async{
+      var urlPdf= Uri.parse('http://192.168.0.167:8080/pdf/${idAllegato}/${anno}/${richiesta}');
+      String token=Hive.box('login').get('token');
+      var risposta = await http.get(
+        urlPdf,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+      await downloadPdf(risposta.bodyBytes, idAllegato.toString());
+      Allegato all=Allegato(descrizione: descrizione, pathAllegato: idAllegato.toString(),idAllegato: idAllegato);
+     
+      
+      if(acc.Allegati==null || !acc.Allegati!.any((a)=>a.idAllegato==all.idAllegato)){
+        var nuovaAcc=acc.copyWith( allegati: [...?acc.Allegati, all],);
+      box.put(acc.id, nuovaAcc);
+      final index = state.indexWhere((e) => e.id == acc.id);
+
+      state = [
+    for (final e in state)
+      if (e.id == nuovaAcc.id) nuovaAcc else e
+  ];
+      }
+      
     }
 
     

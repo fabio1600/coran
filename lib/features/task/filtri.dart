@@ -338,7 +338,7 @@ void initState() {
                             isExpanded: true,
                             value: quesSel,
                             hint:  const Text("Seleziona"),
-                            items: ref.watch(providerAccettazione.notifier).getQuesiti(ref.watch(providerUtente.notifier).getUtente().nome).map((e) {
+                            items: ref.watch(providerAccettazione.notifier).getQuesiti(ref.watch(providerUtente.notifier).getUtente().id).map((e) {
                               return DropdownMenuItem(
                                 value: e,
                                 child: Text(e),

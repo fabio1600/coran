@@ -32,7 +32,7 @@ bool eliminaFiltro= false;
  @override
   Widget build(BuildContext context) {
     Utente utente= ref.watch(providerUtente.notifier).getUtente();
-    var lista=ref.watch(providerAccettazione).where((a)=>(a.preferito==true)&&(a.Richiedente==utente.nome)).toList();
+    var lista=ref.watch(providerAccettazione).where((a)=>(a.preferito==true)&&(a.idRichiedente==utente.id)).toList();
     
     
     return 

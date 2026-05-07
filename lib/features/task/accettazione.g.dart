@@ -26,21 +26,22 @@ class AccettazioneAdapter extends TypeAdapter<Accettazione> {
       Utente: fields[6] as String,
       CodiceAzienda: fields[7] as String,
       Asl: fields[8] as String,
-      Allegati: fields[9] as String?,
-      PathAllegati: fields[10] as String?,
+      Allegati: (fields[9] as List?)?.cast<Allegato>(),
       Comune: fields[11] as String,
       RapportiDiProva: (fields[12] as List?)?.cast<int>(),
       stato: fields[13] as String,
       DataRdp: fields[14] as DateTime?,
       positivo: fields[15] as bool?,
       preferito: fields[16] as bool?,
+      idRichiedente: fields[17] as int?,
+      numrapportiProva: fields[18] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Accettazione obj) {
     writer
-      ..writeByte(17)
+      ..writeByte(18)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -61,8 +62,6 @@ class AccettazioneAdapter extends TypeAdapter<Accettazione> {
       ..write(obj.Asl)
       ..writeByte(9)
       ..write(obj.Allegati)
-      ..writeByte(10)
-      ..write(obj.PathAllegati)
       ..writeByte(11)
       ..write(obj.Comune)
       ..writeByte(12)
@@ -74,7 +73,11 @@ class AccettazioneAdapter extends TypeAdapter<Accettazione> {
       ..writeByte(15)
       ..write(obj.positivo)
       ..writeByte(16)
-      ..write(obj.preferito);
+      ..write(obj.preferito)
+      ..writeByte(17)
+      ..write(obj.idRichiedente)
+      ..writeByte(18)
+      ..write(obj.numrapportiProva);
   }
 
   @override

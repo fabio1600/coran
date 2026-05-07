@@ -1,4 +1,7 @@
 
+import 'dart:convert';
+import 'package:coran/features/task/Allegato.dart';
+import 'package:http/http.dart' as http;
 import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/paginaRdp.dart';
 import 'package:coran/features/task/rdp.dart';
@@ -22,19 +25,20 @@ void main() async {
 Hive.registerAdapter(AccettazioneAdapter());
 Hive.registerAdapter(UtenteAdapter());
 Hive.registerAdapter(RdpAdapter());
+Hive.registerAdapter(AllegatoAdapter());
   await Hive.openBox<Accettazione>('accettazioni');
 
   await Hive.openBox('login');
   await Hive.openBox<Utente>('utente');
   await Hive.openBox<Rdp>('rdp');
   await Hive.openBox('preferiti');
-  
-  
+
   var box = Hive.box('login');
   bool isLogged = box.get('isLogged', defaultValue: false);
 
  
   
+
   
 
 

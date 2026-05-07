@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:coran/core/storage/servizio_preferenze.dart';
 import 'package:coran/features/task/modello_task.dart';
+import 'package:coran/features/task/utente.dart';
 import 'package:coran/services/connectivity_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:jwt_decode/jwt_decode.dart';
 
 import 'provider_task.dart';
 import 'package:coran/core/storage/servizio_preferenze.dart';
@@ -32,7 +36,9 @@ class Login extends ConsumerStatefulWidget {
   ConsumerState<Login> createState() => _LoginState();
 }
 class _LoginState extends ConsumerState<Login> {
+final url = Uri.parse('http://192.168.0.167:8080/auth/login');
 String? user;
+String? password;
  bool password_dimenticata=false; 
 bool errore=false;
  var box=Hive.box('login');
@@ -70,6 +76,7 @@ bool errore=false;
                     Padding(padding:EdgeInsetsGeometry.only(bottom: 20)),
                     if(!password_dimenticata)
                     TextField(
+                      onChanged: (value) => password=value,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         border: OutlineInputBorder(),
@@ -109,9 +116,61 @@ bool errore=false;
                                   );
                                   return;
                                 }
-                              if(user=='user'){
+                              final risposta = await http.post(
+                              url,
+                              headers: {
+                                'Content-Type': 'application/json',
+                              },
+                              body: jsonEncode({
+                                'user': user,
+                                'pws': password,
+                              }),
+                            );
+                              if(risposta.statusCode==200){
+                                var token=risposta.body;
+                                Map<String, dynamic> payload = Jwt.parseJwt(token);
+
+                                int userId = int.parse(payload['sub']);
+                                
+                                box.put('utente', userId);
+                                box.put('token',risposta.body);
                                 box.put('islogged', true);
-                                box.put('utente', 1);
+                                Future<void> importUtente()async{
+                                  int? id;
+                                  
+                                  var box2=Hive.box<Utente>('utente');
+                                  var box=Hive.box('login');
+                                  id=box.get('utente');
+
+                                  if(box2.get(id)==null&&box.get('islogged')==true){
+                                    
+                                      var box = Hive.box('login');
+                                      if(box.get('token')!=null){}
+                                      String token = box.get('token'); // assicurati di salvarlo prima!
+
+                                      var url = Uri.parse('http://192.168.0.167:8080/utente');
+
+                                      var risposta = await http.get(
+                                        url,
+                                        headers: {
+                                          'Authorization': 'Bearer $token',
+                                          'Content-Type': 'application/json',
+                                        },
+                                      );
+
+                                      Map<String, dynamic> data = jsonDecode(risposta.body);
+                                      
+
+                                      Utente nuovoUtente=Utente(id: data['id'], nome: data['nominativo'], utenzaRiferimento:data['descrizione'], mail: data['mail'], cellulare: data['cell'], telefono: data['tel'], codiceFiscale: data['codFisc'], password: data['psw'], coordinatore: data['coord']);
+                                      
+                                      await box2.put(id, nuovoUtente);   
+                                    
+                                    
+                                    
+                                  }
+                                  
+                                }
+                                await importUtente();
                                 context.go('/');
                               }else if(user=='admin'){
                                 box.put('islogged', true);

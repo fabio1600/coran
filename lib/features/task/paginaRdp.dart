@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:coran/features/task/rdp.dart';
 import 'package:coran/features/task/rdpNotifier.dart';
 import 'package:coran/features/task/utente.dart';
+import 'package:path_provider/path_provider.dart';
 import 'test_pdf.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +26,7 @@ final int id2;
   ConsumerState<Paginardp> createState() => _PaginardpState();
 }
 class _PaginardpState extends ConsumerState<Paginardp> {
-  ByteData? pdf;
+  Uint8List? pdf;
   bool loading=true;
 
 
@@ -36,11 +39,13 @@ class _PaginardpState extends ConsumerState<Paginardp> {
     
     
      Rdp rdp=ref.read(providerRdp).toList().firstWhere((element) => (element.id==widget.id2&&element.idAcc==widget.id));
-    final bytes= await rootBundle.load('assets/images/${rdp.pathPdf}');
-    downloadPdf(bytes.buffer.asUint8List(),'${rdp.idAcc}-${rdp.id}');
+    final dir = await getApplicationDocumentsDirectory();
+  final file = File('${dir.path}/rdp/${rdp.pathPdf}.pdf');
+  final bytes = await file.readAsBytes();
+    
     setState(() {
       
-      pdf = bytes;
+      pdf=bytes;
       loading = false;
      
     });

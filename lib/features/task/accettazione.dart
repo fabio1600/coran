@@ -1,10 +1,14 @@
+import 'dart:ffi';
+
+import 'package:coran/features/task/Allegato.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 part 'accettazione.g.dart';
 
 @HiveType(typeId: 0)
-class Accettazione extends HiveObject{
+class Accettazione extends HiveObject with EquatableMixin{
   @HiveField(0)
   final int id;
 
@@ -33,10 +37,9 @@ class Accettazione extends HiveObject{
   final String Asl;
 
   @HiveField(9)
-  final String? Allegati;
+  final List<Allegato>? Allegati;
 
-  @HiveField(10)
-  final String? PathAllegati;
+  
 
   @HiveField(11)
   final String Comune;
@@ -56,6 +59,12 @@ class Accettazione extends HiveObject{
   @HiveField(16)
   final bool? preferito;
 
+  @HiveField(17)
+  final int? idRichiedente;
+
+  @HiveField(18)
+  final int? numrapportiProva;
+
   Accettazione({
     required this.id,
     required this.DataAccettazione,
@@ -67,41 +76,128 @@ class Accettazione extends HiveObject{
     required this.CodiceAzienda,
     required this.Asl,
     this.Allegati,
-    this.PathAllegati,
     required this.Comune,
     this.RapportiDiProva,
     required this.stato,
     this.DataRdp,
     this.positivo=false,
-    this.preferito=false
+    this.preferito=false,
+     this.idRichiedente,
+     required this.numrapportiProva
   });
 
   Accettazione copyWith({
-    String? allegati,
-    String? pathAllegati,
-    List<int>? rapportiDiProva,
+    int? id,
+    DateTime? dataAccettazione,
+    String? attivita,
+    String? indirizzo,
+    String? richiedente,
+    String? quesito,
+    String? utente,
+    String? codiceAzienda,
+    String? asl,
+    String? comune,
+    List<Allegato>? allegati,
+    List<int>? RapportiDiProva,
     DateTime? dataRdp,
     String? stato,
     bool? positivo,
-    bool? preferito
+    bool? preferito,
+    int? idRichiedente,
+    int? numrapportiProva
     }) {return Accettazione(
-      id: this.id,
-      DataAccettazione: this.DataAccettazione,
-      Attivita: this.Attivita,
-      Indirizzo: this.Indirizzo,
-      Richiedente: this.Richiedente,
-      Quesito: this.Quesito,
-      Utente: this.Utente,
-      CodiceAzienda: this.CodiceAzienda,
-      Asl: this.Asl,
+      id: id ?? this.id,
+      DataAccettazione: dataAccettazione ?? this.DataAccettazione,
+      Attivita: attivita ??  this.Attivita,
+      Indirizzo: indirizzo ?? this.Indirizzo,
+      Richiedente: richiedente ?? this.Richiedente,
+      Quesito: quesito ?? this.Quesito,
+      Utente:utente ?? this.Utente,
+      CodiceAzienda:codiceAzienda ?? this.CodiceAzienda,
+      Asl:asl ?? this.Asl,
       Allegati: allegati ?? this.Allegati,
-      PathAllegati: pathAllegati ?? this.PathAllegati,
-      Comune: this.Comune,
-      RapportiDiProva: rapportiDiProva?? this.RapportiDiProva,
+      Comune:comune ?? this.Comune,
+      RapportiDiProva: RapportiDiProva?? this.RapportiDiProva,
       DataRdp: dataRdp?? this.DataRdp,
       stato:stato ?? this.stato,
       positivo: positivo ?? this.positivo,
-      preferito: preferito ?? this.preferito
+      preferito: preferito ?? this.preferito,
+      idRichiedente: idRichiedente ?? this.idRichiedente,
+      numrapportiProva: numrapportiProva ?? this.numrapportiProva
       );
     }
+
+
+    
+factory Accettazione.fromJson(Map<String, dynamic> json) {
+  return Accettazione(
+    id: json['accettazione'],
+    DataAccettazione: DateTime.parse(json['dataaccettazione']),
+    Attivita: json['proprietario'] ?? '',
+    Indirizzo: json['indirizzo']??'', // NON presente nel JSON → placeholder
+    Richiedente: json['richiedente'] ?? '',
+    Quesito: json['sigquedescr'] ?? '',
+    Utente: json['utente'] ?? '',
+    CodiceAzienda: json['codiceazienda'] ?? '',
+    Asl: json['asl'] ?? '',
+    Comune: json['comune'] ?? '',
+    stato: (json['rapportoprovan'] ?? 0) > 0
+    ? 'Non letto'
+    : 'analisi in corso',
+    positivo: json['positivi'] != null ? json['positivi'] > 0 : false,
+    numrapportiProva: json['rapportoprovan']
+
+
+  );
+}
+
+Accettazione updateFromJson(Map<String, dynamic> json) {
+  return copyWith(
+    id: json.containsKey('accettazione') ? json['accettazione'] : null,
+    dataAccettazione: json.containsKey('dataaccettazione')
+        ? DateTime.parse(json['dataaccettazione'])
+        : null,
+    attivita: json.containsKey('proprietario') ? json['proprietario'] : null,
+    indirizzo: json.containsKey('indirizzo') ? json['indirizzo'] : null,
+    richiedente: json.containsKey('richiedente') ? json['richiedente'] : null,
+    quesito: json.containsKey('sigquedescr') ? json['sigquedescr'] : null,
+    utente: json.containsKey('utente') ? json['utente'] : null,
+    codiceAzienda: json.containsKey('codiceazienda') ? json['codiceazienda'] : null,
+    asl: json.containsKey('asl') ? json['asl'] : null,
+    comune: json.containsKey('comune') ? json['comune'] : null,
+    stato: json.containsKey('rapportoprovan') &&
+        json['rapportoprovan'] != null &&
+        (this.RapportiDiProva == null ||
+         json['rapportoprovan'] > this.RapportiDiProva!.length)
+    ? 'Non letto'
+    : null,
+    positivo: json.containsKey('positivi')
+        ? (json['positivi'] != null ? json['positivi'] > 0 : false)
+        : null,
+    numrapportiProva: json.containsKey('rapportoprovan') ? json['rapportoprovan'] : null,
+  );
+}
+
+@override
+List<Object?> get props => [
+  id,
+  DataAccettazione,
+  Attivita,
+  Indirizzo,
+  Richiedente,
+  Quesito,
+  Utente,
+  CodiceAzienda,
+  Asl,
+  Comune,
+  stato,
+  DataRdp,
+  positivo,
+  preferito,
+  idRichiedente,
+  Allegati,
+  RapportiDiProva,
+  numrapportiProva
+];
+
 }

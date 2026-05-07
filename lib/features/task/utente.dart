@@ -33,7 +33,7 @@ class Utente extends HiveObject{
   final String? password;
 
   @HiveField(9)
-  final bool? coordinatore;
+  final String? coordinatore;
 
   Utente({
     required this.id,
@@ -61,7 +61,7 @@ class Utente extends HiveObject{
     String? telefono,
     String? codiceFiscale,
     String? password,
-    bool? coordinatore
+    String? coordinatore
   }) {
     return Utente(
       id: id ?? this.id,

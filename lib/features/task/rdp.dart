@@ -36,6 +36,9 @@ class Rdp extends HiveObject{
   @HiveField(9)
   final int? idAcc;
 
+  @HiveField(10)
+  final int? seqRichiesta;
+
   Rdp({
     required this.id,
     required this.conferimento,
@@ -46,7 +49,8 @@ class Rdp extends HiveObject{
     this.letto=false,
     required this.positivo,
     required this.data,
-    required this.idAcc
+    required this.idAcc,
+    required this.seqRichiesta
   });
 
   Rdp copyWith({
@@ -62,8 +66,29 @@ class Rdp extends HiveObject{
     letto: letto ?? this.letto,
     positivo: this.positivo,
     data: this.data,
-    idAcc: this.idAcc
+    idAcc: this.idAcc,
+    seqRichiesta: this.seqRichiesta
   );
+
+  
   }
+
+  factory Rdp.fromJson(Map<String, dynamic> json) {
+  return Rdp(
+    id: json['rapportoprovan'],
+    conferimento: json['conferimento'].toString(),
+    tipo: json['tipo'],
+    specie: json['specie'],
+    campioni: json['numcampioni'].toString(),
+    positivo: (json['sigrisesito'] ?? "N") == "S"
+    ? true
+    : false,
+    data: DateTime.parse(json['datarapportoprova']),
+    idAcc: json['sigrcsprog'],
+    seqRichiesta: json['seqrichiesta']
+
+
+  );
+}
   
 }

@@ -1,7 +1,8 @@
 
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'package:coran/features/task/test_pdf.dart';
+import 'package:http/http.dart' as http;
 import 'package:coran/features/task/accettazione.dart';
 import 'package:coran/features/task/rdp.dart';
 import 'package:coran/features/task/utente.dart';
@@ -27,19 +28,35 @@ class Rdpnotifier extends StateNotifier<List<Rdp>> {
 
     Rdpnotifier(this.box) : super(box.values.toList());
 
-    void addRdp(Rdp rdp){
-     
-      final exists = state.indexWhere((e) => e.id == rdp.id);
-      if(exists != -1){
-        box.put(rdp.id,rdp);
-        state = state.where((e) => e.id != rdp.id).toList();
+    Future<void> addRdp(Rdp rdp,Accettazione acc) async {
+      try{
+        var urlPdf= Uri.parse("http://192.168.0.167:8080/pdfRdp/${rdp.id}/${rdp.seqRichiesta}");
+          var token=Hive.box('login').get('token');
+        var risposta = await http.get(
+            urlPdf,
+            headers: {
+              'Authorization': 'Bearer $token',
+              'Content-Type': 'application/json',
+            },
+          );
+        await downloadPdf(risposta.bodyBytes, rdp.id.toString());
+        Rdp nuovoRdp=rdp.copyWith(pathPdf: rdp.id.toString());
         
-      state=[...state,rdp];
-      }else{
-      box.put(rdp.id, rdp);
-      state=[...state,rdp];
-      }
       
+        final exists = state.indexWhere((e) => e.id == rdp.id);
+        if(exists != -1){
+          box.put(rdp.id,nuovoRdp);
+          state = state.where((e) => e.id != rdp.id).toList();
+          
+        state=[...state,nuovoRdp];
+        }else{
+        box.put(rdp.id, nuovoRdp);
+        state=[...state,nuovoRdp];
+        }
+      }catch (e) {
+    print("Errore critico durante addRdp: $e");
+    // Opzionale: puoi comunque aggiornare lo stato locale anche se il PDF fallisce
+  }
     }
 
     void setLetto(Rdp rdp){
@@ -59,7 +76,8 @@ class Rdpnotifier extends StateNotifier<List<Rdp>> {
       }
     }
     
-  Future<void> downloadPdf(Uint8List pdfBytes,String nome,Rdp rdp) async {
+  
+  Future<void> downloadPdf(Uint8List pdfBytes,String nome) async {
   try {
     // 1️⃣ Carico il PDF dagli assets (simula BLOB)
     
@@ -82,11 +100,7 @@ class Rdpnotifier extends StateNotifier<List<Rdp>> {
 
     if(!await file.exists()){
       await file.writeAsBytes(pdfBytes);
-      var nuovoRdp=rdp.copyWith(pathPdf: nome);
-      box.put(rdp.id, nuovoRdp);
-      state = state.where((e) => e.id != nuovoRdp.id).toList();
-        
-      state=[...state,nuovoRdp];
+      
     }
 
 
@@ -95,7 +109,6 @@ class Rdpnotifier extends StateNotifier<List<Rdp>> {
     print("Errore download: $e");
   }
 }
-  
 
   
   

@@ -26,7 +26,7 @@ class UtenteAdapter extends TypeAdapter<Utente> {
       telefono: fields[6] as String?,
       codiceFiscale: fields[7] as String?,
       password: fields[8] as String?,
-      coordinatore: fields[9] as bool?,
+      coordinatore: fields[9] as String?,
     );
   }
 

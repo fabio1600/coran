@@ -37,10 +37,7 @@ var box2= Hive.box('login');
 
 
   
-Future<void> checkConn()async{
 
-       
-  }
   @override
 void initState() {
   

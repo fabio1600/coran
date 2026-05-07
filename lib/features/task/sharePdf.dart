@@ -1,19 +1,20 @@
-import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:io';
 
 Future<void> sharePdf(String path) async {
-  final byteData = await rootBundle.load('assets/images/${path}');
-
-  final tempDir = await getTemporaryDirectory();
-  final file = File('${tempDir.path}/${path}');
-
-  
+  final dir = await getApplicationDocumentsDirectory();
+  final file = File('${dir.path}/rdp/$path.pdf');
 
   if (!await file.exists()) {
-  await file.writeAsBytes(byteData.buffer.asUint8List());
-}
+    print("File non trovato");
+    return;
+  }
 
-  await Share.shareXFiles([XFile(file.path)]);
+  final tempDir = await getTemporaryDirectory();
+  final tempFile = File('${tempDir.path}/$path.pdf');
+
+  await tempFile.writeAsBytes(await file.readAsBytes());
+
+  await Share.shareXFiles([XFile(tempFile.path)]);
 }

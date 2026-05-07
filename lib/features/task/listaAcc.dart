@@ -15,7 +15,10 @@ ListView getListaAcc(List<Accettazione> lista,WidgetRef ref){
               itemCount: lista.length,
               itemBuilder:(context, index) {
               final item = lista[index];
-              final positivi=ref.watch(providerRdp.notifier).getPositivi(item.RapportiDiProva!);
+              var positivi=false;
+              if(item.RapportiDiProva!=null){ positivi=ref.watch(providerRdp.notifier).getPositivi(item.RapportiDiProva!);}
+              
+              
               return Center( 
               child: 
               FractionallySizedBox(
@@ -233,7 +236,7 @@ ListView getListaAcc(List<Accettazione> lista,WidgetRef ref){
                                               mainAxisSize: MainAxisSize.min,
                                                     children:[
                                                       item.positivo==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
-                                                      item.RapportiDiProva!.isNotEmpty ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black87,fontSize: 16),),
+                                                      item.RapportiDiProva!=null ? Icon(Icons.picture_as_pdf,color: Colors.black,) : Text('Analisi in corso...',style: TextStyle(color: Colors.black87,fontSize: 16),),
                                                       item.Allegati!=null ? Icon(Icons.attach_file,color: Colors.black,) : SizedBox.shrink()
                                                       ],
                                                     ),
