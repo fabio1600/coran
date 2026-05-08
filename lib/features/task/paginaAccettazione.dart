@@ -324,13 +324,16 @@ List<Rdp> rapportiDiProva=[];
                             child:SizedBox(
                               
                               child:ElevatedButton(
-                                style:item.positivo==true&&item.letto==false ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)) : item.letto==false ? ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(157, 80, 200, 255)) : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)),
-                                onPressed: (){
-                                  ref.watch(providerRdp.notifier).setLetto(item);
+                                style:item.incorso==true ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)) :  item.positivo==true&&item.letto==false ? ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(117, 238, 72, 108)) : item.letto==false ? ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(157, 80, 200, 255)) : ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(157, 197, 207, 213)),
+                                onPressed: (){ 
+                                  if(item.incorso==false){
+                                    ref.watch(providerRdp.notifier).setLetto(item);
                                   if(rapportiDiProva.where((item)=>item.letto==false).length==1){
                                     ref.watch(providerAccettazione.notifier).modStato('Letto', accettazione);
                                   }
                                   context.push('/rdp/${accettazione.id}/${item.id}');
+                                  }
+                                  
                                 },
                                 child: Column(
                                   children: [ 
@@ -346,6 +349,7 @@ List<Rdp> rapportiDiProva=[];
                                                             style: TextStyle(fontSize: 16,color: Colors.black54)
                                                           ),
                                                       ),
+                                                      item.incorso==false ?
                                                       Expanded(
                                                         child:Padding(
                                                           padding:EdgeInsetsGeometry.only(left: 25),
@@ -353,7 +357,7 @@ List<Rdp> rapportiDiProva=[];
                                                                       style: TextStyle(fontSize: 16,color:Colors.black87,fontWeight: FontWeight.bold)
                                                                       )
                                                                     )
-                                                        )
+                                                        ): SizedBox.shrink()
                                                       ]
                                                     )
                                           )
@@ -457,7 +461,8 @@ List<Rdp> rapportiDiProva=[];
                                               
                                             )
                                           ),
-                                    Align(
+                                    item.data!=null ?
+                                      Align(
                                           alignment: AlignmentGeometry.centerLeft,
                                           child: Padding(
                                             padding: EdgeInsetsGeometry.only(left: 0,top: 10,bottom: 10),
@@ -481,7 +486,9 @@ List<Rdp> rapportiDiProva=[];
                                                     )
                                               
                                             )
-                                          ),
+                                          ): SizedBox.shrink(),
+                                    
+                                    
                                           Align(
                                           alignment: AlignmentGeometry.centerRight,
                                           child: Padding(
@@ -489,7 +496,7 @@ List<Rdp> rapportiDiProva=[];
                                             child:  Row (
                                               mainAxisSize: MainAxisSize.min,
                                                     children:[
-                                                      item.positivo==true ? Icon(Icons.error_outline,color: Colors.black,) : SizedBox.shrink(),
+                                                      item.positivo==true ? Icon(Icons.error_outline,color: Colors.black,) : item.incorso==true ? Text('Analisi in corso...',style: TextStyle(color: Colors.black87,fontSize: 16),) : SizedBox.shrink(),
                                                       
                                                       
                                                       ],

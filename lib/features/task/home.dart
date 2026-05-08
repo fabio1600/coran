@@ -92,7 +92,11 @@ Future<void> caricaAnalisi()async{
                 
                 Rdp rdp=Rdp.fromJson(r);
               
-                await ref.read(providerRdp.notifier).addRdp(rdp,acc);
+                if(r['rapportoprovan']!=0){
+                  await ref.read(providerRdp.notifier).addRdp(rdp);
+                }else{
+                  ref.read(providerRdp.notifier).addRdpIncorso(rdp);
+                }
                 var listaRdp=ref.read(providerRdp).toList().where((r)=>r.idAcc==acc.id);
                 List<int> lista= listaRdp.map((e) => e.id).toList();
                  acc=acc.copyWith(RapportiDiProva: lista);
@@ -117,7 +121,12 @@ Future<void> caricaAnalisi()async{
                 
                 Rdp rdp=Rdp.fromJson(r);
                 if(listaCompleta.any((a)=>( a.id==rdp.idAcc&& ((a.RapportiDiProva!=null &&   !a.RapportiDiProva!.any((b)=>b==rdp.id))||a.RapportiDiProva==null)))){
-                await ref.read(providerRdp.notifier).addRdp(rdp,updateAcc);
+                if(r['rapportoprovan']!=0){
+                  await ref.read(providerRdp.notifier).addRdp(rdp);
+                }else{
+                  ref.read(providerRdp.notifier).addRdpIncorso(rdp);
+                }
+                
                 var listaRdp=ref.watch(providerRdp).toList().where((r)=>r.idAcc==acc.id);
                 List<int> lista= listaRdp.map((e) => e.id).toList();
                 updateAcc=updateAcc.copyWith(RapportiDiProva: lista);

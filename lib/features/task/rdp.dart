@@ -39,6 +39,9 @@ class Rdp extends HiveObject{
   @HiveField(10)
   final int? seqRichiesta;
 
+  @HiveField(11)
+  final bool? incorso;
+
   Rdp({
     required this.id,
     required this.conferimento,
@@ -50,12 +53,14 @@ class Rdp extends HiveObject{
     required this.positivo,
     required this.data,
     required this.idAcc,
-    required this.seqRichiesta
+    required this.seqRichiesta,
+    this.incorso=false
   });
 
   Rdp copyWith({
     bool? letto,
-    String? pathPdf
+    String? pathPdf,
+    bool? incorso
   }){return Rdp(
     id: this.id,
     conferimento: this.conferimento,
@@ -67,7 +72,8 @@ class Rdp extends HiveObject{
     positivo: this.positivo,
     data: this.data,
     idAcc: this.idAcc,
-    seqRichiesta: this.seqRichiesta
+    seqRichiesta: this.seqRichiesta,
+    incorso: incorso ?? this.incorso
   );
 
   
@@ -77,13 +83,15 @@ class Rdp extends HiveObject{
   return Rdp(
     id: json['rapportoprovan'],
     conferimento: json['conferimento'].toString(),
-    tipo: json['tipo'],
-    specie: json['specie'],
+    tipo: json['tipo']??'',
+    specie: json['specie']??'',
     campioni: json['numcampioni'].toString(),
-    positivo: (json['sigrisesito'] ?? "N") == "S"
+    positivo: (json['sigesiesito'] ?? "N") == "S"
     ? true
     : false,
-    data: DateTime.parse(json['datarapportoprova']),
+    data: json['datarapportoprova'] != null 
+          ? DateTime.parse(json['datarapportoprova']) 
+          : null,
     idAcc: json['sigrcsprog'],
     seqRichiesta: json['seqrichiesta']
 

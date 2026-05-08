@@ -28,13 +28,14 @@ class RdpAdapter extends TypeAdapter<Rdp> {
       data: fields[8] as DateTime?,
       idAcc: fields[9] as int?,
       seqRichiesta: fields[10] as int?,
+      incorso: fields[11] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Rdp obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -56,7 +57,9 @@ class RdpAdapter extends TypeAdapter<Rdp> {
       ..writeByte(9)
       ..write(obj.idAcc)
       ..writeByte(10)
-      ..write(obj.seqRichiesta);
+      ..write(obj.seqRichiesta)
+      ..writeByte(11)
+      ..write(obj.incorso);
   }
 
   @override

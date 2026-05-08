@@ -28,7 +28,7 @@ class Rdpnotifier extends StateNotifier<List<Rdp>> {
 
     Rdpnotifier(this.box) : super(box.values.toList());
 
-    Future<void> addRdp(Rdp rdp,Accettazione acc) async {
+    Future<void> addRdp(Rdp rdp) async {
       try{
         var urlPdf= Uri.parse("http://192.168.0.167:8080/pdfRdp/${rdp.id}/${rdp.seqRichiesta}");
           var token=Hive.box('login').get('token');
@@ -57,6 +57,24 @@ class Rdpnotifier extends StateNotifier<List<Rdp>> {
     print("Errore critico durante addRdp: $e");
     // Opzionale: puoi comunque aggiornare lo stato locale anche se il PDF fallisce
   }
+    }
+
+    void addRdpIncorso(Rdp rdp)  {
+      
+        Rdp nuovoRdp=rdp.copyWith(incorso: true);
+        
+      
+        final exists = state.indexWhere((e) => e.id == rdp.id);
+        if(exists != -1){
+          box.put(rdp.id,nuovoRdp);
+          state = state.where((e) => e.id != rdp.id).toList();
+          
+        state=[...state,nuovoRdp];
+        }else{
+        box.put(rdp.id, nuovoRdp);
+        state=[...state,nuovoRdp];
+        }
+      
     }
 
     void setLetto(Rdp rdp){
